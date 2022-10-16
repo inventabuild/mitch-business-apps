@@ -1,0 +1,9 @@
+.ul-formatting{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+.li-formatting{
+    border: 1px solid black;
+    width: 100%;
+}

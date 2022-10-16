@@ -8,10 +8,10 @@
 </head>
 <body>
     <h1>All Posts</h1>
-    <ul style="display: flex; flex-flow: column; gap: 10px">
+    <ul class="ul-formatting">
         {% for post in posts %}
         <li>
-            <div style="border: 1px solid black; width: 100%">
+            <div class="li-formatting">
                 <h2>{{ post.title }}</h2>
                 <p>{{ post.body }}</p>
             </div>
