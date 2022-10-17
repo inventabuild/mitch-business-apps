@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu-hyperlink-format">
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+    </div>
+    <h2>Customer Options</h2>
+    <ul>
+        <li><a url href="{% url 'customer_new' %}">Customer New</a> - Create a new customer</li>
+        <li><a url href="{% url 'customer_list' %}">Customer List</a> - View individual customers by selecting from the list</li>
+    </ul>
+</body>
+</html>
