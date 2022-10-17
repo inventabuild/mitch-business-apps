@@ -10,13 +10,13 @@
 </head>
 <body>
     <div class="menu-hyperlink-format">
-        <a class="hyperlink-menu-item">Home</a>
-        <a >Company list</a>
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a href="{% url 'company_list' %}">Company list</a>
     </div>
     <h2>
         New Company Form
     </h2>
-    <form action=# method="POST">
+    <form action="{% url 'company_new' %}" method="POST">
         {% csrf_token %}
         <div>
             <label>

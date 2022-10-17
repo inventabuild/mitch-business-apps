@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu-hyperlink-format">
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a href="{% url 'company_list' %}">Customer list</a>
+    </div>
+    <h2>Customer Info</h2>
+    <div>
+        <label class="output-label">Company id: </label>
+        <span class="company-view-output">
+            {{ company_single.id }}
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Company name: </label>
+        <span class="company-view-output">
+            <label>{{ company_single.name }}</label>
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Company address: </label>
+        <span class="company-view-output">
+            <label>{{ company_single.address }}</label>
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Company city: </label>
+        <span class="company-view-output">
+            <label>{{ company_single.city }}</label>
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Company state: </label>
+        <span class="company-view-output">
+            <label>{{ company_single.state }}</label>
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Company country: </label>
+        <span class="company-view-output">
+            <label>{{ company_single.country }}</label>
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Company zip code: </label>
+        <span class="company-view-output">
+            <label>{{ company_single.zip_code }}</label>
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Company telephone #: </label>
+        <span class="company-view-output">
+            <label>{{ company_single.tel }}</label>
+        </span>
+    </div>
+</body>
+</html>
