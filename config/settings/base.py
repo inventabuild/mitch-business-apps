@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'home',
     'company_manager',
+    'item_manager',
 ]
 
 MIDDLEWARE = [
