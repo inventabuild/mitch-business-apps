@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu-hyperlink-format">
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a href="{% url 'company_list' %}">Company list</a>
+    </div>
+    <h2>
+        New Company Form
+    </h2>
+    <form action="{% url 'company_new' %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <label>
+                Name
+                <input type="text" name="company_name" required />
+            </label>
+        </div>
+        <div>
+            <label>
+                Address
+                <input type="text" name="company_address" required />
+            </label>
+        </div>
+        <div>
+            <label>
+                City
+                <input type="text" name="company_city" required />
+            </label>
+        </div>
+        <div>
+            <label>
+                State
+                <input type="text" name="company_state" required />
+            </label>
+        </div>
+        <div>
+            <label>
+                Country
+                <input type="text" name="company_country" required />
+            </label>
+        </div>
+        <div>
+            <label>Zip Code
+                <input type="text" name="company_zip_code" required />
+            </label>
+        </div>
+        <div>
+            <label>Telephone #
+                <input type="text" name="company_tel" required />
+            </label>
+        </div>
+        <button type="submit" class="create-company-button">Create Company</button>
+    </form>
+    {{ message }}
+</body>
+</html>
