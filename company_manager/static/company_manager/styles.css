@@ -1,0 +1,23 @@
+input{
+    display: block;
+    margin-bottom: 5px;
+}
+.menu-hyperlink-format{
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.company-view-output{
+    display: block;
+    margin-bottom: 5px;
+}
+.output-label{
+    font-weight: bold;
+}
+.hyperlink-menu-item{
+    margin-right: 10px;
+}
+.create-company-button{
+    background-color: #FFA41C;
+    border-width: 1px;
+    border-radius: 16px;
+}

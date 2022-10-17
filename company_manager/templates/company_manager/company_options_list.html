@@ -1,12 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}">
     <title>Document</title>
 </head>
 <body>
-    <h2>Company manager app</h2>
+    <div class="menu-hyperlink-format">
+        <h3>Home<h3>
+    </div>
+    <h2>Company Options</h2>
+    <ul>
+        <li>Company New - Create a new company</li>
+        <li>Company list - List all the companies</li>
+    </ul>
 </body>
 </html>
