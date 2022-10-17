@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,13 +10,13 @@
 </head>
 <body>
     <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'company_list' %}">Company list</a>
+        <a class="hyperlink-menu-item">Home</a>
+        <a >Company list</a>
     </div>
     <h2>
         New Company Form
     </h2>
-    <form action="{% url 'company_new' %}" method="POST">
+    <form action=# method="POST">
         {% csrf_token %}
         <div>
             <label>
