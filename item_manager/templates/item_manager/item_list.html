@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'item_manager/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu-hyperlink-format">
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a href="{% url 'item_new' %}">Item new</a>
+    </div>
+    <h2>List all items</h2>
+    <table>
+        <thead>
+            <th>Item Number</th>
+            <th>Item Name</th>
+            <th>id</th>
+        </thead>
+        {% for item in list_all %}
+        <tr>
+            <td><a href="{% url 'item_view' item.id %}">{{item.number}}</a></td>
+            <td><a href="{% url 'item_view' item.id %}">{{item.name}}</a></td>
+            <td><a href="{% url 'item_view' item.id %}">{{item.id}}</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

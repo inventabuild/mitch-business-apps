@@ -11,7 +11,7 @@
 <body>
     <div class="menu-hyperlink-format">
         <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a>Item list</a>
+        <a href="{% url 'item_list' %}" class="hyperlink-menu-item">Item list</a>
     </div>
     <h2>New item</h2>
     <form action="{% url 'item_new' %}" method="POST">

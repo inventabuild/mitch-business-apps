@@ -21,3 +21,18 @@ def item_new(request):
         'message': message
     }
     return render(request, 'item_manager/item_new.html', data)
+def item_view(request, id):
+    item_single=models.Item.objects.get(id=id)
+    data={
+        'item_single': item_single
+    }
+    return render(request, 'item_manager/item_view.html', data)
+
+def item_list(request):
+    list_all=models.Item.objects.all().order_by('name')
+    data={
+        'list_all': list_all
+    }
+    return render(request, 'item_manager/item_list.html', data)
+def item_options_list(request):
+    return render(request, 'item_manager/item_options_list.html')

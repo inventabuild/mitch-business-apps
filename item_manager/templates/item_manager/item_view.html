@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'item_manager/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+    <a href="{% url 'item_list' %}">Item list</a>
+    <h2>Item view</h2>
+        <div>
+            <label class="output-label">Item id: </label>
+            <span class="item-view-output">
+                {{ item_single.id }}
+            </span>
+        <div>
+            <label class="output-label">Item number: </label>
+            <span class="item-view-output">
+                {{ item_single.number }}
+            </span>
+        </div>
+        <div>
+            <label class="output-label">Item name: </label>
+            <span class="item-view-output">
+                {{ item_single.name }}
+            </span>
+        </div>
+        <div>
+            <label class="output-label">Item description: </label>
+            <span class="item-view-output">
+                {{ item_single.description }}
+            </span>
+        </div>
+        <div>
+            <label class="output-label">Item cost internal: </label>
+            <span class="item-view-output">
+                {{ item_single.item_cost_internal }}
+            </span>
+        </div>
+    </div>
+</body>
+</html>
