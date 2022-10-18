@@ -7,13 +7,19 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>Invoice Creator</h2>
-    <ul>
-        <li>Invoice manager</li>
-        <li>Item manager</li>
-        <li>Customer manager</li>
-        <li>Customer pricing manager</li>
-        <li>Company manager</li>
-    </ul>
+    <h2>Invoice creator app</h2>
+    <header>
+        <div>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'invoice_options_list' %}">Invoice manager</a></li>
+                    <li><a href="{% url 'item_options_list' %}">Item manager</a></li>
+                    <li><a href="{% url 'customer_options_list' %}">Customer manager</a></li>
+                    <li><a href="{% url 'customer_pricing_options_list' %}">Customer pricing manager</a></li>
+                    <li><a href="{% url 'company_options_list' %}">Company manager</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 </body>
 </html>
