@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+    <a href="{% url 'customer_pricing_list' %}">Customer pricing list</a>
+    <h2>Customer Pricing View</h1>
+    <div>
+        <label class="output-label">Pricing id:</label>
+        <span class="customer-pricing-view-output">
+            {{ customer_pricing_single.id }}
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Customer name:</label>
+        <span class="customer-pricing-view-output">
+            {{ customer_pricing_single.customer_id.name }}
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Item name:</label>
+        <span class="customer-pricing-view-output">
+            {{ customer_pricing_single.item_id.name }}
+        </span>
+    </div>
+    <div>
+        <label class="output-label">Customer Price:</label>
+        <span class="customer-pricing-view-output">
+            ${{ customer_pricing_single.customer_pricing }}
+        </span>
+    </div>
+</body>
+</html>

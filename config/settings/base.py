@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'home',
     'company_manager',
     'item_manager',
-    'customer_manager'
+    'customer_manager',
+    'customer_pricing_manager',
 ]
 
 MIDDLEWARE = [

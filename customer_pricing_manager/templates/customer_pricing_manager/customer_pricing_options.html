@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu-hyperlink-format">
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+    </div>
+    <h2>Customer Pricing Options</h2>
+    <ul>
+        <li><a url href="{% url 'customer_pricing_new' %}">Customer Pricing New</a> - Create a new item price for a customer</li>
+        <li><a url href="{% url 'customer_pricing_list' %}">Customer Pricing List</a> - View individual customer item pricing by selecting from a list</li>
+    </ul>
+</body>
+</html>

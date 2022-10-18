@@ -23,5 +23,6 @@ urlpatterns = [
     path('company_manager/', include('company_manager.urls')),
     path('item_manager/', include('item_manager.urls')),
     path('customer_manager/', include('customer_manager.urls')),
+    path('customer_pricing_manager/', include('customer_pricing_manager.urls')),
 ]
 
