@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="stylesheet" href="{% static 'invoice_manager/style.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+    <a href="{% url 'invoice_list' %}">Invoice list</a>
+    <h2>Invoice View</h2>
+    <div>
+        <label>Invoice Date: </label>
+        <span>
+            {{ invoice_single.invoice_date }}
+        </span>
+    </div>
+    <div>
+        <label>Invoice Number: </label>
+        <span>
+            {{ invoice_single.invoice_number }}
+        </span>
+    </div>
+    <div>
+        <label>Customer Name: </label>
+        <span>
+            {{ invoice_single.customer_name }}
+        </span>
+    </div>
+    <table>
+        <thead>
+            <th>PO #</th>
+            <th>Item #</th>
+            <th>Item Name</th>
+            <th>Price Ea</th>
+            <th>Qty Ea</th>
+            <th>Amount ($)</th>
+        </thead>
+        <tr>
+            <td>{{ invoice_single.po_num_row_1 }}</td>
+            <td>{{ invoice_single.item_num_row_1 }}</td>
+            <td>{{ invoice_single.item_name_row_1 }}</td>
+            <td>{{ invoice_single.customer_pricing_ea_row_1 }}</td>
+            <td>{{ invoice_single.qty_ea_row_1 }}</td>
+            <td>{{ invoice_single.amount_row_1 }}</td>
+        </tr>
+        <tr>
+            <td>{{ invoice_single.po_num_row_2 }}</td>
+            <td>{{ invoice_single.item_num_row_2 }}</td>
+            <td>{{ invoice_single.item_name_row_2 }}</td>
+            <td>{{ invoice_single.customer_pricing_ea_row_2 }}</td>
+            <td>{{ invoice_single.qty_ea_row_2 }}</td>
+            <td>{{ invoice_single.amount_row_2 }}</td>
+        </tr>
+        <tr>
+            <td>{{ invoice_single.po_num_row_3 }}</td>
+            <td>{{ invoice_single.item_num_row_3 }}</td>
+            <td>{{ invoice_single.item_name_row_3 }}</td>
+            <td>{{ invoice_single.customer_pricing_ea_row_3 }}</td>
+            <td>{{ invoice_single.qty_ea_row_3 }}</td>
+            <td>{{ invoice_single.amount_row_3 }}</td>
+        </tr>
+        <tr>
+            <td>{{ invoice_single.po_num_row_4 }}</td>
+            <td>{{ invoice_single.item_num_row_4 }}</td>
+            <td>{{ invoice_single.item_name_row_4 }}</td>
+            <td>{{ invoice_single.customer_pricing_ea_row_4 }}</td>
+            <td>{{ invoice_single.qty_ea_row_4 }}</td>
+            <td>{{ invoice_single.amount_row_4 }}</td>
+        </tr>
+        <tr>
+            <td>{{ invoice_single.po_num_row_5 }}</td>
+            <td>{{ invoice_single.item_num_row_5 }}</td>
+            <td>{{ invoice_single.item_name_row_5 }}</td>
+            <td>{{ invoice_single.customer_pricing_ea_row_5 }}</td>
+            <td>{{ invoice_single.qty_ea_row_5 }}</td>
+            <td>{{ invoice_single.amount_row_5 }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Sales Amount</td>
+            <td>{{ invoice_single.invoice_sales_amount }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Freight Amount</td>
+            <td>{{ invoice_single.invoice_freight_amount }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total Due</td>
+            <td>{{ invoice_single.invoice_total_due }}</td>
+        </tr>
+    </table>
+</body>
+</html>

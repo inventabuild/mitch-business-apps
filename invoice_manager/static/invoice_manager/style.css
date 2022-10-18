@@ -1,0 +1,542 @@
+.header-address{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.doc-type{
+    text-align: right;
+    font-weight: bold;
+}
+.bill-to{
+   margin-left: 108px; 
+}
+.bill-to-date-invoice-header-row{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin-top: 25px;
+}
+.customer-mailing-address{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    word-wrap: normal;
+}
+.text-area-customer-mailing-address{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    height: 5em;
+    width: 14em;
+    border-color: black;
+    resize: none;
+    position: relative;
+    top: -22px;
+    /* top: -63px; */
+    /* color: rgb(0, 0, 182); */
+    color: black;
+    background-color: lightgrey;
+}
+/* .company-address-line-1{
+    color: rgb(0, 0, 182);
+}
+.company-address-line-2{
+    color: rgb(0, 0, 182);
+}
+.company-address-line-3{
+    color: rgb(0, 0, 182);
+}
+.company-address-line-4{
+    color: rgb(0, 0, 182);
+} */
+.text-area-company-mailing-address{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    height: 5em;
+    width: 14em;
+    border-color: black;
+    resize: none;
+    position: relative;
+    top: 27.5px;
+    left: 167px;
+    /* color: rgb(0, 0, 182); */
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+}
+.select-company-date-invoice-num-input-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.customer-select-div{
+    z-index: 1;
+    /* margin-top: 44px;
+    margin-left: 295px; */
+    opacity: 1;
+}
+.customer-select{
+    position: relative;
+    left: 57px;
+    top: -18.5px;
+    background-color: rgb(255,216,20);
+    text-align: center;
+}
+.customer-select option{
+    background-color: white;
+}
+.change-customer-button{
+    position: relative;
+    /* top: -70px;
+    left: 5px; */
+    top:-123px;
+    left: -194px;
+    /* background-color: rgb(255, 196, 86); */
+    background-color: rgb(235, 199, 20);
+    border-width: 1px;
+    opacity: 0;
+    z-index: 0;
+}
+.company-select{
+    z-index: 1;
+    position: relative;
+    left: -64px;
+    top: -73px;
+    bottom: 48px;
+    opacity: 1;
+    background-color: rgb(255,216,20);
+    text-align: center;
+}
+.company-select option{
+    background-color: white;
+}
+.change-company-button{
+    position: relative;
+    top: -73px;
+    left: -227px;
+    /* background-color: rgb(255, 196, 86); */
+    background-color: rgb(235, 199, 20);
+    opacity: 0;
+    z-index: 0;
+    border-width: 1px;
+}
+.invoice-number-header{
+    margin-right: 60px;
+}
+.invoice-date-header{
+    margin-right: 100px;
+}
+.line-items-table{
+    border-collapse: collapse;
+}
+/* table, thead, th, tr, td{
+    top: 0px;
+    position: sticky;
+} */
+.invoice-date-input{
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 20px; 
+}
+.invoice-num-input{
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.freight-amount-input{
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.po-num-input-1{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.item-num-select-1{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black;   
+}
+.item-num-select-1 option{
+    background-color: white;
+}
+.item-name-select-1{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black; 
+}
+.item-name-select-1 option{
+    background-color: white;
+}
+.qty-ea-input-1{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px;
+}
+.price-ea-input-1{
+    margin-right: -5px;
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */
+}
+.amount-dollar-input-1{
+    margin-right: -5px;
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */ 
+}
+.po-num-input-2{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.item-num-select-2{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black;
+}
+.item-num-select-2 option{
+    background-color: white;
+}
+.item-name-select-2{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black; 
+}
+.item-name-select-2 option{
+    background-color: white;
+}
+.qty-ea-input-2{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.price-ea-input-2{
+    margin-right: -5px;
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */
+}
+.amount-dollar-input-2{
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */ 
+}
+.po-num-input-3{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.item-num-select-3{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black;  
+}
+.item-num-select-3 option{
+    background-color: white;
+}
+.item-name-select-3{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black; 
+}
+.item-name-select-3 option{
+    background-color: white;
+}
+.qty-ea-input-3{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.price-ea-input-3{
+    margin-right: -5px;
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */
+}
+.amount-dollar-input-3{
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */ 
+}
+.po-num-input-4{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.item-num-select-4{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black;  
+}
+.item-num-select-4 option{
+    background-color: white;
+}
+.item-name-select-4{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black;  
+}
+.item-name-select-4 option{
+    background-color: white;
+}
+.qty-ea-input-4{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.price-ea-input-4{
+    margin-right: -5px;
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */ 
+}
+.amount-dollar-input-4{
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */ 
+}
+.po-num-input-5{
+    margin-right: -5px;
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.item-num-select-5{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black;  
+}
+.item-num-select-5 option{
+    background-color: white;
+}
+.item-name-select-5{
+    margin-right: -5px;
+    height: 21.5px;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border-color: black; 
+}
+.item-name-select-5 option{
+    background-color: white;
+}
+.qty-ea-input-5{
+    margin-right: -5px;
+    text-align: center;
+    color: rgb(0, 0, 182);
+    background-color: rgb(251,247,240);
+    border-color: black;
+    border-width: 1px;
+    height: 17.5px; 
+}
+.price-ea-input-5{
+    margin-right: -5px;
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */ 
+}
+.amount-dollar-input-5{
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+    /* color: rgb(0, 0, 182); */ 
+}
+.sales-amount-input{
+    text-align: center; 
+    /* color: rgb(0, 0, 182); */
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+}
+.freight-amount-input{
+    text-align: center; 
+}
+.total-due-input{
+    text-align: center;
+    /* color: rgb(0, 0, 182); */
+    color: black;
+    background-color: lightgrey;
+    border-width: 1px;
+    height: 17.5px;
+}
+td{
+    padding: 0px;
+}
+.save-form-button-paragraph{
+    display: flex;
+    justify-content: center;
+    /* add to @media print */
+    position: relative;
+    top: -46px;
+    left: -150px;
+}
+.save-form-button{
+    /* background-color: lightgreen; */
+    background-color: #FFA41C;
+    border-width: 1px;
+    border-radius: 16px;
+}
+.hyperlink-menu-item{
+    margin-right: 10px;
+}
+.dollar-sign{
+    position: absolute;
+    margin-left: 2px;
+    margin-top: 2px;
+    color: black;
+    /* color: rgb(0, 0, 182);  */
+}
+.dollar-sign-freight-amount-input{
+    position: absolute;
+    margin-left: 2px;
+    margin-top: 2px;
+    color: black;
+}
+/* input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    border: 1px solid rgb(118, 118, 118);
+    box-shadow: 0 0 0 20px white inset;
+    height: 17.2px;
+} */
+@media print{
+    .menu-hyperlink-format{
+        display: none;
+    }
+    .h2-header{
+        display: none;
+    }
+    .save-form-button-paragraph{
+        display: none;
+    }
+    .item-num-select-1{
+        appearance: none;
+    }
+    .item-num-select-2{
+        appearance: none;
+    }
+    .item-num-select-3{
+        appearance: none;
+    }
+    .item-num-select-4{
+        appearance: none;
+    }
+    .item-num-select-5{
+        appearance: none;
+    }
+    .item-name-select-1{
+        appearance: none;
+    }
+    .item-name-select-2{
+        appearance: none;
+    }
+    .item-name-select-3{
+        appearance: none;
+    }
+    .item-name-select-4{
+        appearance: none;
+    }
+    .item-name-select-5{
+        appearance: none;
+    }
+    .change-company-button{
+        display: none;
+    }
+    .change-customer-button{
+        display: none;
+    }
+    .text-area-customer-mailing-address{
+        color: black;
+        border-width: 1px;
+    }
+    .text-area-company-mailing-address{
+        position: relative;
+        left: 0px;
+        color: black;
+        border: none;
+    }
+    .customer-select{
+        display: none;
+    }
+    .company-select{
+        display: none;
+    }
+}

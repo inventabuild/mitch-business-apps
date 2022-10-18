@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'item_manager',
     'customer_manager',
     'customer_pricing_manager',
+    'invoice_manager',
 ]
 
 MIDDLEWARE = [

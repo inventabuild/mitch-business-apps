@@ -24,5 +24,6 @@ urlpatterns = [
     path('item_manager/', include('item_manager.urls')),
     path('customer_manager/', include('customer_manager.urls')),
     path('customer_pricing_manager/', include('customer_pricing_manager.urls')),
+    path('invoice_manager/', include('invoice_manager.urls')),
 ]
 
