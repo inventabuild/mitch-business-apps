@@ -10,9 +10,9 @@
 </head>
 <body>
     <div class="menu-hyperlink-format">
-        <h3>Home<h3>
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
     </div>
-    <a href="{% url 'index' %}" class="hyperlink-menu-item">Company Options</a>
+    <h2>Company Options</h2>
     <ul>
         <li><a url href="{% url 'company_new' %}">Company New - Create a new company</a></li>
         <li><a href="{% url 'company_list' %}">Company list - List all the companies</a></li>
