@@ -6,15 +6,27 @@
 .doc-type{
     text-align: right;
     font-weight: bold;
+    position: relative;
+    left: -1850px;
+    top: 25px;
 }
 .bill-to{
-   margin-left: 108px; 
+   position: relative;
+   margin-right: 589px;
+   left: 105px;
+   visibility: hidden;
 }
-.bill-to-date-invoice-header-row{
+.make-payment-to{
+    visibility: hidden;
+}
+.date-invoice-header-row{
     display: flex;
     flex-direction: row;
     justify-content:space-between;
+    position: relative;
     margin-top: 25px;
+    left: 28px;
+    top: -60px;
 }
 .customer-mailing-address{
     display: flex;
@@ -36,18 +48,6 @@
     color: black;
     background-color: lightgrey;
 }
-/* .company-address-line-1{
-    color: rgb(0, 0, 182);
-}
-.company-address-line-2{
-    color: rgb(0, 0, 182);
-}
-.company-address-line-3{
-    color: rgb(0, 0, 182);
-}
-.company-address-line-4{
-    color: rgb(0, 0, 182);
-} */
 .text-area-company-mailing-address{
     font-family: 'Times New Roman', Times, serif;
     font-size: 18px;
@@ -56,14 +56,16 @@
     border-color: black;
     resize: none;
     position: relative;
-    top: 27.5px;
-    left: 167px;
-    /* color: rgb(0, 0, 182); */
-    text-align: center;
+    top: 162px;
+    left: -78px;
+    position: relative;
+    top: 162px;
+    left: -78px;
+    text-align: left;
     color: black;
     background-color: lightgrey;
 }
-.select-company-date-invoice-num-input-row{
+.select-company-input-row{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -88,7 +90,7 @@
     position: relative;
     /* top: -70px;
     left: 5px; */
-    top:-123px;
+    top:-122px;
     left: -194px;
     /* background-color: rgb(255, 196, 86); */
     background-color: rgb(235, 199, 20);
@@ -99,8 +101,8 @@
 .company-select{
     z-index: 1;
     position: relative;
-    left: -64px;
-    top: -73px;
+    left: -281px;
+    top: 61px;
     bottom: 48px;
     opacity: 1;
     background-color: rgb(255,216,20);
@@ -111,8 +113,8 @@
 }
 .change-company-button{
     position: relative;
-    top: -73px;
-    left: -227px;
+    top: 62px;
+    left: -412px;
     /* background-color: rgb(255, 196, 86); */
     background-color: rgb(235, 199, 20);
     opacity: 0;
@@ -121,9 +123,13 @@
 }
 .invoice-number-header{
     margin-right: 60px;
+    position: relative;
+    left: 18px;
 }
 .invoice-date-header{
     margin-right: 100px;
+    position: relative;
+    left: 18px;
 }
 .line-items-table{
     border-collapse: collapse;
@@ -136,13 +142,19 @@
     background-color: rgb(251,247,240);
     border-color: black;
     border-width: 1px;
-    height: 20px; 
+    height: 20px;
+    position: relative;
+    left: -1611px;
+    top: -78px;
 }
 .invoice-num-input{
     background-color: rgb(251,247,240);
     border-color: black;
     border-width: 1px;
-    height: 17.5px; 
+    height: 17.5px;
+    position: relative;
+    left:-1611px;
+    top: -78px;
 }
 .freight-amount-input{
     background-color: rgb(251,247,240);
@@ -442,13 +454,11 @@ td{
 .save-form-button-paragraph{
     display: flex;
     justify-content: center;
-    /* add to @media print */
     position: relative;
     top: -46px;
-    left: -150px;
+    left: -480px;
 }
 .save-form-button{
-    /* background-color: lightgreen; */
     background-color: #FFA41C;
     border-width: 1px;
     border-radius: 16px;
@@ -529,9 +539,10 @@ input:-webkit-autofill:active{
     }
     .text-area-company-mailing-address{
         position: relative;
-        left: 0px;
+        left: 288px;
+        top: 161px;
         color: black;
-        border: none;
+        border-width: 1px;
     }
     .customer-select{
         display: none;
@@ -539,4 +550,45 @@ input:-webkit-autofill:active{
     .company-select{
         display: none;
     }
+    .bill-to-header{
+        /* left: -1607px;
+        top: -77px; */
+        left: -100px;
+        top: -90px;
+    }
+    .invoice-date-input{
+        background-color: rgb(251,247,240);
+        border-color: black;
+        border-width: 1px;
+        height: 20px;
+        position: relative;
+        /* left: -1611px;
+        top: -78px; */
+        left: -526px;
+        top: -77px;
+    }
+    .invoice-num-input{
+        background-color: rgb(251,247,240);
+        border-color: black;
+        border-width: 1px;
+        height: 17.5px;
+        position: relative;
+        /* left:-1611px;
+        top: -78px; */
+        left: -524px;
+        top: -77px;
+    }
+    .doc-type{
+        text-align: right;
+        font-weight: bold;
+        position: relative;
+        left: -767px;
+        top: 25px;
+    }
+    .bill-to{
+        visibility: visible;
+     }
+     .make-payment-to{
+         visibility: visible;
+     }
 }

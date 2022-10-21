@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'invoice_manager/style.css' %}?v=20220925742">
+    <link rel="stylesheet" href="{% static 'invoice_manager/style.css' %}?v={{ now }}">
     <title>Invoice Document</title>
 </head>
 <body>
@@ -16,8 +16,8 @@
     <h2 class="h2-header">Invoice Form</h2>
     <form action="{% url 'invoice_new' %}" id="invoice-form" method="POST">
         {% csrf_token %}
-        <div class="doc-type">
-            INVOICE
+        <div class="doc-type" id="doc-type">
+            Invoice
         </div>
         <div class="header-address">
             <div class="company-select-div">
@@ -35,14 +35,17 @@
                 <button type="button" id="change-company-button" class="change-company-button" disabled>Change company</button>
             </div>
         </div>
-        <div class="bill-to-date-invoice-header-row">
-            <span class="bill-to">Bill to:</span>
+        <div class="date-invoice-header-row">
             <span>
-                <span id="invoice-date-header" class="invoice-date-header">Date</span>
+                <span class="invoice-date-header" id="invoice-date-header">Date</span>
                 <span class="invoice-number-header">Invoice #</span>
             </span>
         </div>
-        <div class="select-company-date-invoice-num-input-row">
+        <div>
+            <span class="bill-to">Bill to:</span>
+            <span class="make-payment-to">Make payment to:</span>
+        </div>
+        <div class="select-company-input-row">
             <div class="customer-select-div">
                 <select name="customer-select" id="customer-select" class="customer-select" onchange="customer_selected(this)">
                     <option value="-1">
@@ -271,7 +274,7 @@
         var js_json_customer_pricing_all = JSON.parse('{{ json_customer_pricing_all | safe }}');
         var js_json_item_all = JSON.parse('{{ json_item_all | safe }}');
         var customerSelectedPk = "-1";
-        document.getElementById("text-area-company-mailing-address").innerHTML = "\n" + "--Read only--";
+        document.getElementById("text-area-company-mailing-address").innerHTML = "\n" + "                 --Read only--";
         document.getElementById("text-area-customer-mailing-address").innerHTML = "\n" + "                 --Read only--";
         function validate_form(){
             alert(document.getElementById("po-num-input-1").value)
@@ -386,7 +389,7 @@
         function company_selected(companySelectObject){
             var companyAddressComplete = "";
             if (companySelectObject.value == "-1" || companySelectObject == "-1"){
-                companyAddressComplete = "\n" + "--Read only--";
+                companyAddressComplete = "\n" + "                --Read only--";
             }
             else {
                 for (i=0; i<js_json_company_all.length; i++){
@@ -395,7 +398,7 @@
                         companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.address + "\n";
                         companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.city + " ";
                         companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.state + " ";
-                        companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.zip_code + " ";
+                        companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.zip_code + "\n";
                         companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.tel;  
                     }
                 }

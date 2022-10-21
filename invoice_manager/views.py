@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from . import models
 from company_manager import models as company_manager_models
@@ -136,6 +137,7 @@ def invoice_new(request):
     json_customer_pricing_all = serializers.serialize('json', customer_pricing_manager_models.Customer_Pricing.objects.all().order_by('item_id'))
     item_all = item_manager_models.Item.objects.all().order_by('name')
     json_item_all = serializers.serialize('json', item_manager_models.Item.objects.all().order_by('name'))
+    now = datetime.today().timestamp
     data = {
         'company_all': company_all,
         'customer_all': customer_all,
@@ -145,7 +147,8 @@ def invoice_new(request):
         'json_company_all': json_company_all,
         'json_customer_all': json_customer_all,
         'json_item_all': json_item_all,
-        'json_customer_pricing_all': json_customer_pricing_all
+        'json_customer_pricing_all': json_customer_pricing_all,
+        'now': now
         }
     return render(request, 'invoice_manager/invoice_new.html', data)
 def invoice_view(request, id):
