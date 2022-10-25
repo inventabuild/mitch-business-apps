@@ -604,13 +604,14 @@
         var today = year + "-" + month + "-" + day;       
         document.getElementById("invoice-date-input").value = today;
         function sum_amount(){
-            var totSalesAmount = Number(0.00).toFixed(2)
+            // var totSalesAmount = Number(0.00).toFixed(2)
+            var totSalesAmount = 0.00
             for(i = 1; i<=5; i++){
                 if (!isNaN(Number(document.getElementById("amount-dollar-input-" + i).value))){
                 totSalesAmount = Number(totSalesAmount) + Number(document.getElementById("amount-dollar-input-" + i).value);
                 }
             }
-            document.getElementById("sales-amount-input").value = totSalesAmount
+            document.getElementById("sales-amount-input").value = Number(totSalesAmount).toFixed(2)
             if(document.getElementById("sales-amount-input").value == "0.00"){
                 document.getElementById("sales-amount-input").value = "read-only";
             }
