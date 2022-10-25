@@ -1,32 +1,29 @@
-.header-address{
+.company-address-group{
     display: flex;
     flex-direction: column;
     text-align: center;
+    position: absolute;
+    top: 0px;
+    left: -120px;
 }
 .doc-type{
     text-align: right;
     font-weight: bold;
-    position: relative;
-    left: -1850px;
-    top: 25px;
-}
-.bill-to{
-   position: relative;
-   margin-right: 589px;
-   left: 105px;
-   visibility: hidden;
-}
-.make-payment-to{
+    position: absolute;
+    top: 0px;
     visibility: hidden;
 }
-.date-invoice-header-row{
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-    position: relative;
-    margin-top: 25px;
-    left: 28px;
-    top: -60px;
+.bill-to{
+    position: absolute;
+    left: 110px;
+    top: 171px;
+    visibility: hidden;
+}
+.make-payment-to{
+    position: absolute;
+    left: 569px;
+    top: 171px;
+    visibility: hidden;
 }
 .customer-mailing-address{
     display: flex;
@@ -41,12 +38,10 @@
     width: 14em;
     border-color: black;
     resize: none;
-    position: relative;
-    top: -22px;
-    /* top: -63px; */
-    /* color: rgb(0, 0, 182); */
     color: black;
     background-color: lightgrey;
+    position: absolute;
+    top: 191px;
 }
 .text-area-company-mailing-address{
     font-family: 'Times New Roman', Times, serif;
@@ -55,44 +50,33 @@
     width: 14em;
     border-color: black;
     resize: none;
-    position: relative;
-    top: 162px;
-    left: -78px;
-    position: relative;
-    top: 162px;
-    left: -78px;
     text-align: left;
     color: black;
     background-color: lightgrey;
-}
-.select-company-input-row{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    position: absolute;
+    top: 191px;
+    left: 620px;
 }
 .customer-select-div{
     z-index: 1;
-    /* margin-top: 44px;
-    margin-left: 295px; */
     opacity: 1;
 }
 .customer-select{
-    position: relative;
-    left: 57px;
-    top: -18.5px;
+    position: absolute;
+    left: 73px;
+    top: 172px;
     background-color: rgb(255,216,20);
     text-align: center;
+    z-index: 1;
 }
 .customer-select option{
     background-color: white;
 }
 .change-customer-button{
-    position: relative;
-    /* top: -70px;
-    left: 5px; */
-    top:-122px;
-    left: -194px;
-    /* background-color: rgb(255, 196, 86); */
+    min-width: 120px;
+    position: absolute;
+    left: 76px;
+    top: 172px;
     background-color: rgb(235, 199, 20);
     border-width: 1px;
     opacity: 0;
@@ -100,10 +84,9 @@
 }
 .company-select{
     z-index: 1;
-    position: relative;
-    left: -281px;
-    top: 61px;
-    bottom: 48px;
+    position: absolute;
+    left: 688px;
+    top: 172px;
     opacity: 1;
     background-color: rgb(255,216,20);
     text-align: center;
@@ -112,356 +95,540 @@
     background-color: white;
 }
 .change-company-button{
-    position: relative;
-    top: 62px;
-    left: -412px;
-    /* background-color: rgb(255, 196, 86); */
+    min-width: 119px;
+    position: absolute;
+    left: 687px;
+    top: 172px;
     background-color: rgb(235, 199, 20);
     opacity: 0;
     z-index: 0;
     border-width: 1px;
 }
-.invoice-number-header{
-    margin-right: 60px;
-    position: relative;
-    left: 18px;
+.date-invoice-group{
+    position: absolute;
+    top: 98px;
 }
 .invoice-date-header{
-    margin-right: 100px;
-    position: relative;
-    left: 18px;
-}
-.line-items-table{
-    border-collapse: collapse;
-}
-/* table, thead, th, tr, td{
+    position: absolute;
+    left: 43px;
     top: 0px;
-    position: sticky;
-} */
+}
+.invoice-number-header{
+    position: absolute;
+    left: 159px;
+    top: 0px;
+    white-space: nowrap;
+}
 .invoice-date-input{
     background-color: rgb(251,247,240);
     border-color: black;
     border-width: 1px;
     height: 20px;
-    position: relative;
-    left: -1611px;
-    top: -78px;
+    position: absolute;
+    top: 16px;
+    left: 0px;
+    width: 15ch;
+    text-align: center;
 }
 .invoice-num-input{
     background-color: rgb(251,247,240);
     border-color: black;
     border-width: 1px;
     height: 17.5px;
-    position: relative;
-    left:-1611px;
-    top: -78px;
+    position: absolute;
+    top: 16px;
+    left: 118px;
+    width: 18ch;
+    text-align: center;
 }
-.freight-amount-input{
-    background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+.line-items-table{
+    border-collapse: collapse;
+    position: absolute;
+    top: 310px;
+}
+td{
+    padding: 0px;
+}
+tr:nth-child(1) td{
+    border: 1px solid black;
+}
+tr:nth-child(2) td{
+    border: 1px solid black;
+}
+tr:nth-child(3) td{
+    border: 1px solid black;
+}
+tr:nth-child(4) td{
+    border: 1px solid black;
+}
+tr:nth-child(5) td{
+    border: 1px solid black;
+}
+tr:nth-child(6) td:nth-child(6){
+    border: 1px solid black;
+}
+tr:nth-child(7) td:nth-child(6){
+    border: 1px solid black;
+}
+tr:nth-child(8) td:nth-child(6){
+    border: 1px solid black;
 }
 .po-num-input-1{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 18ch;
+    padding: 2px;
 }
 .item-num-select-1{
-    margin-right: -5px;
     height: 21.5px;
+    width: 14ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black;   
+    border: 0px solid black;
 }
 .item-num-select-1 option{
     background-color: white;
 }
 .item-name-select-1{
-    margin-right: -5px;
     height: 21.5px;
+    width: 23ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black; 
+    border: 0px solid black;
 }
 .item-name-select-1 option{
     background-color: white;
 }
 .qty-ea-input-1{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
+    width: 13ch;
+    padding: 2px;
 }
 .price-ea-input-1{
-    margin-right: -5px;
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */
+    width: 15ch;
+    padding: 2px;
 }
 .amount-dollar-input-1{
-    margin-right: -5px;
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */ 
+    width: 15ch;
+    padding: 2px;
 }
 .po-num-input-2{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px; 
+    width: 18ch;
+    padding: 2px;
 }
 .item-num-select-2{
-    margin-right: -5px;
     height: 21.5px;
+    width: 14ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black;
+    border: 0px solid black;
 }
 .item-num-select-2 option{
     background-color: white;
 }
 .item-name-select-2{
-    margin-right: -5px;
     height: 21.5px;
+    width: 23ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black; 
+    border: 0px solid black;
 }
 .item-name-select-2 option{
     background-color: white;
 }
 .qty-ea-input-2{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 13ch;
+    padding: 2px;
 }
 .price-ea-input-2{
-    margin-right: -5px;
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */
+    width: 15ch;
+    padding: 2px;
 }
 .amount-dollar-input-2{
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */ 
+    width: 15ch;
+    padding: 2px;
 }
 .po-num-input-3{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 18ch;
+    padding: 2px;
 }
 .item-num-select-3{
-    margin-right: -5px;
     height: 21.5px;
+    width: 14ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black;  
+    border: 0px solid black;
 }
 .item-num-select-3 option{
     background-color: white;
 }
 .item-name-select-3{
-    margin-right: -5px;
     height: 21.5px;
+    width: 23ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black; 
+    border: 0px solid black;
 }
 .item-name-select-3 option{
     background-color: white;
 }
 .qty-ea-input-3{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 13ch;
+    padding: 2px;
 }
 .price-ea-input-3{
-    margin-right: -5px;
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */
+    width: 15ch;
+    padding: 2px;
 }
 .amount-dollar-input-3{
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */ 
+    width: 15ch;
+    padding: 2px;
 }
 .po-num-input-4{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 18ch;
+    padding: 2px;
 }
 .item-num-select-4{
-    margin-right: -5px;
     height: 21.5px;
+    width: 14ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black;  
+    border: 0px solid black;
 }
 .item-num-select-4 option{
     background-color: white;
 }
 .item-name-select-4{
-    margin-right: -5px;
     height: 21.5px;
+    width: 23ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black;  
+    border: 0px solid black;
 }
 .item-name-select-4 option{
     background-color: white;
 }
 .qty-ea-input-4{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 13ch;
+    padding: 2px;
 }
 .price-ea-input-4{
-    margin-right: -5px;
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */ 
+    width: 15ch;
+    padding: 2px;
 }
 .amount-dollar-input-4{
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */ 
+    width: 15ch;
+    padding: 2px;
 }
 .po-num-input-5{
-    margin-right: -5px;
     text-align: center;
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 18ch;
 }
 .item-num-select-5{
-    margin-right: -5px;
     height: 21.5px;
+    width: 14ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black;  
+    border: 0px solid black;
+    padding: 2px;
 }
 .item-num-select-5 option{
     background-color: white;
 }
 .item-name-select-5{
-    margin-right: -5px;
     height: 21.5px;
+    width: 23ch;
     text-align: center;
     background-color: rgb(255,216,20);
-    border-color: black; 
+    border: 0px solid black;
 }
 .item-name-select-5 option{
     background-color: white;
 }
 .qty-ea-input-5{
-    margin-right: -5px;
     text-align: center;
     color: rgb(0, 0, 182);
     background-color: rgb(251,247,240);
-    border-color: black;
-    border-width: 1px;
-    height: 17.5px; 
+    border: 0px solid black;
+    height: 17.5px;
+    width: 13ch;
+    padding: 2px;
 }
 .price-ea-input-5{
-    margin-right: -5px;
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */ 
+    width: 15ch;
+    padding: 2px;
 }
 .amount-dollar-input-5{
     text-align: center;
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-    /* color: rgb(0, 0, 182); */ 
+    width: 15ch;
+    padding: 2px;
+}
+.po-num-input-6{
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border: 0px solid black;
+    height: 17.5px;
+    width: 18ch;
+    padding: 2px;
+    visibility: hidden;
+}
+.item-num-select-6{
+    height: 21.5px;
+    width: 14ch;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border: 0px solid black;
+    visibility: hidden;   
+}
+.item-num-select-1 option{
+    background-color: white;
+}
+.item-name-select-6{
+    height: 21.5px;
+    width: 23ch;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border: 0px solid black;
+    visibility: hidden;
+}
+.item-name-select-1 option{
+    background-color: white;
+}
+.qty-ea-input-6{
+    text-align: left;
+    background-color: white;
+    border: 0px solid black;
+    height: 17.5px;
+    width: 13ch;
+    padding: 2px;
+}
+.price-ea-input-6{
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border: 0px solid black;
+    height: 17.5px;
+    width: 15ch;
+    padding: 2px;
+    visibility: hidden;
+}
+.po-num-input-7{
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border: 0px solid black;
+    height: 17.5px;
+    width: 18ch;
+    padding: 2px;
+    visibility: hidden;
+}
+.item-num-select-7{
+    height: 21.5px;
+    width: 14ch;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border: 0px solid black;
+    visibility: hidden;
+}
+.item-num-select-1 option{
+    background-color: white;
+}
+.item-name-select-7{
+    height: 21.5px;
+    width: 23ch;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border: 0px solid black;
+    visibility: hidden;
+}
+.item-name-select-1 option{
+    background-color: white;
+}
+.qty-ea-input-7{
+    text-align: left;
+    background-color: white;
+    border: 0px solid black;
+    height: 17.5px;
+    width: 13ch;
+    padding: 2px;
+}
+.price-ea-input-7{
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border: 0px solid black;
+    height: 17.5px;
+    width: 15ch;
+    padding: 2px;
+    visibility: hidden;
+}
+.po-num-input-8{
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border: 0px solid black;
+    height: 17.5px;
+    width: 18ch;
+    padding: 2px;
+    visibility: hidden;
+}
+.item-num-select-8{
+    height: 21.5px;
+    width: 14ch;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border: 0px solid black;
+    visibility: hidden;
+}
+.item-num-select-1 option{
+    background-color: white;
+}
+.item-name-select-8{
+    height: 21.5px;
+    width: 23ch;
+    text-align: center;
+    background-color: rgb(255,216,20);
+    border: 0px solid black;
+    visibility: hidden;
+}
+.item-name-select-1 option{
+    background-color: white;
+}
+.qty-ea-input-8{
+    text-align: left;
+    background-color: white;
+    border: 0px solid black;
+    height: 17.5px;
+    width: 13ch;
+    padding: 2px;
+}
+.price-ea-input-8{
+    text-align: center;
+    color: black;
+    background-color: lightgrey;
+    border: 0px solid black;
+    height: 17.5px;
+    width: 15ch;
+    padding: 2px;
+    visibility: hidden;
 }
 .sales-amount-input{
     text-align: center; 
-    /* color: rgb(0, 0, 182); */
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
+    width: 15ch;
+    padding: 2px;
 }
 .freight-amount-input{
-    text-align: center; 
+    text-align: center;
+    background-color: rgb(251,247,240);
+    border: 0px solid black;
+    height: 17.5px;
+    width: 15ch;
+    padding: 2px;
 }
 .total-due-input{
     text-align: center;
-    /* color: rgb(0, 0, 182); */
     color: black;
     background-color: lightgrey;
-    border-width: 1px;
+    border: 0px solid black;
     height: 17.5px;
-}
-td{
-    padding: 0px;
+    width: 15ch;
+    padding: 2px;
 }
 .save-form-button-paragraph{
     display: flex;
     justify-content: center;
-    position: relative;
-    top: -46px;
-    left: -480px;
+    position: absolute;
+    top: 455px;
+    left: 422px;
 }
 .save-form-button{
     background-color: #FFA41C;
     border-width: 1px;
     border-radius: 16px;
+    width: 12.5ch;
 }
 .hyperlink-menu-item{
     margin-right: 10px;
@@ -471,7 +638,6 @@ td{
     margin-left: 2px;
     margin-top: 2px;
     color: black;
-    /* color: rgb(0, 0, 182);  */
 }
 .dollar-sign-freight-amount-input{
     position: absolute;
@@ -479,14 +645,314 @@ td{
     margin-top: 2px;
     color: black;
 }
-/* input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-    border: 1px solid rgb(118, 118, 118);
-    box-shadow: 0 0 0 20px white inset;
-    height: 17.2px;
-} */
+.message-div{
+    position: absolute;
+    /* top: 472px;
+    left: 0px; */
+    top: 469px;
+    left: 11px;
+}
+@media (max-width: 759px) {
+    body{
+        font-size: 12px;
+    }
+    .save-form-button-paragraph{
+        top: 455px;
+        left: 222px;
+    }
+    .po-num-input-1{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .po-num-input-2{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .po-num-input-3{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .po-num-input-4{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .po-num-input-5{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .po-num-input-6{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .po-num-input-7{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .po-num-input-8{
+        width: 18ch;
+        width: 9ch;
+        font-size: 12px;
+    }
+    .item-num-select-1{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-num-select-2{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-num-select-3{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-num-select-4{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-num-select-5{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-num-select-6{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-num-select-7{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-num-select-8{
+        width: 14ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .item-name-select-1{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .item-name-select-2{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .item-name-select-3{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .item-name-select-4{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .item-name-select-5{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .item-name-select-6{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .item-name-select-7{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .item-name-select-8{
+        width: 23ch;
+        width: 14ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-1{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-2{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-3{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-4{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-5{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-6{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-7{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .qty-ea-input-8{
+        width: 13ch;
+        width: 7ch;
+        font-size: 12px;
+    }
+    .price-ea-input-1{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .price-ea-input-2{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .price-ea-input-3{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .price-ea-input-4{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .price-ea-input-5{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .price-ea-input-6{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .price-ea-input-7{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .price-ea-input-8{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .amount-dollar-input-1{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .amount-dollar-input-2{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .amount-dollar-input-3{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .amount-dollar-input-4{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .amount-dollar-input-5{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .sales-amount-input{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .freight-amount-input{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .total-due-input{
+        width: 15ch;
+        width: 12ch;
+        font-size: 12px;
+    }
+    .company-address-group{
+        left:-378px
+    }
+    .customer-select-div{
+        font-size: 12px;
+    }
+    .text-area-customer-mailing-address{
+        font-size: 16px;
+    }
+    .customer-select{
+        font-size: 12px;
+        top: 173px;
+        left: 70px;
+    }
+    .change-customer-button{
+        font-size: 12px;
+        top: 173px;
+        left: 61px;
+    }
+    .company-select-div{
+        font-size: 12px;
+    }
+    .text-area-company-mailing-address{
+        font-size: 16px;
+    }
+    .company-select{
+        font-size: 12px;
+        top: 173px;
+        left: 684px;
+    }
+    .change-company-button{
+        font-size: 12px;
+        top: 173px;
+        left: 674px;
+    }
+    .invoice-date-input{
+        font-size: 12px;
+    }
+    .invoice-num-input{
+        font-size: 12px;
+        left: 107px;
+    }
+    .save-form-button{
+        font-size: 12px;
+    }
+    .invoice-date-header{
+        top: 3px;
+    }
+    .invoice-number-header{
+        top: 3px;
+        left: 149px;
+    }
+}
 @media print{
     .menu-hyperlink-format{
         display: none;
@@ -497,34 +963,92 @@ input:-webkit-autofill:active{
     .save-form-button-paragraph{
         display: none;
     }
+    .po-num-input-1{
+        width: 18ch;
+    }
+    .po-num-input-2{
+        width: 18ch;
+    }
+    .po-num-input-3{
+        width: 18ch;
+    }
+    .po-num-input-4{
+        width: 18ch;
+    }
+    .po-num-input-5{
+        width: 18ch;
+    }
+    .po-num-input-6{
+        width: 18ch;
+    }
+    .po-num-input-7{
+        width: 18ch;
+    }
+    .po-num-input-8{
+        width: 18ch;
+    }
     .item-num-select-1{
+        width: 14ch;
         appearance: none;
     }
     .item-num-select-2{
+        width: 14ch;
         appearance: none;
     }
     .item-num-select-3{
+        width: 14ch;
         appearance: none;
     }
     .item-num-select-4{
+        width: 14ch;
         appearance: none;
     }
     .item-num-select-5{
+        width: 14ch;
+        appearance: none;
+    }
+    .item-num-select-6{
+        width: 14ch;
+        appearance: none;
+    }
+    .item-num-select-7{
+        width: 14ch;
+        appearance: none;
+    }
+    .item-num-select-8{
+        width: 14ch;
         appearance: none;
     }
     .item-name-select-1{
+        width: 23ch;
         appearance: none;
     }
     .item-name-select-2{
+        width: 23ch;
         appearance: none;
     }
     .item-name-select-3{
+        width: 23ch;
         appearance: none;
     }
     .item-name-select-4{
+        width: 23ch;
         appearance: none;
     }
     .item-name-select-5{
+        width: 23ch;
+        appearance: none;
+    }
+    .item-name-select-6{
+        width: 23ch;
+        appearance: none;
+    }
+    .item-name-select-7{
+        width: 23ch;
+        appearance: none;
+    }
+    .item-name-select-8{
+        width: 23ch;
         appearance: none;
     }
     .change-company-button{
@@ -533,62 +1057,102 @@ input:-webkit-autofill:active{
     .change-customer-button{
         display: none;
     }
-    .text-area-customer-mailing-address{
-        color: black;
-        border-width: 1px;
-    }
-    .text-area-company-mailing-address{
-        position: relative;
-        left: 288px;
-        top: 161px;
-        color: black;
-        border-width: 1px;
-    }
     .customer-select{
         display: none;
     }
     .company-select{
         display: none;
     }
-    .bill-to-header{
-        /* left: -1607px;
-        top: -77px; */
-        left: -100px;
-        top: -90px;
-    }
-    .invoice-date-input{
-        background-color: rgb(251,247,240);
-        border-color: black;
-        border-width: 1px;
-        height: 20px;
-        position: relative;
-        /* left: -1611px;
-        top: -78px; */
-        left: -526px;
-        top: -77px;
-    }
-    .invoice-num-input{
-        background-color: rgb(251,247,240);
-        border-color: black;
-        border-width: 1px;
-        height: 17.5px;
-        position: relative;
-        /* left:-1611px;
-        top: -78px; */
-        left: -524px;
-        top: -77px;
-    }
-    .doc-type{
-        text-align: right;
-        font-weight: bold;
-        position: relative;
-        left: -767px;
-        top: 25px;
-    }
     .bill-to{
         visibility: visible;
+        top: 174px;
+        left: 102px;
      }
      .make-payment-to{
          visibility: visible;
+         top: 174px;
+         left: 529px;
      }
+     .text-area-customer-mailing-address{
+        top: 187px;
+     }
+     .text-area-company-mailing-address{
+        top: 187px;
+        left: 837px;
+     }
+     .doc-type{
+        visibility: visible;
+     }
+    .qty-ea-input-1{
+        width: 13ch;
+    }
+    .price-ea-input-1{
+        width: 15ch;
+    }
+    .amount-dollar-input-1{
+        width: 15ch;
+    }
+    .qty-ea-input-2{
+        width: 13ch; 
+    }
+    .price-ea-input-2{
+        width: 15ch;
+    }
+    .amount-dollar-input-2{
+        width: 15ch;
+    }
+    .qty-ea-input-3{
+        width: 13ch;
+    }
+    .price-ea-input-3{
+        width: 15ch;
+    }
+    .amount-dollar-input-3{
+        width: 15ch;
+    }
+    .qty-ea-input-4{
+        width: 13ch;
+    }
+    .price-ea-input-4{
+        width: 15ch;
+    }
+    .amount-dollar-input-4{
+        width: 15ch;
+    }
+    .qty-ea-input-5{
+       width: 13ch;
+    }
+    .price-ea-input-5{
+        width: 15ch;
+    }
+    .qty-ea-input-6{
+        width: 13ch;
+     }
+     .price-ea-input-6{
+         width: 15ch;
+     }
+     .qty-ea-input-7{
+        width: 13ch;
+     }
+     .price-ea-input-7{
+         width: 15ch;
+     }
+     .qty-ea-input-8{
+        width: 13ch;
+     }
+     .price-ea-input-8{
+         width: 15ch;
+     }
+    .amount-dollar-input-5{
+        width: 15ch;
+    }
+    .sales-amount-input{
+        width: 15ch;
+    }
+    .freight-amount-input{
+        width: 15ch;
+    }
+    .total-due-input{
+        width: 15ch;
+    }
 }
