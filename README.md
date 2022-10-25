@@ -3,8 +3,11 @@ Mitchell Rabushka
 # Invoice Creator made with Django
 
 ## Link
-Branch
+Github
 https://inventabuild.github.io/Customer-invoice/
+
+Heroku
+https://mitch-business-apps.herokuapp.com/company_manager/company_options_list
 
 ## Short Project Description
 
@@ -31,6 +34,7 @@ The website uses Django,Python, html, css and Javascript.
 17. Create Freight Only invoice by populating the words Freigth only in the fields across the row after the PO#.
 18. Add a place for notes on the invoice.
 19. Add comma separator for evey three 0's in a number / $ amount.
+20. Make lists in apps more tabular with row / column lines similar to the table displayed in invoice_new.
 
 ## User Stories
 User Story 1, As someone that creates invoices on the computer, I want to simplify the invoice creation process, so that I can automate invoicing.
