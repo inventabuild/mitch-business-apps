@@ -55,7 +55,7 @@
     background-color: lightgrey;
     position: absolute;
     top: 191px;
-    left: 620px;
+    left: 567px;
 }
 .customer-select-div{
     z-index: 1;
@@ -85,7 +85,7 @@
 .company-select{
     z-index: 1;
     position: absolute;
-    left: 688px;
+    left: 635px;
     top: 172px;
     opacity: 1;
     background-color: rgb(255,216,20);
@@ -97,7 +97,7 @@
 .change-company-button{
     min-width: 119px;
     position: absolute;
-    left: 687px;
+    left: 634px;
     top: 172px;
     background-color: rgb(235, 199, 20);
     opacity: 0;
@@ -146,8 +146,9 @@
     position: absolute;
     top: 310px;
 }
-td{
-    padding: 0px;
+.th{
+    word-wrap: break-word;
+    overflow:hidden;
 }
 tr:nth-child(1) td{
     border: 1px solid black;
@@ -178,12 +179,12 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 18ch;
+    width: 16ch;
     padding: 2px;
 }
 .item-num-select-1{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -193,7 +194,7 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-1{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -206,7 +207,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-1{
@@ -215,7 +216,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .amount-dollar-input-1{
@@ -224,7 +225,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .po-num-input-2{
@@ -232,12 +233,12 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px; 
-    width: 18ch;
+    width: 16ch;
     padding: 2px;
 }
 .item-num-select-2{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -247,7 +248,7 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-2{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -260,7 +261,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-2{
@@ -269,7 +270,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .amount-dollar-input-2{
@@ -278,7 +279,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .po-num-input-3{
@@ -286,12 +287,12 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 18ch;
+    width: 16ch;
     padding: 2px;
 }
 .item-num-select-3{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -301,7 +302,7 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-3{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -314,7 +315,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-3{
@@ -323,7 +324,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .amount-dollar-input-3{
@@ -332,7 +333,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .po-num-input-4{
@@ -340,12 +341,12 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 18ch;
+    width: 16ch;
     padding: 2px;
 }
 .item-num-select-4{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -355,7 +356,7 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-4{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -368,7 +369,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-4{
@@ -377,7 +378,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .amount-dollar-input-4{
@@ -386,7 +387,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .po-num-input-5{
@@ -394,22 +395,22 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 18ch;
+    width: 16ch;
+    padding: 2px;
 }
 .item-num-select-5{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
-    padding: 2px;
 }
 .item-num-select-5 option{
     background-color: white;
 }
 .item-name-select-5{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -419,11 +420,10 @@ tr:nth-child(8) td:nth-child(6){
 }
 .qty-ea-input-5{
     text-align: center;
-    color: rgb(0, 0, 182);
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-5{
@@ -432,7 +432,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .amount-dollar-input-5{
@@ -441,7 +441,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .po-num-input-6{
@@ -449,13 +449,13 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 18ch;
+    width: 17ch;
     padding: 2px;
     visibility: hidden;
 }
 .item-num-select-6{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -466,7 +466,7 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-6{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -480,7 +480,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: white;
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-6{
@@ -489,7 +489,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
     visibility: hidden;
 }
@@ -498,13 +498,13 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 18ch;
+    width: 17ch;
     padding: 2px;
     visibility: hidden;
 }
 .item-num-select-7{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -515,7 +515,7 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-7{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -529,7 +529,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: white;
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-7{
@@ -538,7 +538,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
     visibility: hidden;
 }
@@ -547,13 +547,13 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 18ch;
+    width: 17ch;
     padding: 2px;
     visibility: hidden;
 }
 .item-num-select-8{
     height: 21.5px;
-    width: 14ch;
+    width: 13ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -564,7 +564,7 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-8{
     height: 21.5px;
-    width: 23ch;
+    width: 21ch;
     text-align: center;
     background-color: rgb(255,216,20);
     border: 0px solid black;
@@ -578,7 +578,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: white;
     border: 0px solid black;
     height: 17.5px;
-    width: 13ch;
+    width: 12ch;
     padding: 2px;
 }
 .price-ea-input-8{
@@ -587,7 +587,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
     visibility: hidden;
 }
@@ -597,7 +597,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .freight-amount-input{
@@ -605,7 +605,7 @@ tr:nth-child(8) td:nth-child(6){
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .total-due-input{
@@ -614,15 +614,15 @@ tr:nth-child(8) td:nth-child(6){
     background-color: lightgrey;
     border: 0px solid black;
     height: 17.5px;
-    width: 15ch;
+    width: 14ch;
     padding: 2px;
 }
 .save-form-button-paragraph{
     display: flex;
     justify-content: center;
     position: absolute;
-    top: 455px;
-    left: 422px;
+    top: 453px;
+    left: 370px;
 }
 .save-form-button{
     background-color: #FFA41C;
@@ -633,26 +633,40 @@ tr:nth-child(8) td:nth-child(6){
 .hyperlink-menu-item{
     margin-right: 10px;
 }
-.dollar-sign{
-    position: absolute;
-    margin-left: 2px;
-    margin-top: 2px;
-    color: black;
-}
-.dollar-sign-freight-amount-input{
-    position: absolute;
-    margin-left: 2px;
-    margin-top: 2px;
-    color: black;
-}
 .message-div{
     position: absolute;
-    /* top: 472px;
-    left: 0px; */
     top: 469px;
     left: 11px;
 }
+.popup-table-cells{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    height: 30px;
+    width: 170px;
+    background-color: #555;
+    color: #fff;
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: -1;
+}
+.corner-for-popup{
+    border-right: 10px solid transparent;
+    border-top: 5px solid grey;
+    border-bottom: 1px solid transparent;
+    border-left: 0px solid transparent;
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    z-index: 1;
+}
 @media (max-width: 759px) {
+    .line-items-table{
+        top: 300px;
+    }
     body{
         font-size: 12px;
     }
@@ -661,243 +675,198 @@ tr:nth-child(8) td:nth-child(6){
         left: 222px;
     }
     .po-num-input-1{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .po-num-input-2{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .po-num-input-3{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .po-num-input-4{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .po-num-input-5{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .po-num-input-6{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .po-num-input-7{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .po-num-input-8{
-        width: 18ch;
         width: 9ch;
         font-size: 12px;
     }
     .item-num-select-1{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-num-select-2{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-num-select-3{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-num-select-4{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-num-select-5{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-num-select-6{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-num-select-7{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-num-select-8{
-        width: 14ch;
         width: 12ch;
         font-size: 12px;
     }
     .item-name-select-1{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .item-name-select-2{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .item-name-select-3{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .item-name-select-4{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .item-name-select-5{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .item-name-select-6{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .item-name-select-7{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .item-name-select-8{
-        width: 23ch;
         width: 14ch;
         font-size: 12px;
     }
     .qty-ea-input-1{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
     .qty-ea-input-2{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
     .qty-ea-input-3{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
     .qty-ea-input-4{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
     .qty-ea-input-5{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
     .qty-ea-input-6{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
     .qty-ea-input-7{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
     .qty-ea-input-8{
-        width: 13ch;
         width: 7ch;
         font-size: 12px;
     }
+    .cost-ea{
+        width: 10ch;
+    }
     .price-ea-input-1{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .price-ea-input-2{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .price-ea-input-3{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .price-ea-input-4{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .price-ea-input-5{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .price-ea-input-6{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .price-ea-input-7{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .price-ea-input-8{
-        width: 15ch;
-        width: 12ch;
+        width: 10ch;
         font-size: 12px;
     }
     .amount-dollar-input-1{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .amount-dollar-input-2{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .amount-dollar-input-3{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .amount-dollar-input-4{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .amount-dollar-input-5{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .sales-amount-input{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .freight-amount-input{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .total-due-input{
-        width: 15ch;
-        width: 12ch;
+        width: 11ch;
         font-size: 12px;
     }
     .company-address-group{
@@ -907,33 +876,34 @@ tr:nth-child(8) td:nth-child(6){
         font-size: 12px;
     }
     .text-area-customer-mailing-address{
-        font-size: 16px;
+        font-size: 15px;
     }
     .customer-select{
         font-size: 12px;
         top: 173px;
-        left: 70px;
+        left: 61px;
     }
     .change-customer-button{
         font-size: 12px;
         top: 173px;
-        left: 61px;
+        left: 55px;
     }
     .company-select-div{
         font-size: 12px;
     }
     .text-area-company-mailing-address{
-        font-size: 16px;
+        font-size: 15px;
+        left: 625px;
     }
     .company-select{
         font-size: 12px;
         top: 173px;
-        left: 684px;
+        left: 677px;
     }
     .change-company-button{
         font-size: 12px;
         top: 173px;
-        left: 674px;
+        left: 672px;
     }
     .invoice-date-input{
         font-size: 12px;
@@ -952,8 +922,16 @@ tr:nth-child(8) td:nth-child(6){
         top: 3px;
         left: 149px;
     }
+    .popup-table-cells{
+        border-radius: 6px;
+        height: 30px;
+        width: 130px;
+    }
 }
 @media print{
+    .corner-for-popup{
+        display: none;
+    }
     .menu-hyperlink-format{
         display: none;
     }

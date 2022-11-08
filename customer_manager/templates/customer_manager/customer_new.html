@@ -16,45 +16,151 @@
     <h2>
         New Customer Form
     </h2>
-    <form action="{% url 'customer_new' %}" method="POST">
+    <form action="{% url 'customer_new' %}" id="customer-form" method="POST">
         {% csrf_token %}
         <div>
             <label>
                 Name
-                <input type="text" name="customer_name" required />
+                <input type="text" name="customer_name" id="customer-name" onchange="customer_name_input()" required />
             </label>
         </div>
         <div>
             <label>
                 Address
-                <input type="text" name="customer_address" required />
+                <input type="text" name="customer_address" id="customer-address" onchange="customer_address_input()" required />
             </label>
         </div>
         <div>
             <label>
                 City
-                <input type="text" name="customer_city" required />
+                <input type="text" name="customer_city" id="customer-city" onchange="customer_city_input()" required />
             </label>
         </div>
         <div>
             <label>
                 State
-                <input type="text" name="customer_state" required />
+                <input type="text" name="customer_state" id="customer-state" onchange="customer_state_input()" required />
             </label>
         </div>
         <div>
             <label>
                 Country
-                <input type="text" name="customer_country" required />
+                <input type="text" name="customer_country" id="customer-country" onchange="customer_country_input()" required />
             </label>
         </div>
         <div>
             <label>Zip Code
-                <input type="text" name="customer_zip_code" required />
+                <input type="text" name="customer_zip_code" id="customer-zip-code" onchange="customer_zip_code_input()" required />
             </label>
         </div>
-        <button type="submit" class="create-customer-button">Create Customer</button>
+        <p>
+            <button type="button" id="create-customer-button" class="create-customer-button" onclick="validate_form()">Create Customer</button>
+        </p>
     </form>
     {{ message }}
+    <script type="text/javascript">
+        function customer_name_input(){
+            if((document.getElementById("customer-name").value != "")){
+               if((document.getElementById("customer-name").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Name field")
+                    return
+                }
+            }
+        }
+        function customer_address_input(){
+            if((document.getElementById("customer-address").value != "")){
+               if((document.getElementById("customer-address").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Address field")
+                    return
+                }
+            }
+        }
+        function customer_city_input(){
+            if((document.getElementById("customer-city").value != "")){
+               if((document.getElementById("customer-city").value).includes("'")){
+                    alert("Apostrophes (') not allowed in City field")
+                    return
+                }
+            }
+        }
+        function customer_state_input(){
+            if((document.getElementById("customer-state").value != "")){
+               if((document.getElementById("customer-state").value).includes("'")){
+                    alert("Apostrophes (') not allowed in State field")
+                    return
+                }
+            }
+        }
+        function customer_country_input(){
+            if((document.getElementById("customer-country").value != "")){
+               if((document.getElementById("customer-country").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Country field")
+                    return
+                }
+            }
+        }
+        function customer_zip_code_input(){
+            if((document.getElementById("customer-zip-code").value != "")){
+               if((document.getElementById("customer-zip-code").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Zip Code field")
+                    return
+                }
+            }
+        }
+        function customer_tel_input(){
+            if((document.getElementById("customer-tel").value != "")){
+               if((document.getElementById("customer-tel").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Telephone # field")
+                    return
+                }
+            }
+        }
+        function validate_form(){
+            if((document.getElementById("customer-name").value != "")){
+                if((document.getElementById("customer-name").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Name field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            if((document.getElementById("customer-address").value != "")){
+               if((document.getElementById("customer-address").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Address field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            if((document.getElementById("customer-city").value != "")){
+               if((document.getElementById("customer-city").value).includes("'")){
+                    alert("Apostrophes (') not allowed in City field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            if((document.getElementById("customer-state").value != "")){
+               if((document.getElementById("customer-state").value).includes("'")){
+                    alert("Apostrophes (') not allowed in State field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            if((document.getElementById("customer-country").value != "")){
+               if((document.getElementById("customer-country").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Country field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            if((document.getElementById("customer-zip-code").value != "")){
+               if((document.getElementById("customer-zip-code").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Zip Code field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            let form = document.getElementById("customer-form");
+            form.submit();
+        }
+        </script>
 </body>
 </html>

@@ -52,18 +52,18 @@
         </div>
         <div>
             <label>
-                Customer price
-                <input type="number" name="customer_pricing" id="customer-pricing" step=.01 onchange="twoDecimalSetter()" required>
+                Customer Price (USD)
+                <input type="number" name="customer_pricing" id="customer-pricing" step=.01 onchange="customer_pricing_input()" required />
             </label>
         </div>
         <button type="button" class="create-customer-pricing-button" onclick="validate_form()">Create pricing</button>
     </form>
     {{ message }}
     <script>
-        function twoDecimalSetter(){
-            twoDecimalCost=document.getElementById("customer-pricing").value;
-            twoDecimalCost=Number(twoDecimalCost).toFixed(2);
-            document.getElementById("customer-pricing").value=twoDecimalCost;
+        function customer_pricing_input(){
+            customerPricing = Number(document.getElementById("customer-pricing").value) + Number(document.getElementById("customer-pricing").value) * Number.EPSILON;
+            customerPricing = customerPricing.toFixed(2);
+            document.getElementById("customer-pricing").value = customerPricing;
         }
         function validate_form(){
             if(document.getElementById("customer-name-select").value == "-1"){

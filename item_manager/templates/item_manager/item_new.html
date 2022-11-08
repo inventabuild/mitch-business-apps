@@ -14,41 +14,93 @@
         <a href="{% url 'item_list' %}" class="hyperlink-menu-item">Item list</a>
     </div>
     <h2>New item</h2>
-    <form action="{% url 'item_new' %}" method="POST">
+    <form action="{% url 'item_new' %}" id="new-item-form" method="POST">
         {% csrf_token %}
         <div>
             <label>
                 Item Number
-                <input type="text" name="item_number" id="item_number" required />
+                <input type="text" name="item_number" id="item-number" onchange="item_number_input()" required />
             </label>
         </div>
         <div>
             <label>
                 Item Name
-                <input type="text" name="item_name" id="item_name" required />
+                <input type="text" name="item_name" id="item-name" onchange="item_name_input()" required />
             </label>
         </div>
         <div>
             <label>
                 Item Description
-                <input type="text" name="item_description" id="item_description" required />
+                <input type="text" name="item_description" id="item-description" onchange="item_description_input()" required />
             </label>
         </div>
         <div>
             <label>
-                Item Internal Cost
-                <input type="number" name="item_cost_internal" id="item_cost_internal" step=.01 onchange="twoDecimalSetter()" required>
+                Item Internal Cost (USD)
+                <input type="number" name="item_cost_internal" id="item-internal-cost" step=.01 onchange="item_internal_cost_input()" required />
             </label>
         </div>
-        <button type="submit" class="create-new-item-button">Create item</button>
+        <p>
+            <button type="submit" class="create-new-item-button" onclick="validate_form()">Create item</button>
+        </p>
     </form>
     {{ message }}
-    <script>
-        function twoDecimalSetter(){
-            twoDecimalCost=document.getElementById("item_cost_internal").value;
-            twoDecimalCost=Number(twoDecimalCost).toFixed(2);
-            document.getElementById("item_cost_internal").value=twoDecimalCost;
+    <script type="text/javascript">
+        function item_internal_cost_input(){
+            itemInternalCost = Number(document.getElementById("item-internal-cost").value) + Number(document.getElementById("item-internal-cost").value) * Number.EPSILON;
+            itemInternalCost = itemInternalCost.toFixed(2);
+            document.getElementById("item-internal-cost").value = itemInternalCost;
         }
+        function item_number_input(){
+            if((document.getElementById("item-number").value != "")){
+               if((document.getElementById("item-number").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Item Number field")
+                    return
+                }
+            }
+        }
+        function item_name_input(){
+            if((document.getElementById("item-name").value != "")){
+               if((document.getElementById("item-name").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Item Name field")
+                    return
+                }
+            }
+        }
+        function item_description_input(){
+            if((document.getElementById("item-description").value != "")){
+               if((document.getElementById("item-description").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Item Description field")
+                    return
+                }
+            }
+        }
+        function validate_form(){
+            if((document.getElementById("item-number").value != "")){
+               if((document.getElementById("item-number").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Item Number field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            if((document.getElementById("item-name").value != "")){
+               if((document.getElementById("item-name").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Item Name field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            if((document.getElementById("item-description").value != "")){
+               if((document.getElementById("item-description").value).includes("'")){
+                    alert("Apostrophes (') not allowed in Item Description field")
+                    event.preventDefault()
+                    return
+                }
+            }
+            let form = document.getElementById("new-item-form");
+            form.submit();
+        }
+
     </script>
 </body>
 </html>

@@ -26,7 +26,7 @@
             </span>
             <span>
                 <input name="invoice-date" type="date" id="invoice-date-input" class="invoice-date-input">
-                <input name="invoice-number" type="text" id="invoice-num-input" class ="invoice-num-input">
+                <input name="invoice-number" type="text" id="invoice-num-input" class ="invoice-num-input" onchange="invoice_num_entered(this)">
             </span>
         </div>
         <div>
@@ -71,13 +71,13 @@
                 <th>PO #</th>
                 <th>Item #</th>
                 <th>Item Name</th>
-                <th>Price Ea</th>
+                <th>Cost Ea (USD)</th>
                 <th>Qty Ea</th>
-                <th>Amount</th>
+                <th>Amount (USD)</th>
             </thead>
             <tr>
-                <td><input type="text" name="po-num-input-1" id="po-num-input-1" class="po-num-input-1" placeholder="optional"></td>
-                <td><select name="item-num-select-1" id="item-num-select-1" class="item-num-select-1" onchange="item_num_selected(this, '1')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-1')" onmouseout="amount_popup_hide(event, 'po-num-input-1')"></span><input type="text" name="po-num-input-1" id="po-num-input-1" class="po-num-input-1" placeholder="optional" onchange="po_num_selected(this, '1')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-1')" onmouseout="amount_popup_hide(event, 'item-num-select-1')"></span><select name="item-num-select-1" id="item-num-select-1" class="item-num-select-1" onchange="item_num_selected(this, '1')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -90,7 +90,7 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><select name="item-name-select-1" id="item-name-select-1" class="item-name-select-1" onchange="item_name_selected(this, '1')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-1')" onmouseout="amount_popup_hide(event, 'item-name-select-1')"></span><select name="item-name-select-1" id="item-name-select-1" class="item-name-select-1" onchange="item_name_selected(this, '1')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -103,13 +103,13 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-1" class="dollar-sign">$</span><input type="text" name="price-ea-input-1" id="price-ea-input-1" class="price-ea-input-1" onclick="price_ea_field_clicked('1')" value="read-only" readonly></td>
-                <td><input type="number" min="0" max="1000000000000" name="qty-ea-input-1" id="qty-ea-input-1" class="qty-ea-input-1" step="1" onchange="qty_ea_validation(this, '1')"></td>
-                <td><span id="dollar-sign-amount-dollar-input-1" class="dollar-sign">$</span><input type="text" name="amount-dollar-input-1" id="amount-dollar-input-1" class="amount-dollar-input-1" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+                <td class="cost-ea"><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-1')" onmouseout="amount_popup_hide(event, 'price-ea-input-1')"></span><input type="text" name="price-ea-input-1" maxlength="22" id="price-ea-input-1" class="price-ea-input-1" onclick="price_ea_field_clicked('1')" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-1')" onmouseout="amount_popup_hide(event, 'qty-ea-input-1')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-1" maxlength="22" id="qty-ea-input-1" class="qty-ea-input-1" onchange="qty_ea_validation(this, '1')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-1')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-1')"></span><input type="text" name="amount-dollar-input-1" maxlength="22" id="amount-dollar-input-1" class="amount-dollar-input-1" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
             </tr>
             <tr>
-                <td><input type="text" name="po-num-input-2" id="po-num-input-2" class="po-num-input-2" placeholder="optional"></td>
-                <td><select name="item-num-select-2" id="item-num-select-2" class="item-num-select-2" onchange="item_num_selected(this, '2')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-2')" onmouseout="amount_popup_hide(event, 'po-num-input-2')"></span><input type="text" name="po-num-input-2" id="po-num-input-2" class="po-num-input-2" placeholder="optional" onchange="po_num_selected(this, '2')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-2')" onmouseout="amount_popup_hide(event, 'item-num-select-2')"></span><select name="item-num-select-2" id="item-num-select-2" class="item-num-select-2" onchange="item_num_selected(this, '2')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -122,7 +122,7 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><select name="item-name-select-2" id="item-name-select-2" class="item-name-select-2" onchange="item_name_selected(this, '2')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-2')" onmouseout="amount_popup_hide(event, 'item-name-select-2')"></span><select name="item-name-select-2" id="item-name-select-2" class="item-name-select-2" onchange="item_name_selected(this, '2')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -135,13 +135,13 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-2" class="dollar-sign">$</span><input type="text" name="price-ea-input-2" id="price-ea-input-2" class="price-ea-input-2" onclick="price_ea_field_clicked('2')" value="read-only" readonly></td>
-                <td><input type="number" min="0" max="1000000000000" name="qty-ea-input-2" id="qty-ea-input-2" class="qty-ea-input-2" step="1" onchange="qty_ea_validation(this, '2')"></td>
-                <td><span id="dollar-sign-amount-dollar-input-2" class="dollar-sign">$</span><input type="text" name="amount-dollar-input-2" id="amount-dollar-input-2" class="amount-dollar-input-2" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-2')" onmouseout="amount_popup_hide(event, 'price-ea-input-2')"></span><input type="text" name="price-ea-input-2" maxlength="22" id="price-ea-input-2" class="price-ea-input-2" onclick="price_ea_field_clicked('2')" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-2')" onmouseout="amount_popup_hide(event, 'qty-ea-input-2')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-2" maxlength="22" id="qty-ea-input-2" class="qty-ea-input-2" onchange="qty_ea_validation(this, '2')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-2')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-2')"></span><input type="text" name="amount-dollar-input-2" maxlength="22" id="amount-dollar-input-2" class="amount-dollar-input-2" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></span></td>
             </tr>
             <tr>
-                <td><input type="text" name="po-num-input-3" id="po-num-input-3" class="po-num-input-3" placeholder="optional"></td>
-                <td><select name="item-num-select-3" id="item-num-select-3" class="item-num-select-3" onchange="item_num_selected(this, '3')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-3')" onmouseout="amount_popup_hide(event, 'po-num-input-3')"></span><input type="text" name="po-num-input-3" id="po-num-input-3" class="po-num-input-3" placeholder="optional" onchange="po_num_selected(this, '3')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-3')" onmouseout="amount_popup_hide(event, 'item-num-select-3')"></span><select name="item-num-select-3" id="item-num-select-3" class="item-num-select-3" onchange="item_num_selected(this, '3')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -154,7 +154,7 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><select name="item-name-select-3" id="item-name-select-3" class="item-name-select-3" onchange="item_name_selected(this, '3')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-3')" onmouseout="amount_popup_hide(event, 'item-name-select-3')"></span><select name="item-name-select-3" id="item-name-select-3" class="item-name-select-3" onchange="item_name_selected(this, '3')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -167,13 +167,13 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-3" class="dollar-sign">$</span><input type="text" name="price-ea-input-3" id="price-ea-input-3" class="price-ea-input-3" onclick="price_ea_field_clicked('3')" value="read-only" readonly></td>
-                <td><input type="number" min="0" max="1000000000000" name="qty-ea-input-3" id="qty-ea-input-3" class="qty-ea-input-3" step="1" onchange="qty_ea_validation(this, '3')"></td>
-                <td><span id="dollar-sign-amount-dollar-input-3" class="dollar-sign">$</span><input type="text" name="amount-dollar-input-3" id="amount-dollar-input-3" class="amount-dollar-input-3" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-3')" onmouseout="amount_popup_hide(event, 'price-ea-input-3')"></span><input type="text" name="price-ea-input-3" maxlength="22" id="price-ea-input-3" class="price-ea-input-3" onclick="price_ea_field_clicked('3')" value="read-only"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-3')" onmouseout="amount_popup_hide(event, 'qty-ea-input-3')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-3" maxlength="22" id="qty-ea-input-3" class="qty-ea-input-3" onchange="qty_ea_validation(this, '3')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-3')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-3')"></span><input type="text" name="amount-dollar-input-3" maxlength="22" id="amount-dollar-input-3" class="amount-dollar-input-3" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
             </tr>
             <tr>
-                <td><input type="text" name="po-num-input-4" id="po-num-input-4" class="po-num-input-4" placeholder="optional"></td>
-                <td><select name="item-num-select-4" id="item-num-select-4" class="item-num-select-4" onchange="item_num_selected(this, '4')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-4')" onmouseout="amount_popup_hide(event, 'po-num-input-4')"></span><input type="text" name="po-num-input-4" id="po-num-input-4" class="po-num-input-4" placeholder="optional" onchange="po_num_selected(this, '4')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-4')" onmouseout="amount_popup_hide(event, 'item-num-select-4')"></span><select name="item-num-select-4" id="item-num-select-4" class="item-num-select-4" onchange="item_num_selected(this, '4')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -186,7 +186,7 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><select name="item-name-select-4" id="item-name-select-4" class="item-name-select-4" onchange="item_name_selected(this, '4')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-4')" onmouseout="amount_popup_hide(event, 'item-name-select-4')"></span><select name="item-name-select-4" id="item-name-select-4" class="item-name-select-4" onchange="item_name_selected(this, '4')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -199,13 +199,13 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-4" class="dollar-sign">$</span><input type="text" name="price-ea-input-4" id="price-ea-input-4" class="price-ea-input-4" onclick="price_ea_field_clicked('4')" value="read-only" readonly></td>
-                <td><input type="number" min="0" max="1000000000000" name="qty-ea-input-4" id="qty-ea-input-4" class="qty-ea-input-4" step="1" onchange="qty_ea_validation(this, '4')"></td>
-                <td><span id="dollar-sign-amount-dollar-input-4" class="dollar-sign">$</span><input type="text" name="amount-dollar-input-4" id="amount-dollar-input-4" class="amount-dollar-input-4" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-4')" onmouseout="amount_popup_hide(event, 'price-ea-input-4')"></span><input type="text" name="price-ea-input-4" maxlength="22" id="price-ea-input-4" class="price-ea-input-4" onclick="price_ea_field_clicked('4')" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-4')" onmouseout="amount_popup_hide(event, 'qty-ea-input-4')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-4" maxlength="22" id="qty-ea-input-4" class="qty-ea-input-4" onchange="qty_ea_validation(this, '4')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-4')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-4')"></span><input type="text" name="amount-dollar-input-4" maxlength="22" id="amount-dollar-input-4" class="amount-dollar-input-4" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
             </tr>
             <tr>
-                <td><input type="text" name="po-num-input-5" id="po-num-input-5" class="po-num-input-5" placeholder="optional"></td>
-                <td><select name="item-num-select-5" id="item-num-select-5" class="item-num-select-5" onchange="item_num_selected(this, '5')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-5')" onmouseout="amount_popup_hide(event, 'po-num-input-5')"></span><input type="text" name="po-num-input-5" id="po-num-input-5" class="po-num-input-5" placeholder="optional" onchange="po_num_selected(this, '5')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-5')" onmouseout="amount_popup_hide(event, 'item-num-select-5')"></span><select name="item-num-select-5" id="item-num-select-5" class="item-num-select-5" onchange="item_num_selected(this, '5')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -218,7 +218,7 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><select name="item-name-select-5" id="item-name-select-5" class="item-name-select-5" onchange="item_name_selected(this, '5')">
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-5')" onmouseout="amount_popup_hide(event, 'item-name-select-5')"></span><select name="item-name-select-5" id="item-name-select-5" class="item-name-select-5" onchange="item_name_selected(this, '5')">
                     <option value="{{ '-1' }}">
                         select-one
                     </option>
@@ -231,9 +231,9 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-5" class="dollar-sign">$</span><input type="text" name="price-ea-input-5" id="price-ea-input-5" class="price-ea-input-5" onclick="price_ea_field_clicked('5')" value="read-only" readonly></td>
-                <td><input type="number" min="0" max="1000000000000" name="qty-ea-input-5" id="qty-ea-input-5" class="qty-ea-input-5" step="1" onchange="qty_ea_validation(this, '5')"></td>
-                <td><span id="dollar-sign-amount-dollar-input-5" class="dollar-sign">$</span><input type="text" name="amount-dollar-input-5" id="amount-dollar-input-5" class="amount-dollar-input-5" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-5')" onmouseout="amount_popup_hide(event, 'price-ea-input-5')"></span><input type="text" name="price-ea-input-5" maxlength="22" id="price-ea-input-5" class="price-ea-input-5" onclick="price_ea_field_clicked('5')" value="read-only"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-5')" onmouseout="amount_popup_hide(event, 'qty-ea-input-5')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-5" maxlength="22" id="qty-ea-input-5" class="qty-ea-input-5" onchange="qty_ea_validation(this, '5')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-5')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-5')"></span><input type="text" name="amount-dollar-input-5" maxlength="22" id="amount-dollar-input-5" class="amount-dollar-input-5" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
             </tr>
             <tr>
                 <td><input type="text" name="po-num-input-6" id="po-num-input-6" class="po-num-input-6"></td>
@@ -263,9 +263,9 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-6" class="dollar-sign"></span><input type="text" name="price-ea-input-6" id="price-ea-input-6" class="price-ea-input-6" onclick="price_ea_field_clicked('6')" value="read-only" readonly></td>
-                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-6" id="qty-ea-input-6" class="qty-ea-input-6" step="1" value="Subtotal" onchange="qty_ea_validation(this, '6')" readonly></td>
-                <td><span id="dollar-sign-sales-amount-input" class="dollar-sign">$</span><input type="text" name="sales-amount-input" id="sales-amount-input" step=".01" class="sales-amount-input" onclick="sales_amount_field_clicked()" value="read-only" readonly></td>
+                <td><input type="text" name="price-ea-input-6" maxlength="22" id="price-ea-input-6" class="price-ea-input-6" onclick="price_ea_field_clicked('6')" value="read-only" readonly></td>
+                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-6" maxlength="22" id="qty-ea-input-6" class="qty-ea-input-6" value="Subtotal" onchange="qty_ea_validation(this, '6')" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'sales-amount-input')" onmouseout="amount_popup_hide(event, 'sales-amount-input')"></span><input type="text" name="sales-amount-input" maxlength="22" id="sales-amount-input" step=".01" class="sales-amount-input" onclick="sales_amount_field_clicked()" value="read-only" readonly></td>
             </tr>
             <tr>
                 <td><input type="text" name="po-num-input-7" id="po-num-input-7" class="po-num-input-7"></td>
@@ -295,9 +295,9 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-7" class="dollar-sign"></span><input type="text" name="price-ea-input-7" id="price-ea-input-7" class="price-ea-input-7" onclick="price_ea_field_clicked('7')" value="read-only" readonly></td>
-                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-7" id="qty-ea-input-7" class="qty-ea-input-7" step="1" value="Freight" onchange="qty_ea_validation(this, '7')" readonly></td>
-                <td><span id="dollar-sign-freight-amount-input" class="dollar-sign-freight-amount-input">$</span><input type="text" name="freight-amount-input" id="freight-amount-input" class="freight-amount-input" onchange="freight_amount()"></td>
+                <td><input type="text" name="price-ea-input-7" maxlength="22" id="price-ea-input-7" class="price-ea-input-7" onclick="price_ea_field_clicked('7')" value="read-only" readonly></td>
+                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-7" maxlength="22" id="qty-ea-input-7" class="qty-ea-input-7" value="Freight" onchange="qty_ea_validation(this, '7')" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'freight-amount-input')" onmouseout="amount_popup_hide(event, 'freight-amount-input')"></span><input type="text" name="freight-amount-input" maxlength="22" id="freight-amount-input" class="freight-amount-input" onchange="freight_amount()"></td>
             </tr>
             <tr>
                 <td><input type="text" name="po-num-input-8" id="po-num-input-8" class="po-num-input-8"></td>
@@ -327,17 +327,64 @@
                     {% endfor %}
                     </select>
                 </td>
-                <td><span id="dollar-sign-price-ea-8" class="dollar-sign"></span><input type="text" name="price-ea-input-8" id="price-ea-input-8" class="price-ea-input-8" onclick="price_ea_field_clicked('8')" value="read-only" readonly></td>
-                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-8" id="qty-ea-input-8" class="qty-ea-input-8" step="1" value="Total due" onchange="qty_ea_validation(this, '8')" readonly></td>
-                <td><span id="dollar-sign-total-due-input" class="dollar-sign">$</span><input type="text" name="invoice-total" name="total-due-input" id="total-due-input" class="total-due-input" step=".01" onclick="total_due_field_clicked()" value="read-only" readonly></td>
+                <td><input type="text" name="price-ea-input-8" id="price-ea-input-8" class="price-ea-input-8" onclick="price_ea_field_clicked('8')" value="read-only" readonly></td>
+                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-8" id="qty-ea-input-8" class="qty-ea-input-8" value="Total" onchange="qty_ea_validation(this, '8')" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'total-due-input')" onmouseout="amount_popup_hide(event, 'total-due-input')"></span><input type="text" name="invoice-total" name="total-due-input" maxlength="22" id="total-due-input" class="total-due-input" onclick="total_due_field_clicked()" value="read-only" readonly></td>
             </tr>
         </table>
         <p class="save-form-button-paragraph">
             <button type="button" id="save-button" class="save-form-button" onclick="validate_form()">Save invoice</button>
         </p>
+        <span id="popup-table-cells" class="popup-table-cells"></span>
     </form>
     <div id="message-div" class="message-div">{{ message }}</div>
     <script type="text/javascript">
+        //Popup
+        function amount_popup_show(event, rowToShow){
+            const popup = document.getElementById('popup-table-cells');
+            popup.style.opacity = "1"
+            popup.style.zIndex = "1"
+            let X = event.clientX;
+            let Y = event.clientY;
+            if(rowToShow.substring(0,19) == "amount-dollar-input" || rowToShow.substring(0,12) == "sales-amount" || rowToShow.substring(0,14) == "freight-amount" || rowToShow.substring(0,9) == "total-due"){
+                if (window.innerWidth <= 759){
+                popup.style.left = X -62 + 'px';
+                }
+                else{
+                    popup.style.left = X -71 + 'px';
+                }
+            }
+            else{
+                popup.style.left = X + 'px';
+            }
+            popup.style.top = Y -35 + 'px';
+            if(rowToShow == "freight-amount-input" && document.getElementById(rowToShow).value == ""){
+                popup.innerHTML = "Enter the Freight Amount"
+            }
+            else if(rowToShow.substring(0,6) == ("qty-ea") && document.getElementById(rowToShow).value == ""){
+                popup.innerHTML = "Enter the Qty Ea"
+            }
+            else if(rowToShow.substring(0,6) == ("po-num") && document.getElementById(rowToShow).value == ""){
+                popup.innerHTML = "Enter the PO #"
+            }
+            else if(rowToShow.substring(0,8) == ("item-num")){
+                var numDropDown = document.getElementById(rowToShow)
+                popup.innerHTML = numDropDown.options[numDropDown.selectedIndex].text
+            }
+            else if(rowToShow.substring(0,9) == ("item-name")){
+                var numDropDown = document.getElementById(rowToShow)
+                popup.innerHTML = numDropDown.options[numDropDown.selectedIndex].text
+            }
+            else{
+                popup.innerHTML = document.getElementById(rowToShow).value
+            }
+        }
+        function amount_popup_hide(event, rowToHide){
+            const popup = document.getElementById('popup-table-cells');
+            popup.style.opacity = "0"
+            popup.style.zIndex = "-1"
+            popup.innerHTML = ""
+        }
         var js_json_company_all = JSON.parse('{{ json_company_all | safe }}');
         var js_json_customer_all = JSON.parse('{{ json_customer_all | safe }}');
         var js_json_customer_pricing_all = JSON.parse('{{ json_customer_pricing_all | safe }}');
@@ -346,14 +393,31 @@
         document.getElementById("text-area-company-mailing-address").innerHTML = "\n" + "                    read-only";
         document.getElementById("text-area-customer-mailing-address").innerHTML = "\n" + "                   read-only";
         document.documentElement.addEventListener('click', clear_message);
+        function invoice_num_entered(invoiceInputBox){
+            if((invoiceInputBox.value).includes("'")){
+                alert("Apostrophes (') not allowed in Invoice #")
+                return
+            }
+        }
         function clear_message(){
-            document.getElementById("message-div").innerHTML = ""
+            document.getElementById("message-div").innerHTML = "";
+        }
+        function po_num_selected(poNumInputBox, rowSelected){
+            if((poNumInputBox.value).includes("'")){
+                alert("Apostrophes (') not allowed in PO #")
+                return
+            }
         }
         function validate_form(){
             if(document.getElementById("invoice-num-input").value == ""){
                 alert("Enter the Invoice #");
                 event.preventDefault();
                 return;
+            }
+            else if((document.getElementById("invoice-num-input").value).includes("'")){
+                alert("Apostrophes (') not allowed in Invoice #")
+                event.preventDefault();
+                return
             }
             else if(document.getElementById("customer-select").value == "-1"){
                 alert("Select a customer");
@@ -375,6 +439,15 @@
                 alert("Fill out a row before saving the invoice")
                 event.preventDefault();
                 return;
+            }
+            for(i=1; i<=5; i++){
+                if((document.getElementById("po-num-input-" + i).value != "")){
+                    if((document.getElementById("po-num-input-" + i).value).includes("'")){
+                    alert("Apostrophes (') not allowed in PO #.  See row " + i + " PO #")
+                    event.preventDefault();
+                    return
+                    }
+                }
             }
             for(i=1; i<=5; i++){
                 if(document.getElementById("po-num-input-" + i).value != "" && (document.getElementById("item-num-select-" + i).value == "-1" || document.getElementById("qty-ea-input-" + i).value == "")){
@@ -411,20 +484,16 @@
                 }
                 if(document.getElementById("price-ea-input-" + i).value == "read-only"){
                     document.getElementById("price-ea-input-" + i).value = "";
-                    document.getElementById("dollar-sign-price-ea-" + i).innerHTML = "";
                 }
                 if(document.getElementById("amount-dollar-input-" + i).value == "read-only"){
                     document.getElementById("amount-dollar-input-" + i).value = "";
-                    document.getElementById("dollar-sign-amount-dollar-input-" + i).innerHTML = "";
                 }
-                document.getElementById("dollar-sign-price-ea-" + i).style.color = "black";
-                document.getElementById("dollar-sign-amount-dollar-input-" + i).style.color = "black";
                 document.getElementById("price-ea-input-" + i).style.color = "black";
                 document.getElementById("amount-dollar-input-" + i).style.color = "black";
             }
             if(document.getElementById("sales-amount-input").value == "read-only"){
                     document.getElementById("sales-amount-input").value = "";
-                }
+            }
             for(i=1; i<=5; i++){
                 document.getElementById("po-num-input-" + i).placeholder="";
             }
@@ -519,6 +588,7 @@
                 document.getElementById("item-num-select-" + i).style.background = "rgb(255,216,20)";
                 document.getElementById("item-name-select-" + i).style.background = "rgb(255,216,20)";
             }
+            document.getElementById("freight-amount-input").value = ""
             sum_amount();
         }
         function item_num_selected(itemNumSelectObject, rowSelected){
@@ -532,7 +602,7 @@
                 document.getElementById("item-name-select-" + rowSelected).style.backgroundColor = "rgb(255,216,20)";
                 document.getElementById("item-name-select-" + rowSelected).value = "-1";
                 document.getElementById("price-ea-input-" + rowSelected).value = "read-only";
-                document.getElementById("qty-ea-input-" + rowSelected).value = "read-only";
+                document.getElementById("qty-ea-input-" + rowSelected).value = "";
                 document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
                 sum_amount();
             }
@@ -604,36 +674,84 @@
         var today = year + "-" + month + "-" + day;       
         document.getElementById("invoice-date-input").value = today;
         function sum_amount(){
-            // var totSalesAmount = Number(0.00).toFixed(2)
-            var totSalesAmount = 0.00
+            var sumAmountWholeNumber = Number(0);
+            var sumAmountDecimal = "";
+            var sumAmountNumber = 0;
+            var sumAmountText = "";
+            var amtDollarInput = "";
             for(i = 1; i<=5; i++){
-                if (!isNaN(Number(document.getElementById("amount-dollar-input-" + i).value))){
-                totSalesAmount = Number(totSalesAmount) + Number(document.getElementById("amount-dollar-input-" + i).value);
+                amtDollarInput = document.getElementById("amount-dollar-input-" + i).value.replace(/,/g, '');
+                if (!isNaN(Number(amtDollarInput))){
+                    sumAmountNumber = sumAmountNumber + Number(amtDollarInput);
                 }
             }
-            document.getElementById("sales-amount-input").value = Number(totSalesAmount).toFixed(2)
+            sumAmountText = (sumAmountNumber).toFixed(2);
+            sumAmountWholeNumber = Number(((sumAmountText).split('.')[0]));
+            sumAmountDecimal = ((sumAmountText).split('.')[1]);
+            sumAmountText = (sumAmountWholeNumber).toLocaleString("en-US") + "." + (sumAmountDecimal);
+            document.getElementById("sales-amount-input").value = sumAmountText;
             if(document.getElementById("sales-amount-input").value == "0.00"){
                 document.getElementById("sales-amount-input").value = "read-only";
             }
             total_due();
         }
         function qty_ea_validation(amountQtyEaInput, rowSelected){
+            amountQtyEaInput.value = amountQtyEaInput.value.replace(/,/g, '')
+            if(amountQtyEaInput.value <= 0){
+                if(amountQtyEaInput.value != ""){
+                    alert("Qty Ea must be > 0")
+                }
+                amountQtyEaInput.value = "";
+            }
             if (document.getElementById("price-ea-input-" + rowSelected).value == "read-only") {
                 amountQtyEaInput.value = "";
                 alert("Select an Item # or Item Name before entering Qty Ea");
             }
-            else if(amountQtyEaInput.value - Math.floor(amountQtyEaInput.value) !== 0){
-                amountQtyEaInput.value = "";
-                alert("Only whole numbers allowed in Qty Ea field");    
+            else if((isNaN(amountQtyEaInput.value))){
+                alert("Only numbers allowed in the Qty Ea field");
+                document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                sum_amount();
             }
-            else if(amountQtyEaInput.value == 0){
-                amountQtyEaInput.value = "";
-                document.getElementById("amount-dollar-input-" + rowSelected).value = "Read only";
+            else if(amountQtyEaInput.value == ""){
+                document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
                 sum_amount();
             }
             else{
-                amountQtyEaInput.value = Number(amountQtyEaInput.value).toFixed(0);
-                document.getElementById("amount-dollar-input-" + rowSelected).value = Number(amountQtyEaInput.value * document.getElementById("price-ea-input-" + rowSelected).value).toFixed(2);
+                var amtDollarInputWholeNumber = Number(0);
+                var amtDollarInputDecimal = Number(0);
+                var amtDollarInput = "";
+                amtDollarInput = (amountQtyEaInput.value * document.getElementById("price-ea-input-" + rowSelected).value).toFixed(2);
+                if(amtDollarInput > Number(999999999999999)){
+                    var maxQtyEa = (999999999999999/document.getElementById("price-ea-input-" + rowSelected).value);
+                    var maxQtyEaWholeNumber = Number(0);
+                    maxQtyEaWholeNumber = maxQtyEa.toString().split('.')[0];
+                    var maxQtyText = Number(maxQtyEaWholeNumber).toLocaleString("en-US");
+                    alert("Qty Ea for row " + rowSelected + " must be less than " + maxQtyText + " because \n total USD amount of each item must be less than $999,999,999,999,999.00");
+                    document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                    document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                    sum_amount();
+                    return;
+                }
+                var amtQtyEaInputWholeNumber = Number(0);
+                var amtQtyEaInputDecimal = "";
+                var amtQtyEaInputText = "";
+                amountQtyEaInput.value = (Number(amountQtyEaInput.value) + Number(amountQtyEaInput.value) * Number.EPSILON).toFixed(3)
+                amtQtyEaInputWholeNumber = Number(((amountQtyEaInput.value).split('.')[0]));
+                if((amountQtyEaInput.value).split('.')[1] == "000"){
+                    amtQtyEaInputText = Number(amtQtyEaInputWholeNumber).toLocaleString("en-US");
+                }
+                else{
+                    amtQtyEaInputDecimal = ((amountQtyEaInput.value).split('.')[1]);
+                    amtQtyEaInputText = amtQtyEaInputWholeNumber + "." + amtQtyEaInputDecimal;
+                    amtQtyEaInputText = Number(amtQtyEaInputWholeNumber).toLocaleString("en-US") + "." + amtQtyEaInputDecimal;
+                }
+                document.getElementById("qty-ea-input-" + rowSelected).value = amtQtyEaInputText
+                amtDollarInputWholeNumber = ((amtDollarInput).split('.')[0]);
+                amtDollarInputDecimal = ((amtDollarInput).split('.')[1]);
+                amtDollarInput = Number(amtDollarInputWholeNumber).toLocaleString("en-US") + "." + amtDollarInputDecimal;
+                document.getElementById("amount-dollar-input-" + rowSelected).value = amtDollarInput;
                 sum_amount();
             }
         }
@@ -655,26 +773,57 @@
             alert("This field is readonly");
         }
         function freight_amount(){
-            if (!isNaN(Number(document.getElementById("freight-amount-input").value))){
-                document.getElementById("freight-amount-input").value = Number(document.getElementById("freight-amount-input").value).toFixed(2);
+            var amtFreightText = "";
+            amtFreightText = document.getElementById("freight-amount-input").value.replace(/,/g, '');
+            if(isNaN(amtFreightText)){
+                alert("Only numbers are allowed in the Freight field")
+                document.getElementById("freight-amount-input").value = ""
+                total_due();
             }
-            total_due();
+            else if(document.getElementById("freight-amount-input").value == ""){
+                total_due();
+            }
+            else if(amtFreightText > Number(999999999999999)){
+                alert("Freight must be less than $999,999,999,999,999.00");
+                document.getElementById("freight-amount-input").value = "";
+            }
+            else if(document.getElementById("freight-amount-input").value != ""){
+                var amtFreightWholeNumber = Number(0);
+                var amtFreightDecimal = "";
+                amtFreightText = Number(amtFreightText).toFixed(2);
+                amtFreightWholeNumber = Number(((amtFreightText).split('.')[0]));
+                amtFreightDecimal = ((amtFreightText).split('.')[1]);
+                amtFreightText = Number(amtFreightWholeNumber).toLocaleString("en-US") + "." + amtFreightDecimal;
+                document.getElementById("freight-amount-input").value = amtFreightText;
+                total_due();
+            }
         }
         function total_due(){
-            var totalDue = 0.00;
-            if (!isNaN(Number(document.getElementById("sales-amount-input").value))){
-                totalDue = Number(document.getElementById("sales-amount-input").value);
-                document.getElementById("total-due-input").value = Number(totalDue).toFixed(2);
+                var sumAmountNumber = Number(0);
+                var sumAmountText = "";
+                var amtFreightNumber = Number(0);
+                var amtFreightText = "";
+                var totaDueWholeNumber = Number(0);
+                var totaDueDecimal = "";
+                var totalDueNumber = Number(0);
+                var totalDueText = ""
+                var totalDue = "";
+                sumAmountText = document.getElementById("sales-amount-input").value.replace(/,/g, '');
+                sumAmountNumber = Number(sumAmountText);
+                amtFreightText = document.getElementById("freight-amount-input").value.replace(/,/g, '');
+                amtFreightNumber = Number(amtFreightText);
+                totaDueNumber = sumAmountNumber + amtFreightNumber;
+                totalDueText = totaDueNumber.toFixed(2);
+                totaDueWholeNumber = Number((totalDueText.split('.')[0]));
+                totaDueDecimal = totalDueText.split('.')[1];
+                totalDueText = totaDueWholeNumber.toLocaleString("en-US") + "." + totaDueDecimal;
+                if(isNaN(totaDueNumber)){
+                    document.getElementById("total-due-input").value = "read-only";
+                }
+                else{
+                    document.getElementById("total-due-input").value = totalDueText;
+                }
             }
-            else{
-                document.getElementById("total-due-input").value = "read-only";
-            }
-            if (!isNaN(Number(document.getElementById("freight-amount-input").value)) && Number(document.getElementById("freight-amount-input").value)!==0){
-                    document.getElementById("freight-amount-input").value = Number(document.getElementById("freight-amount-input").value).toFixed(2);
-                    totalDue = totalDue + Number(document.getElementById("freight-amount-input").value);
-                    document.getElementById("total-due-input").value = totalDue.toFixed(2);
-            }
-        }
     </script>
 </body>
 </html>

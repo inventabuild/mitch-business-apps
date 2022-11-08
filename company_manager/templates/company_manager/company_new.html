@@ -16,50 +16,163 @@
     <h2>
         New Company Form
     </h2>
-    <form action="{% url 'company_new' %}" method="POST">
+    <form action="{% url 'company_new' %}" id="company-form" method="POST">
         {% csrf_token %}
         <div>
             <label>
                 Name
-                <input type="text" name="company_name" required />
+                <input type="text" name="company_name" id="company-name" onchange="company_name_input()" required />
             </label>
         </div>
         <div>
             <label>
                 Address
-                <input type="text" name="company_address" required />
+                <input type="text" name="company_address" id="company-address" onchange="company_address_input()" required />
             </label>
         </div>
         <div>
             <label>
                 City
-                <input type="text" name="company_city" required />
+                <input type="text" name="company_city" id="company-city" onchange="company_city_input()" required />
             </label>
         </div>
         <div>
             <label>
                 State
-                <input type="text" name="company_state" required />
+                <input type="text" name="company_state" id="company-state" onchange="company_state_input()" required />
             </label>
         </div>
         <div>
             <label>
                 Country
-                <input type="text" name="company_country" required />
+                <input type="text" name="company_country" id="company-country" onchange="company_country_input()" required />
             </label>
         </div>
         <div>
             <label>Zip Code
-                <input type="text" name="company_zip_code" required />
+                <input type="text" name="company_zip_code" id="company-zip-code" onchange="company_zip_code_input()" required />
             </label>
         </div>
         <div>
             <label>Telephone #
-                <input type="text" name="company_tel" required />
+                <input type="text" name="company_tel" id="company-tel" onchange="company_tel_input()" required />
             </label>
         </div>
-        <button type="submit" class="create-company-button">Create Company</button>
+        <p>
+            <button type="button" id="create-company-button" class="create-company-button" onclick="validate_form()">Create Company</button>
+        </p>
     </form>
     {{ message }}
+    <script type="text/javascript">
+    function company_name_input(){
+        if((document.getElementById("company-name").value != "")){
+           if((document.getElementById("company-name").value).includes("'")){
+                alert("Apostrophes (') not allowed in Name field")
+                return
+            }
+        }
+    }
+    function company_address_input(){
+        if((document.getElementById("company-address").value != "")){
+           if((document.getElementById("company-address").value).includes("'")){
+                alert("Apostrophes (') not allowed in Address field")
+                return
+            }
+        }
+    }
+    function company_city_input(){
+        if((document.getElementById("company-city").value != "")){
+           if((document.getElementById("company-city").value).includes("'")){
+                alert("Apostrophes (') not allowed in City field")
+                return
+            }
+        }
+    }
+    function company_state_input(){
+        if((document.getElementById("company-state").value != "")){
+           if((document.getElementById("company-state").value).includes("'")){
+                alert("Apostrophes (') not allowed in State field")
+                return
+            }
+        }
+    }
+    function company_country_input(){
+        if((document.getElementById("company-country").value != "")){
+           if((document.getElementById("company-country").value).includes("'")){
+                alert("Apostrophes (') not allowed in Country field")
+                return
+            }
+        }
+    }
+    function company_zip_code_input(){
+        if((document.getElementById("company-zip-code").value != "")){
+           if((document.getElementById("company-zip-code").value).includes("'")){
+                alert("Apostrophes (') not allowed in Zip Code field")
+                return
+            }
+        }
+    }
+    function company_tel_input(){
+        if((document.getElementById("company-tel").value != "")){
+           if((document.getElementById("company-tel").value).includes("'")){
+                alert("Apostrophes (') not allowed in Telephone # field")
+                return
+            }
+        }
+    }
+    function validate_form(){
+        if((document.getElementById("company-name").value != "")){
+            if((document.getElementById("company-name").value).includes("'")){
+                alert("Apostrophes (') not allowed in Name field")
+                event.preventDefault()
+                return
+            }
+        }
+        if((document.getElementById("company-address").value != "")){
+           if((document.getElementById("company-address").value).includes("'")){
+                alert("Apostrophes (') not allowed in Address field")
+                event.preventDefault()
+                return
+            }
+        }
+        if((document.getElementById("company-city").value != "")){
+           if((document.getElementById("company-city").value).includes("'")){
+                alert("Apostrophes (') not allowed in City field")
+                event.preventDefault()
+                return
+            }
+        }
+        if((document.getElementById("company-state").value != "")){
+           if((document.getElementById("company-state").value).includes("'")){
+                alert("Apostrophes (') not allowed in State field")
+                event.preventDefault()
+                return
+            }
+        }
+        if((document.getElementById("company-country").value != "")){
+           if((document.getElementById("company-country").value).includes("'")){
+                alert("Apostrophes (') not allowed in Country field")
+                event.preventDefault()
+                return
+            }
+        }
+        if((document.getElementById("company-zip-code").value != "")){
+           if((document.getElementById("company-zip-code").value).includes("'")){
+                alert("Apostrophes (') not allowed in Zip Code field")
+                event.preventDefault()
+                return
+            }
+        }
+        if((document.getElementById("company-tel").value != "")){
+           if((document.getElementById("company-tel").value).includes("'")){
+                alert("Apostrophes (') not allowed in Telephone # field")
+                event.preventDefault()
+                return
+            }
+        }
+        let form = document.getElementById("company-form");
+        form.submit();
+    }
+    </script>
 </body>
 </html>
