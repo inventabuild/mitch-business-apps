@@ -1,17 +1,18 @@
 from django.db import models
 from datetime import date
+from company_manager import models as company_manager_models
 from customer_manager import models as customer_manager_models
 from customer_pricing_manager import models as customer_pricing_manager_models
 from item_manager import models as item_manager_models
 
 # Create your models here.
 class Invoice(models.Model):
+    company_id = models.ForeignKey(company_manager_models.Company, on_delete=models.CASCADE)
     customer_id = models.ForeignKey(customer_manager_models.Customer, on_delete=models.CASCADE)
     item_id = models.ForeignKey(item_manager_models.Item, blank=True, null=True, on_delete=models.CASCADE)
     customer_pricing_id = models.ForeignKey(customer_pricing_manager_models.Customer_Pricing, blank=True, null=True, on_delete=models.CASCADE)    
     invoice_date = models.DateField(default=date.today)
     invoice_number = models.CharField(max_length=60, default='00000')
-    customer_name = models.CharField(max_length=60, default='00000') 
     po_num_row_1 = models.CharField(max_length=60, default='00000')
     po_num_row_2 = models.CharField(max_length=60, default='00000')
     po_num_row_3 = models.CharField(max_length=60, default='00000')

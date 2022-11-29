@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'item_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'item_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
 <body>
@@ -14,19 +14,28 @@
         <a href="{% url 'item_new' %}">Item new</a>
     </div>
     <h2>List all items</h2>
-    <table>
+    <table id="item-table">
         <thead>
             <th>Item Number</th>
             <th>Item Name</th>
             <th>id</th>
+            <th class="hide-me">Item Number</th>
         </thead>
         {% for item in list_all %}
         <tr>
             <td><a href="{% url 'item_view' item.id %}">{{item.number}}</a></td>
             <td><a href="{% url 'item_view' item.id %}">{{item.name}}</a></td>
             <td><a href="{% url 'item_view' item.id %}">{{item.id}}</a></td>
+            <td class="hide-me">{{item.number}}</td>
         </tr>
         {% endfor %}
     </table>
 </body>
+<script type="text/javascript">
+    for(i=0; i<=document.getElementById("item-table").rows.length; i++){
+        if(document.getElementById("item-table").rows[i].cells.item(3).innerHTML == "00000"){
+            document.getElementById("item-table").deleteRow(i)
+        }
+    }
+</script>
 </html>

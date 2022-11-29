@@ -14,8 +14,8 @@
     </div>
     <h2>Invoice Options</h2>
     <ul>
-        <li><a url href="{% url 'invoice_new' %}">Invoice new</a> - Create a new invoice</li>
-        <li><a url href="{% url 'invoice_list' %}">Invoice list</a> - View individual invoices by selecting from a list</li>
+        <li><a href="{% url 'invoice_new_view_edit' 1 %}">Invoice new, view, edit</a> - Create a new invoice, view / edit an existing invoice</li>
+        <li><a href="{% url 'invoice_list' %}">Invoice list</a> - View individual invoices by selecting from a list</li>
     </ul>
 </body>
 </html>

@@ -62,11 +62,12 @@
     opacity: 1;
 }
 .customer-select{
+    width: 126px;
     position: absolute;
     left: 73px;
     top: 172px;
     background-color: rgb(255,216,20);
-    text-align: center;
+    text-align: left;
     z-index: 1;
 }
 .customer-select option{
@@ -83,13 +84,14 @@
     z-index: 0;
 }
 .company-select{
+    width: 126px;
     z-index: 1;
     position: absolute;
     left: 635px;
     top: 172px;
     opacity: 1;
     background-color: rgb(255,216,20);
-    text-align: center;
+    text-align: left;
 }
 .company-select option{
     background-color: white;
@@ -174,44 +176,44 @@ tr:nth-child(7) td:nth-child(6){
 tr:nth-child(8) td:nth-child(6){
     border: 1px solid black;
 }
-.po-num-input-1{
-    text-align: center;
+.po-num-input{
+    text-align: left;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 16ch;
     padding: 2px;
 }
-.item-num-select-1{
+.item-num-select{
     height: 21.5px;
     width: 13ch;
-    text-align: center;
+    text-align: left;
     background-color: rgb(255,216,20);
     border: 0px solid black;
 }
-.item-num-select-1 option{
+.item-num-select option{
     background-color: white;
 }
-.item-name-select-1{
+.item-name-select{
     height: 21.5px;
     width: 21ch;
-    text-align: center;
+    text-align: left;
     background-color: rgb(255,216,20);
     border: 0px solid black;
 }
-.item-name-select-1 option{
+.item-name-select option{
     background-color: white;
 }
-.qty-ea-input-1{
-    text-align: center;
+.qty-ea-input{
+    text-align: right;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 12ch;
     padding: 2px;
 }
-.price-ea-input-1{
-    text-align: center;
+.price-ea-input{
+    text-align: right;
     color: black;
     background-color: lightgrey;
     border: 0px solid black;
@@ -219,8 +221,8 @@ tr:nth-child(8) td:nth-child(6){
     width: 14ch;
     padding: 2px;
 }
-.amount-dollar-input-1{
-    text-align: center;
+.amount-dollar-input{
+    text-align: right;
     color: black;
     background-color: lightgrey;
     border: 0px solid black;
@@ -228,15 +230,15 @@ tr:nth-child(8) td:nth-child(6){
     width: 14ch;
     padding: 2px;
 }
-.po-num-input-2{
+/* .po-num-input-2{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px; 
     width: 16ch;
     padding: 2px;
-}
-.item-num-select-2{
+} */
+/* .item-num-select-2{
     height: 21.5px;
     width: 13ch;
     text-align: center;
@@ -245,8 +247,8 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-num-select-2 option{
     background-color: white;
-}
-.item-name-select-2{
+} */
+/* .item-name-select-2{
     height: 21.5px;
     width: 21ch;
     text-align: center;
@@ -255,16 +257,16 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-2 option{
     background-color: white;
-}
-.qty-ea-input-2{
+} */
+/* .qty-ea-input-2{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 12ch;
     padding: 2px;
-}
-.price-ea-input-2{
+} */
+/* .price-ea-input-2{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -272,8 +274,8 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
-.amount-dollar-input-2{
+} */
+/* .amount-dollar-input-2{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -281,16 +283,16 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
-.po-num-input-3{
+} */
+/* .po-num-input-3{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 16ch;
     padding: 2px;
-}
-.item-num-select-3{
+} */
+/* .item-num-select-3{
     height: 21.5px;
     width: 13ch;
     text-align: center;
@@ -299,8 +301,8 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-num-select-3 option{
     background-color: white;
-}
-.item-name-select-3{
+} */
+/* .item-name-select-3{
     height: 21.5px;
     width: 21ch;
     text-align: center;
@@ -309,16 +311,16 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-3 option{
     background-color: white;
-}
-.qty-ea-input-3{
+} */
+/* .qty-ea-input-3{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 12ch;
     padding: 2px;
-}
-.price-ea-input-3{
+} */
+/* .price-ea-input-3{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -326,8 +328,8 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
-.amount-dollar-input-3{
+} */
+/* .amount-dollar-input-3{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -335,16 +337,16 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
-.po-num-input-4{
+} */
+/* .po-num-input-4{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 16ch;
     padding: 2px;
-}
-.item-num-select-4{
+} */
+/* .item-num-select-4{
     height: 21.5px;
     width: 13ch;
     text-align: center;
@@ -353,8 +355,8 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-num-select-4 option{
     background-color: white;
-}
-.item-name-select-4{
+} */
+/* .item-name-select-4{
     height: 21.5px;
     width: 21ch;
     text-align: center;
@@ -363,16 +365,16 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-4 option{
     background-color: white;
-}
-.qty-ea-input-4{
+} */
+/* .qty-ea-input-4{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 12ch;
     padding: 2px;
-}
-.price-ea-input-4{
+} */
+/* .price-ea-input-4{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -380,8 +382,8 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
-.amount-dollar-input-4{
+} */
+/* .amount-dollar-input-4{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -389,16 +391,16 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
-.po-num-input-5{
+} */
+/* .po-num-input-5{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 16ch;
     padding: 2px;
-}
-.item-num-select-5{
+} */
+/* .item-num-select-5{
     height: 21.5px;
     width: 13ch;
     text-align: center;
@@ -407,8 +409,8 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-num-select-5 option{
     background-color: white;
-}
-.item-name-select-5{
+} */
+/* .item-name-select-5{
     height: 21.5px;
     width: 21ch;
     text-align: center;
@@ -417,16 +419,16 @@ tr:nth-child(8) td:nth-child(6){
 }
 .item-name-select-5 option{
     background-color: white;
-}
-.qty-ea-input-5{
+} */
+/* .qty-ea-input-5{
     text-align: center;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
     width: 12ch;
     padding: 2px;
-}
-.price-ea-input-5{
+} */
+/* .price-ea-input-5{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -434,8 +436,8 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
-.amount-dollar-input-5{
+} */
+/* .amount-dollar-input-5{
     text-align: center;
     color: black;
     background-color: lightgrey;
@@ -443,7 +445,7 @@ tr:nth-child(8) td:nth-child(6){
     height: 17.5px;
     width: 14ch;
     padding: 2px;
-}
+} */
 .po-num-input-6{
     text-align: center;
     background-color: rgb(251,247,240);
@@ -461,9 +463,9 @@ tr:nth-child(8) td:nth-child(6){
     border: 0px solid black;
     visibility: hidden;   
 }
-.item-num-select-1 option{
+/* .item-num-select-1 option{
     background-color: white;
-}
+} */
 .item-name-select-6{
     height: 21.5px;
     width: 21ch;
@@ -510,9 +512,9 @@ tr:nth-child(8) td:nth-child(6){
     border: 0px solid black;
     visibility: hidden;
 }
-.item-num-select-1 option{
+/* .item-num-select-1 option{
     background-color: white;
-}
+} */
 .item-name-select-7{
     height: 21.5px;
     width: 21ch;
@@ -559,9 +561,9 @@ tr:nth-child(8) td:nth-child(6){
     border: 0px solid black;
     visibility: hidden;
 }
-.item-num-select-1 option{
+/* .item-num-select-1 option{
     background-color: white;
-}
+} */
 .item-name-select-8{
     height: 21.5px;
     width: 21ch;
@@ -570,9 +572,9 @@ tr:nth-child(8) td:nth-child(6){
     border: 0px solid black;
     visibility: hidden;
 }
-.item-name-select-1 option{
+/* .item-name-select-1 option{
     background-color: white;
-}
+} */
 .qty-ea-input-8{
     text-align: left;
     background-color: white;
@@ -592,7 +594,7 @@ tr:nth-child(8) td:nth-child(6){
     visibility: hidden;
 }
 .sales-amount-input{
-    text-align: center; 
+    text-align: right; 
     color: black;
     background-color: lightgrey;
     border: 0px solid black;
@@ -601,7 +603,7 @@ tr:nth-child(8) td:nth-child(6){
     padding: 2px;
 }
 .freight-amount-input{
-    text-align: center;
+    text-align: right;
     background-color: rgb(251,247,240);
     border: 0px solid black;
     height: 17.5px;
@@ -609,7 +611,7 @@ tr:nth-child(8) td:nth-child(6){
     padding: 2px;
 }
 .total-due-input{
-    text-align: center;
+    text-align: right;
     color: black;
     background-color: lightgrey;
     border: 0px solid black;
@@ -622,21 +624,41 @@ tr:nth-child(8) td:nth-child(6){
     justify-content: center;
     position: absolute;
     top: 453px;
-    left: 370px;
+    /* left: 178px; */
+    left: 120px;
 }
 .save-form-button{
     background-color: #FFA41C;
     border-width: 1px;
     border-radius: 16px;
-    width: 12.5ch;
+    width: 13ch;
+    font-size: 12px;
+}
+.open-edit-invoice-button{
+    background-color: #FFA41C;
+    border-width: 1px;
+    border-radius: 16px;
+    width: 13ch;
+    margin-right: 8px;
+    font-size: 12px;
+}
+.new-invoice-button{
+    background-color: #FFA41C;
+    border-width: 1px;
+    border-radius: 16px;
+    width: 13ch;
+    margin-right: 8px;
+    font-size: 12px;
 }
 .hyperlink-menu-item{
     margin-right: 10px;
 }
 .message-div{
     position: absolute;
-    top: 469px;
+    top: 499px;
     left: 11px;
+    font-size: 15px;
+    white-space: nowrap;
 }
 .popup-table-cells{
     display: flex;
@@ -663,6 +685,12 @@ tr:nth-child(8) td:nth-child(6){
     position: absolute;
     z-index: 1;
 }
+.hide-me{
+    visibility: hidden;
+}
+.invoice-table tr td{
+    border: 0px;
+}
 @media (max-width: 759px) {
     .line-items-table{
         top: 300px;
@@ -670,15 +698,11 @@ tr:nth-child(8) td:nth-child(6){
     body{
         font-size: 12px;
     }
-    .save-form-button-paragraph{
-        top: 455px;
-        left: 222px;
-    }
-    .po-num-input-1{
+    .po-num-input{
         width: 9ch;
         font-size: 12px;
     }
-    .po-num-input-2{
+    /* .po-num-input-2{
         width: 9ch;
         font-size: 12px;
     }
@@ -693,7 +717,7 @@ tr:nth-child(8) td:nth-child(6){
     .po-num-input-5{
         width: 9ch;
         font-size: 12px;
-    }
+    } */
     .po-num-input-6{
         width: 9ch;
         font-size: 12px;
@@ -706,11 +730,11 @@ tr:nth-child(8) td:nth-child(6){
         width: 9ch;
         font-size: 12px;
     }
-    .item-num-select-1{
+    .item-num-select{
         width: 12ch;
         font-size: 12px;
     }
-    .item-num-select-2{
+    /* .item-num-select-2{
         width: 12ch;
         font-size: 12px;
     }
@@ -725,7 +749,7 @@ tr:nth-child(8) td:nth-child(6){
     .item-num-select-5{
         width: 12ch;
         font-size: 12px;
-    }
+    } */
     .item-num-select-6{
         width: 12ch;
         font-size: 12px;
@@ -738,11 +762,11 @@ tr:nth-child(8) td:nth-child(6){
         width: 12ch;
         font-size: 12px;
     }
-    .item-name-select-1{
+    .item-name-select{
         width: 14ch;
         font-size: 12px;
     }
-    .item-name-select-2{
+    /* .item-name-select-2{
         width: 14ch;
         font-size: 12px;
     }
@@ -757,7 +781,7 @@ tr:nth-child(8) td:nth-child(6){
     .item-name-select-5{
         width: 14ch;
         font-size: 12px;
-    }
+    } */
     .item-name-select-6{
         width: 14ch;
         font-size: 12px;
@@ -770,11 +794,11 @@ tr:nth-child(8) td:nth-child(6){
         width: 14ch;
         font-size: 12px;
     }
-    .qty-ea-input-1{
+    .qty-ea-input{
         width: 7ch;
         font-size: 12px;
     }
-    .qty-ea-input-2{
+    /* .qty-ea-input-2{
         width: 7ch;
         font-size: 12px;
     }
@@ -789,7 +813,7 @@ tr:nth-child(8) td:nth-child(6){
     .qty-ea-input-5{
         width: 7ch;
         font-size: 12px;
-    }
+    } */
     .qty-ea-input-6{
         width: 7ch;
         font-size: 12px;
@@ -805,11 +829,11 @@ tr:nth-child(8) td:nth-child(6){
     .cost-ea{
         width: 10ch;
     }
-    .price-ea-input-1{
+    .price-ea-input{
         width: 10ch;
         font-size: 12px;
     }
-    .price-ea-input-2{
+    /* .price-ea-input-2{
         width: 10ch;
         font-size: 12px;
     }
@@ -824,7 +848,7 @@ tr:nth-child(8) td:nth-child(6){
     .price-ea-input-5{
         width: 10ch;
         font-size: 12px;
-    }
+    } */
     .price-ea-input-6{
         width: 10ch;
         font-size: 12px;
@@ -837,11 +861,11 @@ tr:nth-child(8) td:nth-child(6){
         width: 10ch;
         font-size: 12px;
     }
-    .amount-dollar-input-1{
+    .amount-dollar-input{
         width: 11ch;
         font-size: 12px;
     }
-    .amount-dollar-input-2{
+    /* .amount-dollar-input-2{
         width: 11ch;
         font-size: 12px;
     }
@@ -856,7 +880,7 @@ tr:nth-child(8) td:nth-child(6){
     .amount-dollar-input-5{
         width: 11ch;
         font-size: 12px;
-    }
+    } */
     .sales-amount-input{
         width: 11ch;
         font-size: 12px;
@@ -912,8 +936,18 @@ tr:nth-child(8) td:nth-child(6){
         font-size: 12px;
         left: 107px;
     }
+    .save-form-button-paragraph{
+        top: 455px;
+        left: 28px;
+    }
     .save-form-button{
-        font-size: 12px;
+        height: 19px;
+    }
+    .open-edit-invoice-button{
+        height: 19px;
+    }
+    .new-invoice-button{
+        height: 19px;
     }
     .invoice-date-header{
         top: 3px;
@@ -929,6 +963,9 @@ tr:nth-child(8) td:nth-child(6){
     }
 }
 @media print{
+    .message-div{
+        display: none;
+    }
     .corner-for-popup{
         display: none;
     }
@@ -941,10 +978,13 @@ tr:nth-child(8) td:nth-child(6){
     .save-form-button-paragraph{
         display: none;
     }
-    .po-num-input-1{
+    .new-invoice-button{
+        display: none;
+    }
+    .po-num-input{
         width: 18ch;
     }
-    .po-num-input-2{
+    /* .po-num-input-2{
         width: 18ch;
     }
     .po-num-input-3{
@@ -955,7 +995,7 @@ tr:nth-child(8) td:nth-child(6){
     }
     .po-num-input-5{
         width: 18ch;
-    }
+    } */
     .po-num-input-6{
         width: 18ch;
     }
@@ -965,11 +1005,11 @@ tr:nth-child(8) td:nth-child(6){
     .po-num-input-8{
         width: 18ch;
     }
-    .item-num-select-1{
+    .item-num-select{
         width: 14ch;
         appearance: none;
     }
-    .item-num-select-2{
+    /* .item-num-select-2{
         width: 14ch;
         appearance: none;
     }
@@ -984,7 +1024,7 @@ tr:nth-child(8) td:nth-child(6){
     .item-num-select-5{
         width: 14ch;
         appearance: none;
-    }
+    } */
     .item-num-select-6{
         width: 14ch;
         appearance: none;
@@ -997,11 +1037,11 @@ tr:nth-child(8) td:nth-child(6){
         width: 14ch;
         appearance: none;
     }
-    .item-name-select-1{
+    .item-name-select{
         width: 23ch;
         appearance: none;
     }
-    .item-name-select-2{
+    /* .item-name-select-2{
         width: 23ch;
         appearance: none;
     }
@@ -1016,7 +1056,7 @@ tr:nth-child(8) td:nth-child(6){
     .item-name-select-5{
         width: 23ch;
         appearance: none;
-    }
+    } */
     .item-name-select-6{
         width: 23ch;
         appearance: none;
@@ -1061,48 +1101,48 @@ tr:nth-child(8) td:nth-child(6){
      .doc-type{
         visibility: visible;
      }
-    .qty-ea-input-1{
+    .qty-ea-input{
         width: 13ch;
     }
-    .price-ea-input-1{
+    .price-ea-input{
         width: 15ch;
     }
-    .amount-dollar-input-1{
+    .amount-dollar-input{
         width: 15ch;
     }
-    .qty-ea-input-2{
+    /* .qty-ea-input-2{
         width: 13ch; 
-    }
-    .price-ea-input-2{
+    } */
+    /* .price-ea-input-2{
         width: 15ch;
-    }
-    .amount-dollar-input-2{
+    } */
+    /* .amount-dollar-input-2{
         width: 15ch;
-    }
-    .qty-ea-input-3{
+    } */
+    /* .qty-ea-input-3{
         width: 13ch;
-    }
-    .price-ea-input-3{
+    } */
+    /* .price-ea-input-3{
         width: 15ch;
-    }
-    .amount-dollar-input-3{
+    } */
+    /* .amount-dollar-input-3{
         width: 15ch;
-    }
-    .qty-ea-input-4{
+    } */
+    /* .qty-ea-input-4{
         width: 13ch;
-    }
-    .price-ea-input-4{
+    } */
+    /* .price-ea-input-4{
         width: 15ch;
-    }
-    .amount-dollar-input-4{
+    } */
+    /* .amount-dollar-input-4{
         width: 15ch;
-    }
-    .qty-ea-input-5{
+    } */
+    /* .qty-ea-input-5{
        width: 13ch;
-    }
-    .price-ea-input-5{
+    } */
+    /* .price-ea-input-5{
         width: 15ch;
-    }
+    } */
     .qty-ea-input-6{
         width: 13ch;
      }
@@ -1121,9 +1161,9 @@ tr:nth-child(8) td:nth-child(6){
      .price-ea-input-8{
          width: 15ch;
      }
-    .amount-dollar-input-5{
+    /* .amount-dollar-input-5{
         width: 15ch;
-    }
+    } */
     .sales-amount-input{
         width: 15ch;
     }

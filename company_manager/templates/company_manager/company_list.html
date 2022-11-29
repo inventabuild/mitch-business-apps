@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
 <body>
@@ -17,18 +17,27 @@
         Company List
     </h2>
     <div>
-        <table>
+        <table id="company-table">
             <thead>
                 <th>Company name</th>
                 <th>Company id</th>
+                <th class="hide-me">Company name</th>
             </thead>
             {% for company in company_all %}
             <tr>
                 <td><a href="{% url 'company_view' company.id %}">{{ company.name }}</a></td>
                 <td><a href="{% url 'company_view' company.id %}">{{ company.id }}</a></td>
+                <td class="hide-me">{{ company.name }}</td>
             </tr>
             {% endfor %}
         </table>
     </div>
 </body>
+<script type="text/javascript">
+    for(i=0; i<=document.getElementById("company-table").rows.length; i++){
+        if(document.getElementById("company-table").rows[i].cells.item(2).innerHTML == "Hidden Company"){
+            document.getElementById("company-table").deleteRow(i)
+        }
+    }
+</script>
 </html>

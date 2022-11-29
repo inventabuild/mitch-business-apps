@@ -1,0 +1,1171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'invoice_manager/style.css' %}?v={{ now }}">
+    <title>Invoice Document</title>
+</head>
+<body tabindex="-1" id="mouse-down" onload="initialize_data()">
+    <div class="menu-hyperlink-format">
+        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a href="{% url 'invoice_list' %}">Invoice list</a>
+    </div>
+    <h2 class="h2-header">Invoice Form</h2>
+    <form action="{% url 'invoice_new_view_edit' invoice_single.id %}" id="invoice-form" method="POST">
+        {% csrf_token %}
+        <div class="doc-type" id="doc-type">
+            Invoice
+        </div>
+        <div class="date-invoice-group">
+            <span>
+                <span class="invoice-date-header" id="invoice-date-header">Date</span>
+                <span class="invoice-number-header">Invoice #</span>
+            </span>
+            <span>
+                <input name="invoice-date" type="date" id="invoice-date-input" class="invoice-date-input">
+                <input name="invoice-number" type="text" id="invoice-num-input" class ="invoice-num-input" onblur="invoice_num_entered(this, event)">
+            </span>
+        </div>
+        <div>
+            <span class="bill-to">Bill to:</span>
+            <span class="make-payment-to">Make payment to:</span>
+        </div>
+        <div class="company-address-group">
+            <div class="company-select-div">
+                <textarea id="text-area-company-mailing-address" class="text-area-company-mailing-address" onclick="text_area_company_mailing_address()" readonly></textarea>
+                <select name="company-select" id="company-select" class="company-select" onchange="company_selected(this)">
+                    <option value="-1">
+                        select-company
+                    </option>
+                    {% for company in company_all %}
+                    <option value="{{ company.id }}">
+                        {{ company.name }}
+                    </option>
+                    {% endfor %}    
+                </select>
+                <button type="button" id="change-company-button" class="change-company-button" disabled>change-company</button>
+            </div>
+        </div>
+        <div class="customer-address-group">
+            <div class="customer-select-div">
+                <textarea id="text-area-customer-mailing-address" class="text-area-customer-mailing-address" onclick="text_area_customer_mailing_address()" readonly>
+                </textarea>
+                <select name="customer-select" id="customer-select" class="customer-select" onchange="customer_selected(this)">
+                    <option value="-1">
+                        select-customer
+                    </option>
+                    {% for customer in customer_all %}
+                        <option value="{{ customer.id }}">
+                            {{ customer.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        <button type="button" id="change-customer-button" class="change-customer-button" disabled>change-customer</button>
+        </div>
+        <table id="line-items-table" class="line-items-table">
+            <thead>
+                <th>PO #</th>
+                <th>Item #</th>
+                <th>Item Name</th>
+                <th>Cost Ea (USD)</th>
+                <th>Qty Ea</th>
+                <th>Amount (USD)</th>
+            </thead>
+            <tr>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-1')" onmouseout="amount_popup_hide(event, 'po-num-input-1')"></span><input type="text" name="po-num-input-1" id="po-num-input-1" class="po-num-input" placeholder="optional" onblur="po_num_selected(this, '1')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-1')" onmouseout="amount_popup_hide(event, 'item-num-select-1')"></span><select name="item-num-select-1" id="item-num-select-1" class="item-num-select" onchange="item_num_selected(this, '1')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-1')" onmouseout="amount_popup_hide(event, 'item-name-select-1')"></span><select name="item-name-select-1" id="item-name-select-1" class="item-name-select" onchange="item_name_selected(this, '1')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td class="cost-ea"><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-1')" onmouseout="amount_popup_hide(event, 'price-ea-input-1')"></span><input type="text" name="price-ea-input-1" maxlength="22" id="price-ea-input-1" class="price-ea-input" onclick="price_ea_field_clicked('1')" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-1')" onmouseout="amount_popup_hide(event, 'qty-ea-input-1')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-1" maxlength="22" id="qty-ea-input-1" class="qty-ea-input" onblur="qty_ea_validation(this, '1')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-1')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-1')"></span><input type="text" name="amount-dollar-input-1" maxlength="22" id="amount-dollar-input-1" class="amount-dollar-input" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+            </tr>
+            <tr>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-2')" onmouseout="amount_popup_hide(event, 'po-num-input-2')"></span><input type="text" name="po-num-input-2" id="po-num-input-2" class="po-num-input" placeholder="optional" onblur="po_num_selected(this, '2')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-2')" onmouseout="amount_popup_hide(event, 'item-num-select-2')"></span><select name="item-num-select-2" id="item-num-select-2" class="item-num-select" onchange="item_num_selected(this, '2')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-2')" onmouseout="amount_popup_hide(event, 'item-name-select-2')"></span><select name="item-name-select-2" id="item-name-select-2" class="item-name-select" onchange="item_name_selected(this, '2')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-2')" onmouseout="amount_popup_hide(event, 'price-ea-input-2')"></span><input type="text" name="price-ea-input-2" maxlength="22" id="price-ea-input-2" class="price-ea-input" onclick="price_ea_field_clicked('2')" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-2')" onmouseout="amount_popup_hide(event, 'qty-ea-input-2')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-2" maxlength="22" id="qty-ea-input-2" class="qty-ea-input" onblur="qty_ea_validation(this, '2')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-2')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-2')"></span><input type="text" name="amount-dollar-input-2" maxlength="22" id="amount-dollar-input-2" class="amount-dollar-input" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></span></td>
+            </tr>
+            <tr>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-3')" onmouseout="amount_popup_hide(event, 'po-num-input-3')"></span><input type="text" name="po-num-input-3" id="po-num-input-3" class="po-num-input" placeholder="optional" onblur="po_num_selected(this, '3')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-3')" onmouseout="amount_popup_hide(event, 'item-num-select-3')"></span><select name="item-num-select-3" id="item-num-select-3" class="item-num-select" onchange="item_num_selected(this, '3')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-3')" onmouseout="amount_popup_hide(event, 'item-name-select-3')"></span><select name="item-name-select-3" id="item-name-select-3" class="item-name-select" onchange="item_name_selected(this, '3')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-3')" onmouseout="amount_popup_hide(event, 'price-ea-input-3')"></span><input type="text" name="price-ea-input-3" maxlength="22" id="price-ea-input-3" class="price-ea-input" onclick="price_ea_field_clicked('3')" value="read-only"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-3')" onmouseout="amount_popup_hide(event, 'qty-ea-input-3')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-3" maxlength="22" id="qty-ea-input-3" class="qty-ea-input" onblur="qty_ea_validation(this, '3')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-3')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-3')"></span><input type="text" name="amount-dollar-input-3" maxlength="22" id="amount-dollar-input-3" class="amount-dollar-input" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+            </tr>
+            <tr>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-4')" onmouseout="amount_popup_hide(event, 'po-num-input-4')"></span><input type="text" name="po-num-input-4" id="po-num-input-4" class="po-num-input" placeholder="optional" onblur="po_num_selected(this, '4')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-4')" onmouseout="amount_popup_hide(event, 'item-num-select-4')"></span><select name="item-num-select-4" id="item-num-select-4" class="item-num-select" onchange="item_num_selected(this, '4')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-4')" onmouseout="amount_popup_hide(event, 'item-name-select-4')"></span><select name="item-name-select-4" id="item-name-select-4" class="item-name-select" onchange="item_name_selected(this, '4')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-4')" onmouseout="amount_popup_hide(event, 'price-ea-input-4')"></span><input type="text" name="price-ea-input-4" maxlength="22" id="price-ea-input-4" class="price-ea-input" onclick="price_ea_field_clicked('4')" value="read-only" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-4')" onmouseout="amount_popup_hide(event, 'qty-ea-input-4')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-4" maxlength="22" id="qty-ea-input-4" class="qty-ea-input" onblur="qty_ea_validation(this, '4')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-4')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-4')"></span><input type="text" name="amount-dollar-input-4" maxlength="22" id="amount-dollar-input-4" class="amount-dollar-input" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+            </tr>
+            <tr>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'po-num-input-5')" onmouseout="amount_popup_hide(event, 'po-num-input-5')"></span><input type="text" name="po-num-input-5" id="po-num-input-5" class="po-num-input" placeholder="optional" onblur="po_num_selected(this, '5')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-num-select-5')" onmouseout="amount_popup_hide(event, 'item-num-select-5')"></span><select name="item-num-select-5" id="item-num-select-5" class="item-num-select" onchange="item_num_selected(this, '5')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'item-name-select-5')" onmouseout="amount_popup_hide(event, 'item-name-select-5')"></span><select name="item-name-select-5" id="item-name-select-5" class="item-name-select" onchange="item_name_selected(this, '5')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'price-ea-input-5')" onmouseout="amount_popup_hide(event, 'price-ea-input-5')"></span><input type="text" name="price-ea-input-5" maxlength="22" id="price-ea-input-5" class="price-ea-input" onclick="price_ea_field_clicked('5')" value="read-only"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'qty-ea-input-5')" onmouseout="amount_popup_hide(event, 'qty-ea-input-5')"></span><input type="text" min="0" max="1000000000000" name="qty-ea-input-5" maxlength="22" id="qty-ea-input-5" class="qty-ea-input" onblur="qty_ea_validation(this, '5')"></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'amount-dollar-input-5')" onmouseout="amount_popup_hide(event, 'amount-dollar-input-5')"></span><input type="text" name="amount-dollar-input-5" maxlength="22" id="amount-dollar-input-5" class="amount-dollar-input" onclick="amount_dollar_field_clicked()" onchange="sum_amount(this)" value="read-only" readonly></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="po-num-input-6" id="po-num-input-6" class="po-num-input-6"></td>
+                <td><select name="item-num-select-6" id="item-num-select-6" class="item-num-select-6" onchange="item_num_selected(this, '5')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><select name="item-name-select-6" id="item-name-select-6" class="item-name-select-6" onchange="item_name_selected(this, '6')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><input type="text" name="price-ea-input-6" maxlength="22" id="price-ea-input-6" class="price-ea-input-6" onclick="price_ea_field_clicked('6')" value="read-only" readonly></td>
+                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-6" maxlength="22" id="qty-ea-input-6" class="qty-ea-input-6" value="Subtotal" onchange="qty_ea_validation(this, '6')" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'sales-amount-input')" onmouseout="amount_popup_hide(event, 'sales-amount-input')"></span><input type="text" name="sales-amount-input" maxlength="22" id="sales-amount-input" step=".01" class="sales-amount-input" onclick="sales_amount_field_clicked()" value="read-only" readonly></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="po-num-input-7" id="po-num-input-7" class="po-num-input-7"></td>
+                <td><select name="item-num-select-7" id="item-num-select-7" class="item-num-select-7" onchange="item_num_selected(this, '7')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><select name="item-name-select-7" id="item-name-select-7" class="item-name-select-7" onchange="item_name_selected(this, '7')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><input type="text" name="price-ea-input-7" maxlength="22" id="price-ea-input-7" class="price-ea-input-7" onclick="price_ea_field_clicked('7')" value="read-only" readonly></td>
+                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-7" maxlength="22" id="qty-ea-input-7" class="qty-ea-input-7" value="Freight" onchange="qty_ea_validation(this, '7')" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'freight-amount-input')" onmouseout="amount_popup_hide(event, 'freight-amount-input')"></span><input type="text" name="freight-amount-input" maxlength="22" id="freight-amount-input" class="freight-amount-input" onblur="freight_amount()"></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="po-num-input-8" id="po-num-input-8" class="po-num-input-8"></td>
+                <td><select name="item-num-select-8" id="item-num-select-8" class="item-num-select-8" onchange="item_num_selected(this, '8')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.number }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><select name="item-name-select-8" id="item-name-select-8" class="item-name-select-8" onchange="item_name_selected(this, '8')">
+                    <option value="{{ '-1' }}">
+                        select-one
+                    </option>
+                    <option hidden value="{{ '-2' }}">
+                    </option>
+                    {% for item in item_all %}
+                        <option value="{{ item.id }}">
+                            {{ item.name }}
+                        </option>
+                    {% endfor %}
+                    </select>
+                </td>
+                <td><input type="text" name="price-ea-input-8" id="price-ea-input-8" class="price-ea-input-8" onclick="price_ea_field_clicked('8')" value="read-only" readonly></td>
+                <td><input type="text" min="0" max="1000000000000" name="qty-ea-input-8" id="qty-ea-input-8" class="qty-ea-input-8" value="Total" onchange="qty_ea_validation(this, '8')" readonly></td>
+                <td><span class="corner-for-popup" onmousemove="amount_popup_show(event, 'total-due-input')" onmouseout="amount_popup_hide(event, 'total-due-input')"></span><input type="text" name="invoice-total" name="total-due-input" maxlength="22" id="total-due-input" class="total-due-input" onclick="total_due_field_clicked()" value="read-only" readonly></td>
+            </tr>
+        </table>
+        <p class="save-form-button-paragraph">
+            <button type="button" id = "new-invoice-button" class = "new-invoice-button" onclick="new_invoice()">New invoice</button>
+            <button type="button" id = "open-edit-invoice-button" class = "open-edit-invoice-button" onclick="open_invoice('')">Open invoice</button>
+            <button type="button" id="save-button" class="save-form-button" onclick="validate_form()">Save invoice</button>
+        </p>
+        <span id="popup-table-cells" class="popup-table-cells"></span>
+    </form>
+    <div id="message-div" class="message-div">{{ message }}</div>
+    <script type="text/javascript">
+        //Popup
+        var js_json_invoice_single = JSON.parse('{{ json_invoice_single | safe }}');
+        var js_json_invoice_all = JSON.parse('{{ json_invoice_all | safe }}');
+        var js_json_company_all = JSON.parse('{{ json_company_all | safe }}');
+        var js_json_customer_all = JSON.parse('{{ json_customer_all | safe }}');
+        var js_json_customer_pricing_all = JSON.parse('{{ json_customer_pricing_all | safe }}');
+        var js_json_item_all = JSON.parse('{{ json_item_all | safe }}');
+        var customerSelectedPk = "-1";
+        document.getElementById("text-area-company-mailing-address").innerHTML = "\n" + "                    read-only";
+        document.getElementById("text-area-customer-mailing-address").innerHTML = "\n" + "                   read-only";
+        // Hide Hidden Customer in Invoice 00000 used to setup default Invoice Form page
+        selectCompany = document.getElementById("company-select");
+        for(var i=1; i<= selectCompany.options.length; i++){
+            if(selectCompany.options[i].text == "Hidden Company"){
+                selectCompany.options[i].hidden = true;
+                break;
+            }
+        }
+        // Hide Hidden Company in Invoice 00000 used to setup default Invoice Form page
+        selectCustomer = document.getElementById("customer-select")
+        for(var i=1; i<= selectCustomer.options.length; i++){
+            if(selectCustomer.options[i].text == "Hidden Customer"){
+                selectCustomer.options[i].hidden = true;
+                break;
+            }
+        }
+        // Hide Hidden Item and Hidden Name in Invoice 00000 used to setup default Invoice Form page
+        for(var i=1; i<=5; i++){
+            selectItemNum = document.getElementById("item-num-select-" + i);
+            selectItemName = document.getElementById("item-name-select-" + i);
+            for(var j=1; j<= selectItemNum.options.length; j++){
+                if(selectItemNum.options[j].text == "00000"){
+                    selectItemNum.options[j].hidden = true;
+                    selectItemName.options[j].hidden = true;
+                    break;
+                }
+            }
+        }
+        document.documentElement.addEventListener('click', clear_message);
+        function initialize_data(){
+            if (js_json_invoice_single[0].fields.invoice_number == 00000){
+                localStorage.setItem("invTask", "New");
+                localStorage.setItem("invNbrOpened", "");
+            }
+            if (js_json_invoice_single[0].fields.invoice_number != 00000){
+                document.getElementById("invoice-date-input").value = js_json_invoice_single[0].fields.invoice_date;
+                document.getElementById("invoice-num-input").value = js_json_invoice_single[0].fields.invoice_number;
+                var companyAddressComplete = "";
+                for (i=0; i<js_json_company_all.length; i++){
+                        if (js_json_company_all[i].pk == js_json_invoice_single[0].fields.company_id){
+                            companyAddressComplete = js_json_company_all[i].fields.name + "\n";
+                            companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.address + "\n";
+                            companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.city + " ";
+                            companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.state + " ";
+                            companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.zip_code + "\n";
+                            companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.tel;  
+                        }
+                        document.getElementById("company-select").value = js_json_invoice_single[0].fields.company_id;
+                        document.getElementById("company-select").style.opacity = "0";
+                        document.getElementById("company-select").disabled="true";
+                        document.getElementById("change-company-button").removeAttribute("disabled");
+                        document.getElementById("change-company-button").style.opacity = "1";
+                        document.getElementById("change-company-button").style.zIndex = "2";
+                }
+                document.getElementById("text-area-company-mailing-address").innerHTML = companyAddressComplete;
+                var customerAddressComplete = ""
+                for (i=0; i<js_json_customer_all.length; i++){
+                    if (js_json_customer_all[i].pk == js_json_invoice_single[0].fields.customer_id){
+                        customerAddressComplete = js_json_customer_all[i].fields.name + "\n";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.address + "\n";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.city + " ";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.state + " ";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.zip_code;  
+                        customerSelectedPk=(js_json_customer_all[i].pk);
+                    }
+                    document.getElementById("customer-select").value = js_json_invoice_single[0].fields.customer_id;
+                    document.getElementById("customer-select").style.opacity = "0";
+                    document.getElementById("customer-select").disabled = true;
+                    document.getElementById("change-customer-button").removeAttribute("disabled");
+                    document.getElementById("change-customer-button").style.opacity = "1";
+                    document.getElementById("change-customer-button").style.zIndex = "2";
+                }
+                document.getElementById("text-area-customer-mailing-address").innerHTML = customerAddressComplete;
+                for(var y = 1; y <=5; y++){
+                    document.getElementById("po-num-input-" + y).value = eval("js_json_invoice_single[0].fields.po_num_row_" + y);
+                    for (var i = 0; i < document.getElementById("item-num-select-1").options.length; i++){
+                        if((document.getElementById("item-num-select-" + y)[i].text == eval("js_json_invoice_single[0].fields.item_num_row_" + y))  && (eval("js_json_invoice_single[0].fields.item_num_row_" + y) != "")){
+                            document.getElementById("item-num-select-" + y).value = document.getElementById("item-num-select-" + y)[i].value;
+                            document.getElementById("item-num-select-" + y).style.background = "rgb(255,255,255)";
+                        }
+                    }
+                    for (var i = 0; i < document.getElementById("item-name-select-1").options.length; i++){
+                        if((document.getElementById("item-name-select-" + y)[i].text == eval("js_json_invoice_single[0].fields.item_name_row_" + y)) && (eval("js_json_invoice_single[0].fields.item_name_row_" + y) != "")){
+                            document.getElementById("item-name-select-" + y).value = document.getElementById("item-name-select-" + y)[i].value;
+                            document.getElementById("item-name-select-" + y).style.background = "rgb(255,255,255)";
+                        }
+                    }
+                    if(eval("js_json_invoice_single[0].fields.customer_pricing_ea_row_" + y) != ""){
+                        document.getElementById("price-ea-input-" + y).value = eval("js_json_invoice_single[0].fields.customer_pricing_ea_row_" + y);
+                    }
+                    if(eval("js_json_invoice_single[0].fields.qty_ea_row_" + y) != ""){
+                        document.getElementById("qty-ea-input-" + y).value = eval("js_json_invoice_single[0].fields.qty_ea_row_" + y);
+                    }
+                    if(eval("js_json_invoice_single[0].fields.amount_row_" + y) != ""){
+                        document.getElementById("amount-dollar-input-" + y).value = eval("js_json_invoice_single[0].fields.amount_row_" + y);
+                    }
+                }
+                if(js_json_invoice_single[0].fields.invoice_sales_amount != ""){
+                    document.getElementById("sales-amount-input").value = js_json_invoice_single[0].fields.invoice_sales_amount;
+                }
+                if(js_json_invoice_single[0].fields.invoice_freight_amount != ""){
+                    document.getElementById("freight-amount-input").value = js_json_invoice_single[0].fields.invoice_freight_amount;
+                }
+                if(js_json_invoice_single[0].fields.invoice_total_due != ""){
+                    document.getElementById("total-due-input").value = js_json_invoice_single[0].fields.invoice_total_due;
+                }
+                localStorage.setItem("invTask", "Open");
+                localStorage.setItem("invNbrOpened", document.getElementById("invoice-num-input").value);
+                var selectItemNumForCtr = document.getElementById("item-num-select-" + 1);
+                for(var i=0; i<selectItemNumForCtr.length; i++){
+                    var match = "N";
+                    for (var j=0; j<js_json_customer_pricing_all.length; j++){
+                        if (js_json_customer_pricing_all[j].fields.customer_id == customerSelectedPk && js_json_customer_pricing_all[j].fields.item_id == selectItemNum.options[i].value){
+                            match = "Y";
+                            break;
+                        }
+                    }
+                    if(match == "N" && selectItemNum.options[i].value != -2 && selectItemNum.options[i].value != -1){
+                        for(var k=1; k<=5; k++){
+                            document.getElementById("item-num-select-" + k).options[i].hidden = true;
+                            document.getElementById("item-name-select-" + k).options[i].hidden = true;
+                        }
+                    }
+                }
+            }
+            document.getElementById("invoice-date-input").focus();
+        }
+        function amount_popup_show(event, rowToShow){
+            const popup = document.getElementById("popup-table-cells");
+            popup.style.opacity = "1";
+            popup.style.zIndex = "1";
+            let X = event.clientX;
+            let Y = event.clientY;
+            if(rowToShow.substring(0,19) == "amount-dollar-input" || rowToShow.substring(0,12) == "sales-amount" || rowToShow.substring(0,14) == "freight-amount" || rowToShow.substring(0,9) == "total-due"){
+                if (window.innerWidth <= 759){
+                popup.style.left = X -62 + 'px';
+                }
+                else{
+                    popup.style.left = X -71 + 'px';
+                }
+            }
+            else{
+                popup.style.left = X + 'px';
+            }
+            popup.style.top = Y -35 + 'px';
+            if(rowToShow == "freight-amount-input" && document.getElementById(rowToShow).value == ""){
+                popup.innerHTML = "Enter the Freight Amount";
+            }
+            else if(rowToShow.substring(0,6) == ("qty-ea") && document.getElementById(rowToShow).value == ""){
+                popup.innerHTML = "Enter the Qty Ea";
+            }
+            else if(rowToShow.substring(0,6) == ("po-num") && document.getElementById(rowToShow).value == ""){
+                popup.innerHTML = "Enter the PO #";
+            }
+            else if(rowToShow.substring(0,8) == ("item-num")){
+                var numDropDown = document.getElementById(rowToShow);
+                popup.innerHTML = numDropDown.options[numDropDown.selectedIndex].text;
+            }
+            else if(rowToShow.substring(0,9) == ("item-name")){
+                var numDropDown = document.getElementById(rowToShow);
+                popup.innerHTML = numDropDown.options[numDropDown.selectedIndex].text;
+            }
+            else{
+                popup.innerHTML = document.getElementById(rowToShow).value;
+            }
+        }
+        function amount_popup_hide(event, rowToHide){
+            const popup = document.getElementById("popup-table-cells");
+            popup.style.opacity = "0";
+            popup.style.zIndex = "-1";
+            popup.innerHTML = "";
+        }
+        function invoice_num_entered(invoiceInputBox, event){
+            validate_invoice_num_entered(invoiceInputBox);
+            // try{
+            //     if(event.relatedTarget.id == "open-edit-invoice-button"){
+            //     open_invoice()
+            //     return;
+            //     }
+            //     validate_invoice_num_entered(invoiceInputBox)
+            // }
+            // catch{
+            //     validate_invoice_num_entered(invoiceInputBox)
+            // }
+        }
+        function validate_invoice_num_entered(invoiceInputBox){
+            if((invoiceInputBox.value).includes("'") || (invoiceInputBox.value).includes('"')){
+                alert("Apostrophes not allowed in Invoice #");
+                window.setTimeout(function () { document.getElementById("invoice-num-input").focus(); }, 0);
+                return;
+            }
+            for (i=0; i<js_json_invoice_all.length; i++){
+                if (js_json_invoice_all[i].fields.invoice_number == invoiceInputBox.value && js_json_invoice_all[i].fields.customer_id == document.getElementById("customer-select").value){
+                    if(localStorage.getItem("invTask") == "New"){
+                        alert("Duplicate invoice number for customer not allowed.\nPlease change the invoice number");
+                        window.setTimeout(function () { document.getElementById("invoice-num-input").focus(); }, 0);
+                        return;
+                    }
+                    else if(localStorage.getItem("invTask") == "Open" && invoiceInputBox.value != localStorage.getItem("invNbrOpened")){
+                        alert("Duplicate invoice number for customer not allowed.\nPlease change the invoice number");
+                        window.setTimeout(function () { document.getElementById("invoice-num-input").focus(); }, 0);
+                        return;
+                    }
+                }
+            }
+        }
+        function clear_message(){
+            document.getElementById("message-div").innerHTML = "";
+        }
+        function po_num_selected(poNumInputBox, rowSelected){
+            if((poNumInputBox.value).includes("'") || poNumInputBox.value.includes('"')){
+                alert("Apostrophes not allowed in PO #");
+                window.setTimeout(function () { document.getElementById("po-num-input-" + rowSelected).focus(); }, 0);
+                return;
+            }
+        }
+        function new_invoice(){
+            window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/" + 1, "_top");
+            localStorage.setItem(invTask, "New");
+            localStorage.setItem("invNbrOpened", "");
+        }
+        function open_invoice(invNbr){
+            if(localStorage.getItem("invTask") == 'New'){
+                var invNbr = prompt("Enter invoice # to open / edit it", localStorage.getItem("invNbr"));
+            }
+            else if(localStorage.getItem("invTask") == 'Open'){
+                var invNbr = prompt("Enter invoice # to open / edit it", localStorage.getItem("invNbrOpened"))
+            }
+            if(invNbr != "" && invNbr != null){
+                var invFoundCtr = 0;
+                for (i=0; i<js_json_invoice_all.length; i++){
+                    if (invNbr == js_json_invoice_all[i].fields.invoice_number){
+                        invFoundCtr = invFoundCtr + 1;
+                        invPk = js_json_invoice_all[i].pk;
+                        window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/" + invPk, "_top");
+                        localStorage.setItem("invTask", "Open");
+                        localStorage.setItem("invNbrOpened", invNbr);
+                    }
+                }
+                if(invFoundCtr == 0){
+                    alert("Invoice # " + invNbr + " is not valid");
+                }  
+            }
+        }
+        function validate_form(){
+            if(document.getElementById("invoice-num-input").value == ""){
+                alert("Enter the Invoice #");
+                window.setTimeout(function () { document.getElementById("invoice-num-input").focus(); }, 0);
+                event.preventDefault();
+                return;
+            }
+            else{
+                document.getElementById("invoice-num-input").value = document.getElementById("invoice-num-input").value.trim();
+                var invNbr = document.getElementById("invoice-num-input").value;
+            }
+            if(document.getElementById("customer-select").value == "-1"){
+                alert("Select a customer");
+                window.setTimeout(function () { document.getElementById("customer-select").focus(); }, 0);
+                event.preventDefault();
+                return;
+            }
+            else if(document.getElementById("company-select").value == "-1"){
+                alert("Select a company");
+                window.setTimeout(function () { document.getElementById("company-select").focus(); }, 0);
+                event.preventDefault();
+                return;
+            }
+            var ctr = 0;
+            for(var i=1; i<=5; i++){
+                if(document.getElementById("po-num-input-" + i).value == "" && document.getElementById("item-num-select-" + i).value == "-1" && document.getElementById("qty-ea-input-" + i).value == ""){
+                    ctr = ctr + 1;
+                }
+            }
+            if(ctr == 5){
+                alert("Fill out a row before saving the invoice")
+                event.preventDefault();
+                return;
+            }
+            for(i=1; i<=5; i++){
+                document.getElementById("po-num-input-" + i).value = document.getElementById("po-num-input-" + i).value.trim()
+                if(document.getElementById("po-num-input-" + i).value != "" && (document.getElementById("item-num-select-" + i).value == "-1" || document.getElementById("qty-ea-input-" + i).value == "")){
+                    alert("Please fill out the rest of row " + i + " or delete the PO #");
+                    event.preventDefault();
+                    return;
+                }
+            }
+            for(i=1; i<=5; i++){
+                if(document.getElementById("qty-ea-input-" + i).value == "" && document.getElementById("item-num-select-" + i).value != "-1"){
+                    alert("Please fill out a Qty Ea value for row "+ i + " or remove the Item # / Item Name for that row");
+                    event.preventDefault();
+                    return;
+                }
+            }
+            for(i=1; i<=5; i++){
+                if(document.getElementById("item-num-select-" + i).value != "-1" && document.getElementById("item-num-select-" + i).value != "-2" && document.getElementById("qty-ea-input-" + i).value == "read-only"){
+                    alert("Enter the Qty Ea for row " + i);
+                    event.preventDefault();
+                    return;
+                }
+            }
+            if (document.getElementById("freight-amount-input").value == ""){
+                alert("Enter the Freight Amount");
+                event.preventDefault();
+                return;
+            }
+            for(i=1; i<=5; i++){
+                if(document.getElementById("item-num-select-" + i).value == "-1"){
+                    document.getElementById("item-num-select-" + i).value = "-2";
+                }
+                if(document.getElementById("item-name-select-" + i).value == "-1"){
+                    document.getElementById("item-name-select-" + i).value = "-2";
+                }
+                if(document.getElementById("price-ea-input-" + i).value == "read-only"){
+                    document.getElementById("price-ea-input-" + i).value = "";
+                }
+                if(document.getElementById("amount-dollar-input-" + i).value == "read-only"){
+                    document.getElementById("amount-dollar-input-" + i).value = "";
+                }
+                document.getElementById("price-ea-input-" + i).style.color = "black";
+                document.getElementById("amount-dollar-input-" + i).style.color = "black";
+            }
+            if(document.getElementById("sales-amount-input").value == "read-only"){
+                    document.getElementById("sales-amount-input").value = "";
+            }
+            for(i=1; i<=5; i++){
+                document.getElementById("po-num-input-" + i).placeholder="";
+            }
+            print();
+            document.getElementById("company-select").disabled = false;
+            document.getElementById("customer-select").disabled = false;
+            let form = document.getElementById("invoice-form");
+            try{
+                form.submit();
+                if(js_json_invoice_single[0].pk == 1){
+                    localStorage.setItem("invTask", "New");
+                    localStorage.setItem("invNbr", document.getElementById("invoice-num-input").value);
+                }
+                else{
+                    localStorage.setItem("invTask", "Open");
+                    localStorage.setItem("invNbrOpened", document.getElementById("invoice-num-input").value);
+                }
+            }
+            catch{
+                alert("An error occured.\n Please contact Mitch Rabushka");
+            }
+            //here
+            // var invCount = js_json_invoice_all.length
+            // alert(invCount)
+            // nextPk = js_json_invoice_all[invCount-1].pk
+            // nextPk = nextPk + 1
+            // alert(nextPk)
+            // window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/" + nextPk, "_top")
+            // open_invoice(invNbr)
+
+            // localStorage.setItem("invNbr", invNbr)
+            // location.reload()
+            // open_invoice(localStorage.getItem("invNbr"))
+        }
+        function text_area_customer_mailing_address(){
+            alert("Address area is read only");
+        }
+        function text_area_company_mailing_address(){
+            alert("Address area is read only");
+        }
+        const changeCustomerButton = document.getElementById("change-customer-button");
+        changeCustomerButton.addEventListener("click", showSelectCustomer);
+        function showSelectCustomer(){
+            document.getElementById("customer-select").value = "-1";
+            document.getElementById("customer-select").disabled = false;
+            document.getElementById("customer-select").style.opacity = "1";
+            document.getElementById("change-customer-button").style.zIndex = "0";
+            document.getElementById("change-customer-button").style.opacity = "0";
+            document.getElementById("change-customer-button").disabled = true;
+            customer_selected("-1");
+            for(var i=1; i<=5; i++){
+                selectItemNum = document.getElementById("item-num-select-" + i)
+                selectItemName = document.getElementById("item-name-select-" + i)
+                for(var j=1; j<= selectItemNum.options.length - 1; j++){
+                    if(selectItemNum.options[j].value != -2 && selectItemNum.options[j].value != 1){
+                        selectItemNum.options[j].hidden = false;
+                        selectItemName.options[j].hidden = false;
+                    }
+                }
+            }
+            document.getElementById("customer-select").focus()
+        }
+        const changeCompanyButton = document.getElementById("change-company-button");
+        changeCompanyButton.addEventListener("click", showSelectCompany);
+        function showSelectCompany(){
+            document.getElementById("company-select").value = "-1";
+            document.getElementById("company-select").disabled = false;
+            document.getElementById("company-select").style.opacity = "1";
+            document.getElementById("change-company-button").style.zIndex = "0";
+            document.getElementById("change-company-button").style.opacity = "0";
+            document.getElementById("change-company-button").disabled = true;
+            company_selected("-1");
+            document.getElementById("company-select").focus()
+        }
+        function company_selected(companySelectObject){
+            var companyAddressComplete = "";
+            if (companySelectObject.value == "-1" || companySelectObject == "-1"){
+                companyAddressComplete = "\n" + "                   read-only";
+            }
+            else {
+                for (i=0; i<js_json_company_all.length; i++){
+                    if (js_json_company_all[i].pk == companySelectObject.value){
+                        companyAddressComplete = js_json_company_all[i].fields.name + "\n";
+                        companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.address + "\n";
+                        companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.city + " ";
+                        companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.state + " ";
+                        companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.zip_code + "\n";
+                        companyAddressComplete = companyAddressComplete + js_json_company_all[i].fields.tel;  
+                    }
+                }
+                document.getElementById("company-select").style.opacity = "0";
+                document.getElementById("company-select").disabled="true";
+                document.getElementById("change-company-button").removeAttribute("disabled");
+                document.getElementById("change-company-button").style.opacity = "1";
+                document.getElementById("change-company-button").style.zIndex = "2";
+                // window.setTimeout(function () { document.getElementById("change-company-button").focus(); }, 0);
+                document.getElementById("change-company-button").focus();
+            }
+            document.getElementById("text-area-company-mailing-address").innerHTML = companyAddressComplete;
+        }
+        function customer_selected(customerSelectObject){
+            var customerAddressComplete = "";
+            if (customerSelectObject.value == "-1" || customerSelectObject == "-1"){
+                    customerAddressComplete = "\n" + "                   read-only";
+            }
+            else {
+                for (i=0; i<js_json_customer_all.length; i++){
+                    if (js_json_customer_all[i].pk == customerSelectObject.value){
+                        customerAddressComplete = js_json_customer_all[i].fields.name + "\n";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.address + "\n";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.city + " ";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.state + " ";
+                        customerAddressComplete = customerAddressComplete + js_json_customer_all[i].fields.zip_code;  
+                        customerSelectedPk=(js_json_customer_all[i].pk);
+                    }
+                }
+                document.getElementById("customer-select").style.opacity = "0";
+                document.getElementById("customer-select").disabled = true;
+                document.getElementById("change-customer-button").removeAttribute("disabled");
+                document.getElementById("change-customer-button").style.opacity = "1";
+                document.getElementById("change-customer-button").style.zIndex = "2";
+                // window.setTimeout(function () { document.getElementById("change-customer-button").focus(); }, 0);
+                document.getElementById("change-customer-button").focus();
+            }
+            
+            document.getElementById("text-area-customer-mailing-address").innerHTML = customerAddressComplete;
+            for (i=1; i<=5; i++){
+                document.getElementById("po-num-input-" + i).value = "";
+                document.getElementById("item-num-select-" + i).value = "-1";
+                document.getElementById("item-name-select-" + i).value = "-1";
+                document.getElementById("qty-ea-input-" + i).value = "";
+                document.getElementById("price-ea-input-" + i).value = "read-only";
+                document.getElementById("amount-dollar-input-" + i).value = "read-only";
+                document.getElementById("item-num-select-" + i).style.background = "rgb(255,216,20)";
+                document.getElementById("item-name-select-" + i).style.background = "rgb(255,216,20)";
+            }
+            document.getElementById("freight-amount-input").value = ""
+            sum_amount();
+            document.getElementById("invoice-num-input").focus();
+            document.getElementById("change-customer-button").focus();
+            var selectItemNumForCtr = document.getElementById("item-num-select-" + 1)
+            for(var i=0; i<selectItemNumForCtr.length; i++){
+                var match = "N";
+                for (var j=0; j<js_json_customer_pricing_all.length; j++){
+                    if (js_json_customer_pricing_all[j].fields.customer_id == customerSelectedPk && js_json_customer_pricing_all[j].fields.item_id == selectItemNum.options[i].value){
+                        match = "Y";
+                        break;
+                    }
+                }
+                if(match == "N" && selectItemNum.options[i].value != -2 && selectItemNum.options[i].value != -1){
+                    for(var k=1; k<=5; k++){
+                        document.getElementById("item-num-select-" + k).options[i].hidden = true;
+                        document.getElementById("item-name-select-" + k).options[i].hidden = true;
+                    }
+                }
+            }
+        }
+        function item_num_selected(itemNumSelectObject, rowSelected){
+            if (document.getElementById("customer-select").value == "-1"){
+                itemNumSelectObject.value = "-1";
+                alert("Select the customer first");
+                return;
+            }
+            if (document.getElementById(itemNumSelectObject.name).value == "-1"){
+                document.getElementById(itemNumSelectObject.name).style.backgroundColor = "rgb(255,216,20)";
+                document.getElementById("item-name-select-" + rowSelected).style.backgroundColor = "rgb(255,216,20)";
+                document.getElementById("item-name-select-" + rowSelected).value = "-1";
+                document.getElementById("price-ea-input-" + rowSelected).value = "read-only";
+                document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                sum_amount();
+            }
+            else{
+                var match = "N";
+                for (i=0; i<js_json_customer_pricing_all.length; i++){
+                    if ((js_json_customer_pricing_all[i].fields.customer_id == customerSelectedPk) && (js_json_customer_pricing_all[i].fields.item_id == itemNumSelectObject.value)){
+                        document.getElementById("price-ea-input-" + rowSelected).value = js_json_customer_pricing_all[i].fields.customer_pricing;
+                        document.getElementById("item-name-select-" + rowSelected).value = itemNumSelectObject.value;
+                        document.getElementById(itemNumSelectObject.name).style.background = "rgb(251,247,240)";
+                        document.getElementById("item-name-select-" + rowSelected).style.background = "rgb(251,247,240)";
+                        match = "Y";
+                        break;
+                    }
+                }
+                if(match == "N"){
+                    document.getElementById("item-name-select-" + rowSelected).value = "-1";
+                    document.getElementById("item-num-select-" + rowSelected).value = "-1";
+                    document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                    document.getElementById("price-ea-input-" + rowSelected).value = "read-only";
+                    document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                    alert("Please create customer pricing for this item");
+                }
+            }
+        }
+        function item_name_selected(itemNameSelectObject, rowSelected){
+            if (document.getElementById("customer-select").value == "-1"){
+                itemNameSelectObject.value = "-1";
+                alert("Select the company first");
+            }
+            else if (document.getElementById(itemNameSelectObject.name).value == "-1"){
+                document.getElementById(itemNameSelectObject.name).style.backgroundColor = "rgb(255,216,20)";
+                document.getElementById("item-num-select-" + rowSelected).style.backgroundColor = "rgb(255,216,20)";
+                document.getElementById("item-num-select-" + rowSelected).value = "-1";
+                document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                document.getElementById("price-ea-input-" + rowSelected).value = "read-only";
+                document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                sum_amount();
+            }
+            else {
+                var match = "N";
+                for (i=0; i<js_json_customer_pricing_all.length; i++){
+                    if (js_json_customer_pricing_all[i].fields.customer_id == customerSelectedPk && js_json_customer_pricing_all[i].fields.item_id == itemNameSelectObject.value){
+                        document.getElementById("price-ea-input-" + rowSelected).value = js_json_customer_pricing_all[i].fields.customer_pricing;
+                        document.getElementById("item-num-select-" + rowSelected).value = itemNameSelectObject.value;
+                        document.getElementById(itemNameSelectObject.name).style.background = "rgb(251,247,240)";
+                        document.getElementById("item-num-select-" + rowSelected).style.backgroundColor = "rgb(251,247,240)";
+                        match = "Y";
+                        break;
+                    }
+                }
+                if(match == "N"){
+                    document.getElementById("item-name-select-" + rowSelected).value = "-1";
+                    document.getElementById("item-num-select-" + rowSelected).value = "-1";
+                    document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                    document.getElementById("price-ea-input-" + rowSelected).value = "read-only";
+                    document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                    alert("Please create customer pricing for this item");
+                }
+            }
+        }
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+        var today = year + "-" + month + "-" + day;       
+        document.getElementById("invoice-date-input").value = today;
+        function sum_amount(){
+            var sumAmountWholeNumber = Number(0);
+            var sumAmountDecimal = "";
+            var sumAmountNumber = 0;
+            var sumAmountText = "";
+            var amtDollarInput = "";
+            for(i = 1; i<=5; i++){
+                amtDollarInput = document.getElementById("amount-dollar-input-" + i).value.replace(/,/g, '');
+                if (!isNaN(Number(amtDollarInput))){
+                    sumAmountNumber = sumAmountNumber + Number(amtDollarInput);
+                }
+            }
+            sumAmountText = (sumAmountNumber).toFixed(2);
+            sumAmountWholeNumber = Number(((sumAmountText).split('.')[0]));
+            sumAmountDecimal = ((sumAmountText).split('.')[1]);
+            sumAmountText = (sumAmountWholeNumber).toLocaleString("en-US") + "." + (sumAmountDecimal);
+            document.getElementById("sales-amount-input").value = sumAmountText;
+            if(document.getElementById("sales-amount-input").value == "0.00"){
+                document.getElementById("sales-amount-input").value = "read-only";
+            }
+            total_due();
+        }
+        function qty_ea_validation(amountQtyEaInput, rowSelected){
+            amountQtyEaInput.value = amountQtyEaInput.value.replace(/,/g, '');
+            if(amountQtyEaInput.value <= 0){
+                if(amountQtyEaInput.value != ""){
+                    alert("Qty Ea must be > 0");
+                }
+                amountQtyEaInput.value = "";
+            }
+            //here
+            // if (document.getElementById("price-ea-input-" + rowSelected).value == "read-only") {
+            //     // amountQtyEaInput.value = "";
+            //     // alert("Select an Item # or Item Name before entering Qty Ea");
+            //     // window.setTimeout(function () { document.getElementById("item-num-select-" + rowSelected).focus(); }, 0);
+            // }
+            if((isNaN(amountQtyEaInput.value))){
+                alert("Only numbers allowed in the Qty Ea field");
+                // document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                sum_amount();
+                // document.getElementById("qty-ea-input-" + rowSelected).focus()
+                window.setTimeout(function () { document.getElementById("qty-ea-input-" + rowSelected).focus(); }, 0);
+            }
+            else if(amountQtyEaInput.value == ""){
+                document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                sum_amount();
+            }
+            else if(amountQtyEaInput.value != "" && document.getElementById("price-ea-input-" + rowSelected).value == "read-only"){
+                amountQtyEaInput.value = "";
+                alert("Select an Item # or Item Name before entering Qty Ea");
+                window.setTimeout(function () { document.getElementById("item-num-select-" + rowSelected).focus(); }, 0);
+            }
+            else{
+                var amtDollarInputWholeNumber = Number(0);
+                var amtDollarInputDecimal = Number(0);
+                var amtDollarInput = "";
+                amtDollarInput = (amountQtyEaInput.value * document.getElementById("price-ea-input-" + rowSelected).value).toFixed(2);
+                if(amtDollarInput > Number(999999999999999)){
+                    var maxQtyEa = (999999999999999/document.getElementById("price-ea-input-" + rowSelected).value);
+                    var maxQtyEaWholeNumber = Number(0);
+                    maxQtyEaWholeNumber = maxQtyEa.toString().split('.')[0];
+                    var maxQtyText = Number(maxQtyEaWholeNumber).toLocaleString("en-US");
+                    alert("Qty Ea for row " + rowSelected + " must be less than " + maxQtyText + " because \n total USD amount of each item must be less than $999,999,999,999,999.00");
+                    document.getElementById("qty-ea-input-" + rowSelected).value = "";
+                    document.getElementById("amount-dollar-input-" + rowSelected).value = "read-only";
+                    sum_amount();
+                    return;
+                }
+                var amtQtyEaInputWholeNumber = Number(0);
+                var amtQtyEaInputDecimal = "";
+                var amtQtyEaInputText = "";
+                amountQtyEaInput.value = (Number(amountQtyEaInput.value) + Number(amountQtyEaInput.value) * Number.EPSILON).toFixed(3);
+                amtQtyEaInputWholeNumber = Number(((amountQtyEaInput.value).split('.')[0]));
+                // if((amountQtyEaInput.value).split('.')[1] == "000"){
+                //     amtQtyEaInputText = Number(amtQtyEaInputWholeNumber).toLocaleString("en-US");
+                // }
+                // else{
+                    amtQtyEaInputDecimal = ((amountQtyEaInput.value).split('.')[1]);
+                    amtQtyEaInputText = amtQtyEaInputWholeNumber + "." + amtQtyEaInputDecimal;
+                    amtQtyEaInputText = Number(amtQtyEaInputWholeNumber).toLocaleString("en-US") + "." + amtQtyEaInputDecimal;
+                // }
+                document.getElementById("qty-ea-input-" + rowSelected).value = amtQtyEaInputText;
+                amtDollarInputWholeNumber = ((amtDollarInput).split('.')[0]);
+                amtDollarInputDecimal = ((amtDollarInput).split('.')[1]);
+                amtDollarInput = Number(amtDollarInputWholeNumber).toLocaleString("en-US") + "." + amtDollarInputDecimal;
+                document.getElementById("amount-dollar-input-" + rowSelected).value = amtDollarInput;
+                sum_amount();
+            }
+        }
+        function price_ea_field_clicked(rowSelected){
+            if (document.getElementById("item-num-select-" + rowSelected).value == ""){
+                alert("Select an Item # or Item Name to get pricing.");
+            }
+            else{
+                alert("This field is readonly");
+            }
+        }
+        function sales_amount_field_clicked(){
+            alert("This field is readonly");
+        }
+        function total_due_field_clicked(){
+            alert("This field is readonly");
+        }
+        function amount_dollar_field_clicked(){
+            alert("This field is readonly");
+        }
+        function freight_amount(){
+            var amtFreightText = "";
+            amtFreightText = document.getElementById("freight-amount-input").value.replace(/,/g, '');
+            if(isNaN(amtFreightText)){
+                alert("Only numbers are allowed in the Freight field");
+                // document.getElementById("freight-amount-input").value = "";
+                total_due();
+                // document.getElementById("freight-amount-input").focus
+                window.setTimeout(function () { document.getElementById("freight-amount-input").focus(); }, 0);
+            }
+            else if(document.getElementById("freight-amount-input").value == ""){
+                total_due();
+            }
+            else if(amtFreightText > Number(999999999999999)){
+                alert("Freight must be less than $999,999,999,999,999.00");
+                document.getElementById("freight-amount-input").value = "";
+            }
+            else if(document.getElementById("freight-amount-input").value != ""){
+                var amtFreightWholeNumber = Number(0);
+                var amtFreightDecimal = "";
+                amtFreightText = Number(amtFreightText).toFixed(2);
+                amtFreightWholeNumber = Number(((amtFreightText).split('.')[0]));
+                amtFreightDecimal = ((amtFreightText).split('.')[1]);
+                amtFreightText = Number(amtFreightWholeNumber).toLocaleString("en-US") + "." + amtFreightDecimal;
+                document.getElementById("freight-amount-input").value = amtFreightText;
+                total_due();
+            }
+        }
+        function total_due(){
+            var sumAmountNumber = Number(0);
+            var sumAmountText = "";
+            var amtFreightNumber = Number(0);
+            var amtFreightText = "";
+            var totaDueWholeNumber = Number(0);
+            var totaDueDecimal = "";
+            var totalDueNumber = Number(0);
+            var totalDueText = "";
+            var totalDue = "";
+            sumAmountText = document.getElementById("sales-amount-input").value.replace(/,/g, '');
+            sumAmountNumber = Number(sumAmountText);
+            amtFreightText = document.getElementById("freight-amount-input").value.replace(/,/g, '');
+            amtFreightNumber = Number(amtFreightText);
+            totaDueNumber = sumAmountNumber + amtFreightNumber;
+            totalDueText = totaDueNumber.toFixed(2);
+            totaDueWholeNumber = Number((totalDueText.split('.')[0]));
+            totaDueDecimal = totalDueText.split('.')[1];
+            totalDueText = totaDueWholeNumber.toLocaleString("en-US") + "." + totaDueDecimal;
+            if(isNaN(totaDueNumber)){
+                document.getElementById("total-due-input").value = "read-only";
+            }
+            else{
+                document.getElementById("total-due-input").value = totalDueText;
+            }
+        }
+
+
+        
+        //Enter key moves cursor to next input field
+        document.addEventListener("keypress",function(event){
+            whichKeyDown = event.which;
+            if(whichKeyDown == 13 && document.getElementById("save-button").className != document.activeElement.className){
+                if(document.activeElement.className == ""){
+                    document.getElementById("invoice-date-input").focus();
+                    event.preventDefault();
+                }
+                else if(document.getElementById("invoice-date-input").id == document.activeElement.id){
+                    document.getElementById("invoice-num-input").focus();
+                    event.preventDefault();
+                }
+                else if(document.getElementById("invoice-num-input").id == document.activeElement.id){
+                    if(document.getElementById("change-customer-button").style.zIndex == "2"){
+                        document.getElementById("change-customer-button").focus();
+                    }
+                    else{
+                        document.getElementById("customer-select").focus();
+                    }
+                    event.preventDefault();
+                }
+                else if(document.getElementById("customer-select").id == document.activeElement.id){
+                    if(document.getElementById("change-company-button").style.zIndex == "2"){
+                        document.getElementById("change-company-button").focus();
+                    }
+                    else{
+                        document.getElementById("company-select").focus();
+                    }
+                    event.preventDefault();
+                }
+                else if(document.getElementById("change-customer-button").id == document.activeElement.id){
+                    if(document.getElementById("change-company-button").style.zIndex == "2"){
+                        document.getElementById("change-company-button").focus();
+                    }
+                    else{
+                        document.getElementById("company-select").focus();
+                    }
+                    event.preventDefault();
+                }
+                else if(document.getElementById("company-select").id == document.activeElement.id){
+                    document.getElementById("po-num-input-1").focus();
+                    event.preventDefault();
+                }
+                else if(document.getElementById("change-company-button").id == document.activeElement.id){
+                    document.getElementById("po-num-input-1").focus();
+                    event.preventDefault();
+                }
+                else if(document.getElementById("freight-amount-input").id == document.activeElement.id){
+                    document.getElementById("save-button").focus();
+                    event.preventDefault();
+                }
+                else if(document.getElementById("save-button").id == document.activeElement.id){
+                    document.getElementById("invoice-date-input").focus();
+                    event.preventDefault();
+                }
+                else{
+                    for(i=1; i<=5; i++){
+                        if(document.getElementById("po-num-input-" + i).id == document.activeElement.id){
+                            document.getElementById("item-num-select-" + i).focus();
+                            event.preventDefault();
+                            break;
+                        }
+                        else if(document.getElementById("item-num-select-" + i).id == document.activeElement.id){
+                            document.getElementById("item-name-select-" + i).focus();
+                            event.preventDefault();
+                            break;
+                        }
+                        else if(document.getElementById("item-name-select-" + i).id == document.activeElement.id){
+                            document.getElementById("qty-ea-input-" + i).focus();
+                            event.preventDefault();
+                            break;
+                        }
+                        else if(document.getElementById("qty-ea-input-" + i).id == document.activeElement.id){
+                            if(i < 5){
+                                document.getElementById("po-num-input-" + (i + 1)).focus();
+                                event.preventDefault();
+                                break;
+                            }
+                            else{
+                                document.getElementById("freight-amount-input").focus()
+                                event.preventDefault();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

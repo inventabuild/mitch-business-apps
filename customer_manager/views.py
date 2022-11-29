@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from . import models
 
@@ -19,8 +20,10 @@ def customer_new(request):
             message = "Error creating the customer"
     else:
         message = ''
+    now = datetime.today().timestamp
     data = {
-        'message': message
+        'message': message,
+        'now': now
     }
     return render(request, 'customer_manager/customer_new.html', data)
 def customer_view(request, id):
@@ -31,8 +34,10 @@ def customer_view(request, id):
     return render(request, 'customer_manager/customer_view.html', data)
 def customer_list(request):
     customers_all=models.Customer.objects.all().order_by('name')
+    now = datetime.today().timestamp
     data = {
-        'customers_all': customers_all
+        'customers_all': customers_all,
+        'now': now
     }
     return render(request, 'customer_manager/customer_list.html', data)
 def customer_options_list(request):

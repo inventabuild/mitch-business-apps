@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
+<body onload="initialize_data()">
     <div class="menu-hyperlink-format">
         <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
         <a href="{% url 'company_list' %}">Company list</a>
@@ -21,41 +21,41 @@
         <div>
             <label>
                 Name
-                <input type="text" name="company_name" id="company-name" onchange="company_name_input()" required />
+                <input type="text" name="company_name" id="company-name" class="company-name" onblur="company_name_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 Address
-                <input type="text" name="company_address" id="company-address" onchange="company_address_input()" required />
+                <input type="text" name="company_address" id="company-address" class="company-address" onblur="company_address_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 City
-                <input type="text" name="company_city" id="company-city" onchange="company_city_input()" required />
+                <input type="text" name="company_city" id="company-city" class="company-city" onblur="company_city_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 State
-                <input type="text" name="company_state" id="company-state" onchange="company_state_input()" required />
+                <input type="text" name="company_state" id="company-state" class="company-state" onblur="company_state_input()" placeholder="required" required />
+            </label>
+        </div>
+        <div>
+            <label>Zip Code
+                <input type="text" name="company_zip_code" id="company-zip-code" class="company-zip-code" onblur="company_zip_code_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 Country
-                <input type="text" name="company_country" id="company-country" onchange="company_country_input()" required />
-            </label>
-        </div>
-        <div>
-            <label>Zip Code
-                <input type="text" name="company_zip_code" id="company-zip-code" onchange="company_zip_code_input()" required />
+                <input type="text" name="company_country" id="company-country" class="company-country" onblur="company_country_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>Telephone #
-                <input type="text" name="company_tel" id="company-tel" onchange="company_tel_input()" required />
+                <input type="text" name="company_tel" id="company-tel" class="company-tel" onblur="company_tel_input()" placeholder="required" required />
             </label>
         </div>
         <p>
@@ -64,115 +64,169 @@
     </form>
     {{ message }}
     <script type="text/javascript">
-    function company_name_input(){
-        if((document.getElementById("company-name").value != "")){
-           if((document.getElementById("company-name").value).includes("'")){
-                alert("Apostrophes (') not allowed in Name field")
-                return
+        function initialize_data(){
+            document.getElementById("company-name").focus();
+        }
+        //Go to next field when Enter key is pressed
+        document.addEventListener("keypress", function(event){
+        whichKeyDown = event.which;
+        if(whichKeyDown == 13 && document.getElementById("create-company-button").className != document.activeElement.className){
+            if(document.activeElement.className == ""){
+                document.getElementById("company-name").focus();
+            }
+            else if(document.getElementById("company-name").className == document.activeElement.className){
+                document.getElementById("company-address").focus();
+            }
+            else if(document.getElementById("company-address").className == document.activeElement.className){
+                document.getElementById("company-city").focus();
+            }
+            else if(document.getElementById("company-city").className == document.activeElement.className){
+                document.getElementById("company-state").focus();
+            }
+            else if(document.getElementById("company-state").className == document.activeElement.className){
+                document.getElementById("company-zip-code").focus();
+            }
+            else if(document.getElementById("company-zip-code").className == document.activeElement.className){
+                document.getElementById("company-country").focus();
+            }
+            else if(document.getElementById("company-country").className == document.activeElement.className){
+                document.getElementById("company-tel").focus();
+            }
+            else if(document.getElementById("company-tel").className == document.activeElement.className){
+                document.getElementById("create-company-button").focus();
+            }
+        }  
+        })
+        function company_name_input(){
+            if((document.getElementById("company-name").value != "")){
+            if((document.getElementById("company-name").value).includes("'") || (document.getElementById("company-name").value).includes('"')){
+                    alert("Apostrophes not allowed in Name field")
+                    window.setTimeout(function () { document.getElementById("company-name").focus(); }, 0)
+                    return
+                }
             }
         }
-    }
-    function company_address_input(){
-        if((document.getElementById("company-address").value != "")){
-           if((document.getElementById("company-address").value).includes("'")){
-                alert("Apostrophes (') not allowed in Address field")
-                return
+        function company_address_input(){
+            if((document.getElementById("company-address").value != "")){
+            if((document.getElementById("company-address").value).includes("'") || (document.getElementById("company-address").value).includes('"')){
+                    alert("Apostrophes not allowed in Address field")
+                    window.setTimeout(function () { document.getElementById("company-address").focus(); }, 0)
+                    return
+                }
             }
         }
-    }
-    function company_city_input(){
-        if((document.getElementById("company-city").value != "")){
-           if((document.getElementById("company-city").value).includes("'")){
-                alert("Apostrophes (') not allowed in City field")
-                return
+        function company_city_input(){
+            if((document.getElementById("company-city").value != "")){
+            if((document.getElementById("company-city").value).includes("'") || (document.getElementById("company-city").value).includes('"')){
+                    alert("Apostrophes not allowed in City field")
+                    window.setTimeout(function () { document.getElementById("company-city").focus(); }, 0)
+                    return
+                }
             }
         }
-    }
-    function company_state_input(){
-        if((document.getElementById("company-state").value != "")){
-           if((document.getElementById("company-state").value).includes("'")){
-                alert("Apostrophes (') not allowed in State field")
-                return
+        function company_state_input(){
+            if((document.getElementById("company-state").value != "")){
+            if((document.getElementById("company-state").value).includes("'") || (document.getElementById("company-state").value).includes('"')){
+                    alert("Apostrophes not allowed in State field")
+                    window.setTimeout(function () { document.getElementById("company-state").focus(); }, 0)
+                    return
+                }
             }
         }
-    }
-    function company_country_input(){
-        if((document.getElementById("company-country").value != "")){
-           if((document.getElementById("company-country").value).includes("'")){
-                alert("Apostrophes (') not allowed in Country field")
-                return
+        function company_country_input(){
+            if((document.getElementById("company-country").value != "")){
+            if((document.getElementById("company-country").value).includes("'") || (document.getElementById("company-country").value).includes('"')){
+                    alert("Apostrophes not allowed in Country field")
+                    window.setTimeout(function () { document.getElementById("company-country").focus(); }, 0)
+                    return
+                }
             }
         }
-    }
-    function company_zip_code_input(){
-        if((document.getElementById("company-zip-code").value != "")){
-           if((document.getElementById("company-zip-code").value).includes("'")){
-                alert("Apostrophes (') not allowed in Zip Code field")
-                return
+        function company_zip_code_input(){
+            if((document.getElementById("company-zip-code").value != "")){
+            if((document.getElementById("company-zip-code").value).includes("'") || (document.getElementById("company-zip-code").value).includes('"')){
+                    alert("Apostrophes not allowed in Zip Code field")
+                    window.setTimeout(function () { document.getElementById("company-zip-code").focus(); }, 0)
+                    return
+                }
             }
         }
-    }
-    function company_tel_input(){
-        if((document.getElementById("company-tel").value != "")){
-           if((document.getElementById("company-tel").value).includes("'")){
-                alert("Apostrophes (') not allowed in Telephone # field")
-                return
+        function company_tel_input(){
+            if((document.getElementById("company-tel").value != "")){
+            if((document.getElementById("company-tel").value).includes("'") || (document.getElementById("company-tel").value).includes('"')){
+                    alert("Apostrophes not allowed in Telephone # field")
+                    window.setTimeout(function () { document.getElementById("company-tel").focus(); }, 0)
+                    return
+                }
             }
         }
-    }
-    function validate_form(){
-        if((document.getElementById("company-name").value != "")){
-            if((document.getElementById("company-name").value).includes("'")){
-                alert("Apostrophes (') not allowed in Name field")
+        function validate_form(){
+            if((document.getElementById("company-name").value == "")){
+                alert("Enter the Company Name")
+                document.getElementById("company-name").focus()
                 event.preventDefault()
                 return
             }
-        }
-        if((document.getElementById("company-address").value != "")){
-           if((document.getElementById("company-address").value).includes("'")){
-                alert("Apostrophes (') not allowed in Address field")
+            else{
+                document.getElementById("company-name").value = document.getElementById("company-name").value.trim()
+            }
+            if((document.getElementById("company-address").value == "")){
+                alert("Enter the Company Address")
+                document.getElementById("company-address").focus()
                 event.preventDefault()
                 return
             }
-        }
-        if((document.getElementById("company-city").value != "")){
-           if((document.getElementById("company-city").value).includes("'")){
-                alert("Apostrophes (') not allowed in City field")
+            else{
+                document.getElementById("company-address").value = document.getElementById("company-address").value.trim()
+            }
+            if((document.getElementById("company-city").value == "")){
+                alert("Enter the Company City")
+                document.getElementById("company-city").focus()
                 event.preventDefault()
                 return
             }
-        }
-        if((document.getElementById("company-state").value != "")){
-           if((document.getElementById("company-state").value).includes("'")){
-                alert("Apostrophes (') not allowed in State field")
+            else{
+                document.getElementById("company-city").value = document.getElementById("company-city").value.trim()
+            }
+            if((document.getElementById("company-state").value == "")){
+                alert("Enter the Company State")
+                document.getElementById("company-state").focus()
                 event.preventDefault()
                 return
             }
-        }
-        if((document.getElementById("company-country").value != "")){
-           if((document.getElementById("company-country").value).includes("'")){
-                alert("Apostrophes (') not allowed in Country field")
+            else{
+                document.getElementById("company-state").value = document.getElementById("company-state").value.trim()
+            }
+            if((document.getElementById("company-zip-code").value == "")){
+                alert("Enter the Company Zip Code")
+                document.getElementById("company-zip-code").focus()
                 event.preventDefault()
                 return
             }
-        }
-        if((document.getElementById("company-zip-code").value != "")){
-           if((document.getElementById("company-zip-code").value).includes("'")){
-                alert("Apostrophes (') not allowed in Zip Code field")
+            else{
+                document.getElementById("company-zip-code").value = document.getElementById("company-zip-code").value.trim()
+            }
+            if((document.getElementById("company-country").value == "")){
+                alert("Enter the Company Country")
+                document.getElementById("company-country").focus()
                 event.preventDefault()
                 return
             }
-        }
-        if((document.getElementById("company-tel").value != "")){
-           if((document.getElementById("company-tel").value).includes("'")){
-                alert("Apostrophes (') not allowed in Telephone # field")
+            else{
+                document.getElementById("company-country").value = document.getElementById("company-country").value.trim()
+            }
+            if((document.getElementById("company-tel").value == "")){
+                alert("Enter the Company Zip Telephone #")
+                document.getElementById("company-tel").focus()
                 event.preventDefault()
                 return
             }
+            else{
+                document.getElementById("company-tel").value = document.getElementById("company-tel").value.trim()
+            }
+            let form = document.getElementById("company-form");
+            form.submit();
         }
-        let form = document.getElementById("company-form");
-        form.submit();
-    }
     </script>
 </body>
 </html>

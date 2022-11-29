@@ -21,3 +21,6 @@ input{
     border-width: 1px;
     border-radius: 16px;
 }
+.hide-me{
+    visibility: hidden;
+}

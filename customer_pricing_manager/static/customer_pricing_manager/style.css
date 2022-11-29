@@ -27,3 +27,22 @@ td, th{
     border-width: 1px;
     border-radius: 16px;
 }
+.customer-name-select{
+    background-color: rgb(255,216,20);
+    border: 1px solid rgb(133,133,133);
+    text-align: center;
+}
+.customer-name-select option{
+    background-color: white;
+}
+.item-name-select{
+    background-color: rgb(255,216,20);
+    border: 1px solid rgb(133,133,133);
+    text-align: center;
+}
+.item-name-select option{
+    background-color: white;
+}
+.hide-me{
+    visibility: hidden;
+}

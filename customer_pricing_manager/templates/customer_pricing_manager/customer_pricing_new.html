@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
+<body onload="initialize_data()")>
     <div class="menu-hyperlink-format">
         <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
         <a href="{% url 'customer_pricing_list' %}">Customer pricing list</a>
@@ -18,11 +18,11 @@
         {% csrf_token %}
         <div class="customer-pricing-div">
             <label>
-             Customer:
+             Customer
                 <div>
-                <select name="customer_id" id="customer-name-select">
+                <select name="customer_id" id="customer-name-select" class="customer-name-select">
                     <option value="-1">
-                        --Select one--
+                        select one
                     </option>
                 {% for customer in customers_all %}
                     <option option value="{{ customer.id }}">
@@ -35,11 +35,11 @@
         </div>
         <div class="customer-pricing-div">
             <label>
-                Item:
+                Item
                 <div>
-                <select name="item_id" id="item-name-select">
+                <select name="item_id" id="item-name-select" class="item-name-select">
                     <option value="-1">
-                        --Select one--
+                        select one
                     </option>
                 {% for item in items_all %}
                     <option option value="{{ item.id }}">
@@ -53,38 +53,93 @@
         <div>
             <label>
                 Customer Price (USD)
-                <input type="number" name="customer_pricing" id="customer-pricing" step=.01 onchange="customer_pricing_input()" required />
+                <input type="number" name="customer_pricing" id="customer-pricing" class="customer-pricing" step=.01 onblur="customer_pricing_input()" placeholder="required" required />
             </label>
         </div>
-        <button type="button" class="create-customer-pricing-button" onclick="validate_form()">Create pricing</button>
+        <button type="button" class="create-customer-pricing-button" id="create-customer-pricing-button" onclick="validate_form()">Create pricing</button>
     </form>
     {{ message }}
-    <script>
-        function customer_pricing_input(){
-            customerPricing = Number(document.getElementById("customer-pricing").value) + Number(document.getElementById("customer-pricing").value) * Number.EPSILON;
-            customerPricing = customerPricing.toFixed(2);
-            document.getElementById("customer-pricing").value = customerPricing;
+    <script type="text/javascript">
+        function initialize_data(){
+            document.getElementById("customer-name-select").focus();
         }
+        //Enter key moves cursor to next input field
+        document.addEventListener("keypress",function(event){
+            whichKeyDown = event.which;
+            if(whichKeyDown == 13 && document.getElementById("create-customer-pricing-button").className != document.activeElement.className){
+                if(document.activeElement.className == ""){
+                    document.getElementById("customer-name-select").focus();
+                }
+                else if(document.getElementById("customer-name-select").className == document.activeElement.className){
+                    document.getElementById("item-name-select").focus();
+                }
+                else if(document.getElementById("item-name-select").className == document.activeElement.className){
+                    document.getElementById("customer-pricing").focus();
+                }
+                else if(document.getElementById("customer-pricing").className == document.activeElement.className){
+                    document.getElementById("create-customer-pricing-button").focus();
+                }
+                event.preventDefault();
+                return;
+            }  
+        })
+        // Hide Hidden Customer in Invoice 00000 used to setup default Invoice Form page
+        selectCustomer = document.getElementById("customer-name-select")
+        for(var i=1; i<= selectCustomer.options.length; i++){
+            if(selectCustomer.options[i].text == "Hidden Customer"){
+                selectCustomer.options[i].hidden = true;
+                break;
+            }
+        }
+        // Hide Hidden Item in Invoice 00000 used to setup default Invoice Form page
+        selectItem = document.getElementById("item-name-select")
+        for(var i=1; i<= selectItem.options.length; i++){
+            if(selectItem.options[i].text == "Hidden Item"){
+                selectItem.options[i].hidden = true;
+                break;
+            }
+        }
+        //Customer Price data is converted to a two decimal number
+        function customer_pricing_input(){
+            if(document.getElementById("customer-pricing").value != ""){
+                customerPricing = Number(document.getElementById("customer-pricing").value) + Number(document.getElementById("customer-pricing").value) * Number.EPSILON;
+                customerPricing = customerPricing.toFixed(2);
+                document.getElementById("customer-pricing").value = customerPricing;
+                event.preventDefault()
+                return;
+            }
+        }
+        //Data is validated when Create pricing button is clicked
         function validate_form(){
             if(document.getElementById("customer-name-select").value == "-1"){
                 alert("Select a Customer");
-                event.preventDefault();
-                return;
-            }
-            else if(document.getElementById("item-name-select").value == "-1"){
-                alert("Select and Item");
-                event.preventDefault();
-                return;
-            }
-            else if(document.getElementById("customer-pricing").value == "") {
-                alert("Enter customer pricing");
+                document.getElementById("customer-name-select").focus();
                 event.preventDefault();
                 return;
             }
             else{
-                let form = document.getElementById("customer-pricing-form");
-                form.submit();
+                document.getElementById("customer-name-select").value = document.getElementById("customer-name-select").value.trim()
             }
+            if(document.getElementById("item-name-select").value == "-1"){
+                alert("Select an Item");
+                document.getElementById("item-name-select").focus();
+                event.preventDefault();
+                return;
+            }
+            else{
+                document.getElementById("item-name-select").value = document.getElementById("item-name-select").value.trim()
+            }
+            if(document.getElementById("customer-pricing").value == "") {
+                alert("Enter customer pricing");
+                document.getElementById("customer-pricing").focus();
+                event.preventDefault();
+                return;
+            }
+            else{
+                document.getElementById("customer-pricing").value = document.getElementById("customer-pricing").value.trim()
+            }
+            let form = document.getElementById("customer-pricing-form");
+            form.submit();
         }
     </script>
 </body>

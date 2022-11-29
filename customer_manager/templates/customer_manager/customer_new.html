@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
+<body onload="initialize_data()">
     <div class="menu-hyperlink-format">
         <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
         <a href="{% url 'customer_list' %}">Customer list</a>
@@ -21,36 +21,36 @@
         <div>
             <label>
                 Name
-                <input type="text" name="customer_name" id="customer-name" onchange="customer_name_input()" required />
+                <input type="text" name="customer_name" id="customer-name" class="customer-name" onblur="customer_name_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 Address
-                <input type="text" name="customer_address" id="customer-address" onchange="customer_address_input()" required />
+                <input type="text" name="customer_address" id="customer-address" class="customer-address" onblur="customer_address_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 City
-                <input type="text" name="customer_city" id="customer-city" onchange="customer_city_input()" required />
+                <input type="text" name="customer_city" id="customer-city" class="customer-city" onblur="customer_city_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 State
-                <input type="text" name="customer_state" id="customer-state" onchange="customer_state_input()" required />
+                <input type="text" name="customer_state" id="customer-state" class="customer-state" onblur="customer_state_input()" placeholder="required" required />
+            </label>
+        </div>
+        <div>
+            <label>Zip Code
+                <input type="text" name="customer_zip_code" id="customer-zip-code" class="customer-zip-code" onblur="customer_zip_code_input()" placeholder="required" required />
             </label>
         </div>
         <div>
             <label>
                 Country
-                <input type="text" name="customer_country" id="customer-country" onchange="customer_country_input()" required />
-            </label>
-        </div>
-        <div>
-            <label>Zip Code
-                <input type="text" name="customer_zip_code" id="customer-zip-code" onchange="customer_zip_code_input()" required />
+                <input type="text" name="customer_country" id="customer-country" class="customer-country" onblur="customer_country_input()" placeholder="required" required />
             </label>
         </div>
         <p>
@@ -59,104 +59,160 @@
     </form>
     {{ message }}
     <script type="text/javascript">
+        function initialize_data(){
+            document.getElementById("customer-name").focus();
+        }
+        //Go to next field when Enter key is pressed
+        document.addEventListener("keypress", function(event){
+        whichKeyDown = event.which;
+        if(whichKeyDown == 13 && document.getElementById("create-customer-button").className != document.activeElement.className){
+            if(document.activeElement.className == ""){
+                document.getElementById("customer-name").focus();
+            }
+            else if(document.getElementById("customer-name").className == document.activeElement.className){
+                document.getElementById("customer-address").focus();
+            }
+            else if(document.getElementById("customer-address").className == document.activeElement.className){
+                document.getElementById("customer-city").focus();
+            }
+            else if(document.getElementById("customer-city").className == document.activeElement.className){
+                document.getElementById("customer-state").focus();
+            }
+            else if(document.getElementById("customer-state").className == document.activeElement.className){
+                document.getElementById("customer-zip-code").focus();
+            }
+            else if(document.getElementById("customer-zip-code").className == document.activeElement.className){
+                document.getElementById("customer-country").focus();
+            }
+            else if(document.getElementById("customer-country").className == document.activeElement.className){
+                document.getElementById("create-customer-button").focus();
+            }
+            }  
+        })
+        //validates customer name on blur
         function customer_name_input(){
             if((document.getElementById("customer-name").value != "")){
-               if((document.getElementById("customer-name").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Name field")
+               if((document.getElementById("customer-name").value).includes("'") || (document.getElementById("customer-name").value).includes('"')){
+                    alert("Apostrophes not allowed in Name field")
+                    window.setTimeout(function () { document.getElementById("customer-name").focus(); }, 0);
                     return
                 }
             }
         }
+        //validates customer address on blur
         function customer_address_input(){
             if((document.getElementById("customer-address").value != "")){
-               if((document.getElementById("customer-address").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Address field")
+               if((document.getElementById("customer-address").value).includes("'") || (document.getElementById("customer-address").value).includes('"')){
+                    alert("Apostrophes not allowed in Address field")
+                    window.setTimeout(function () { document.getElementById("customer-address").focus(); }, 0);
                     return
                 }
             }
         }
+        //validates customer city on blur
         function customer_city_input(){
             if((document.getElementById("customer-city").value != "")){
-               if((document.getElementById("customer-city").value).includes("'")){
-                    alert("Apostrophes (') not allowed in City field")
+               if((document.getElementById("customer-city").value).includes("'") || (document.getElementById("customer-city").value).includes('"')){
+                    alert("Apostrophes not allowed in City field")
+                    window.setTimeout(function () { document.getElementById("customer-city").focus(); }, 0);
                     return
                 }
             }
         }
+        //validates customer state on blur
         function customer_state_input(){
             if((document.getElementById("customer-state").value != "")){
-               if((document.getElementById("customer-state").value).includes("'")){
-                    alert("Apostrophes (') not allowed in State field")
+               if((document.getElementById("customer-state").value).includes("'") || (document.getElementById("customer-state").value).includes('"')){
+                    alert("Apostrophes not allowed in State field")
+                    window.setTimeout(function () { document.getElementById("customer-state").focus(); }, 0);
                     return
                 }
             }
         }
+        //validates customer country on blur
         function customer_country_input(){
             if((document.getElementById("customer-country").value != "")){
-               if((document.getElementById("customer-country").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Country field")
+               if((document.getElementById("customer-country").value).includes("'") || (document.getElementById("customer-country").value).includes('"')){
+                    alert("Apostrophes not allowed in Country field")
+                    window.setTimeout(function () { document.getElementById("customer-country").focus(); }, 0);
                     return
                 }
             }
         }
+        //validates customer zip code on blur
         function customer_zip_code_input(){
             if((document.getElementById("customer-zip-code").value != "")){
-               if((document.getElementById("customer-zip-code").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Zip Code field")
-                    return
+               if((document.getElementById("customer-zip-code").value).includes("'") || (document.getElementById("customer-zip-code").value).includes('"')){
+                    alert("Apostrophes not allowed in Zip Code field")
+                    window.setTimeout(function () { document.getElementById("customer-zip-code").focus(); }, 0);
                 }
             }
         }
+        //code for tel # when implemented
         function customer_tel_input(){
             if((document.getElementById("customer-tel").value != "")){
-               if((document.getElementById("customer-tel").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Telephone # field")
+               if((document.getElementById("customer-tel").value).includes("'") || (document.getElementById("customer-tel").value).includes('"')){
+                    alert("Apostrophes not allowed in Telephone # field")
+                    window.setTimeout(function () { document.getElementById("customer-tel").focus(); }, 0);
                     return
                 }
             }
         }
+        //validate all data entered when Create Customer button is clicked
         function validate_form(){
-            if((document.getElementById("customer-name").value != "")){
-                if((document.getElementById("customer-name").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Name field")
-                    event.preventDefault()
-                    return
-                }
+            if((document.getElementById("customer-name").value == "")){
+                alert("Enter the Customer Name")
+                document.getElementById("customer-name").focus()
+                event.preventDefault()
+                return
             }
-            if((document.getElementById("customer-address").value != "")){
-               if((document.getElementById("customer-address").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Address field")
-                    event.preventDefault()
-                    return
-                }
+            else{
+                document.getElementById("customer-name").value = document.getElementById("customer-name").value.trim()
             }
-            if((document.getElementById("customer-city").value != "")){
-               if((document.getElementById("customer-city").value).includes("'")){
-                    alert("Apostrophes (') not allowed in City field")
-                    event.preventDefault()
-                    return
-                }
+            if((document.getElementById("customer-address").value == "")){
+                alert("Enter the Customer Address")
+                document.getElementById("customer-address").focus()
+                event.preventDefault()
+                return
             }
-            if((document.getElementById("customer-state").value != "")){
-               if((document.getElementById("customer-state").value).includes("'")){
-                    alert("Apostrophes (') not allowed in State field")
-                    event.preventDefault()
-                    return
-                }
+            else{
+                document.getElementById("customer-address").value = document.getElementById("customer-address").value.trim()
             }
-            if((document.getElementById("customer-country").value != "")){
-               if((document.getElementById("customer-country").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Country field")
-                    event.preventDefault()
-                    return
-                }
+            if((document.getElementById("customer-city").value == "")){
+                alert("Enter the Customer City")
+                document.getElementById("customer-city").focus()
+                event.preventDefault()
+                return
             }
-            if((document.getElementById("customer-zip-code").value != "")){
-               if((document.getElementById("customer-zip-code").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Zip Code field")
-                    event.preventDefault()
-                    return
-                }
+            else{
+                document.getElementById("customer-city").value = document.getElementById("customer-city").value.trim()
+            }
+            if((document.getElementById("customer-state").value == "")){
+                alert("Enter the Customer State")
+                document.getElementById("customer-state").focus()
+                event.preventDefault()
+                return
+            }
+            else{
+                document.getElementById("customer-state").value = document.getElementById("customer-state").value.trim()
+            }
+            if((document.getElementById("customer-country").value == "")){
+                alert("Enter the Customer Country")
+                document.getElementById("customer-country").focus()
+                event.preventDefault()
+                return
+            }
+            else{
+                document.getElementById("customer-country").value = document.getElementById("customer-country").value.trim()
+            }
+            if((document.getElementById("customer-zip-code").value == "")){
+                alert("Enter the Customer Zip Code")
+                document.getElementById("customer-zip-code").focus()
+                event.preventDefault()
+                return
+            }
+            else{
+                document.getElementById("customer-zip-code").value = document.getElementById("customer-zip-code").value.trim()
             }
             let form = document.getElementById("customer-form");
             form.submit();

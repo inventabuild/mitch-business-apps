@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from . import models
 
@@ -17,8 +18,10 @@ def item_new(request):
             message='Error saving the item'
     else:
         message=''
+    now = datetime.today().timestamp
     data = {
-        'message': message
+        'message': message,
+        'now': now
     }
     return render(request, 'item_manager/item_new.html', data)
 def item_view(request, id):
@@ -30,8 +33,10 @@ def item_view(request, id):
 
 def item_list(request):
     list_all=models.Item.objects.all().order_by('name')
+    now = datetime.today().timestamp
     data={
-        'list_all': list_all
+        'list_all': list_all,
+        'now': now
     }
     return render(request, 'item_manager/item_list.html', data)
 def item_options_list(request):

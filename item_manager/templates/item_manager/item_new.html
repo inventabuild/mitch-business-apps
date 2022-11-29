@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'item_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'item_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
+<body onload="initialize_data()">
     <div class="menu-hyperlink-format">
         <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
         <a href="{% url 'item_list' %}" class="hyperlink-menu-item">Item list</a>
@@ -19,88 +19,126 @@
         <div>
             <label>
                 Item Number
-                <input type="text" name="item_number" id="item-number" onchange="item_number_input()" required />
+                <input type="text" name="item_number" id="item-number" class="item-number" onblur="item_number_input()" placeholder = "required" required />
             </label>
         </div>
         <div>
             <label>
                 Item Name
-                <input type="text" name="item_name" id="item-name" onchange="item_name_input()" required />
+                <input type="text" name="item_name" id="item-name" class="item-name" onblur="item_name_input()" placeholder = "required" required />
             </label>
         </div>
         <div>
             <label>
                 Item Description
-                <input type="text" name="item_description" id="item-description" onchange="item_description_input()" required />
+                <input type="text" name="item_description" id="item-description" class="item-description" onblur="item_description_input()" placeholder="optional"/>
             </label>
         </div>
         <div>
             <label>
                 Item Internal Cost (USD)
-                <input type="number" name="item_cost_internal" id="item-internal-cost" step=.01 onchange="item_internal_cost_input()" required />
+                <input type="number" name="item_cost_internal" id="item-internal-cost" class="item-internal-cost" step=.01 onblur="item_internal_cost_input()" placeholder="optional" />
             </label>
         </div>
         <p>
-            <button type="submit" class="create-new-item-button" onclick="validate_form()">Create item</button>
+            <button type="button" class="create-new-item-button" id="create-new-item-button" onclick="validate_form()">Create item</button>
         </p>
     </form>
     {{ message }}
     <script type="text/javascript">
-        function item_internal_cost_input(){
-            itemInternalCost = Number(document.getElementById("item-internal-cost").value) + Number(document.getElementById("item-internal-cost").value) * Number.EPSILON;
-            itemInternalCost = itemInternalCost.toFixed(2);
-            document.getElementById("item-internal-cost").value = itemInternalCost;
+        function initialize_data(){
+            document.getElementById("item-number").focus();
         }
+        //Verify all fields completed when Enter key is pressed
+        document.addEventListener("keypress", function(event){
+        whichKeyDown = event.which;
+        if(whichKeyDown == 13 && document.getElementById("create-new-item-button").className != document.activeElement.className){
+            // alert(document.activeElement.className)
+            if(document.activeElement.className == ""){
+                document.getElementById("item-number").focus()
+            }
+            else if(document.getElementById("item-number").className == document.activeElement.className){
+                document.getElementById("item-name").focus();
+            }
+            else if(document.getElementById("item-name").className == document.activeElement.className){
+                document.getElementById("item-description").focus();
+            }
+            else if(document.getElementById("item-description").className == document.activeElement.className){
+                document.getElementById("item-internal-cost").focus();
+            }
+            else if(document.getElementById("item-internal-cost").className == document.activeElement.className){
+                document.getElementById("create-new-item-button").focus();
+            }
+            event.preventDefault();
+            return;
+            }  
+        })
+        //Round Item Internal Cost data to 2 decimal places
+        function item_internal_cost_input(){
+            if(document.getElementById("item-internal-cost").value != ""){
+                itemInternalCost = Number(document.getElementById("item-internal-cost").value) + Number(document.getElementById("item-internal-cost").value) * Number.EPSILON;
+                itemInternalCost = itemInternalCost.toFixed(2);
+                document.getElementById("item-internal-cost").value = itemInternalCost;
+            }
+        }
+        //Validate Item Number input data
         function item_number_input(){
             if((document.getElementById("item-number").value != "")){
-               if((document.getElementById("item-number").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Item Number field")
-                    return
+               if((document.getElementById("item-number").value).includes("'") || (document.getElementById("item-number").value).includes('"')){
+                    alert("Apostrophes not allowed in Item Number field")
+                    window.setTimeout(function () { document.getElementById("item-number").focus(); }, 0);
+                }
+                else if(document.getElementById("item-number").value == "00000"){
+                    alert("Item # 00000 is reserved.  Please pick a different Item #")
+                    window.setTimeout(function () { document.getElementById("item-number").focus(); }, 0);
                 }
             }
         }
+        //Validate Item Name input data
         function item_name_input(){
             if((document.getElementById("item-name").value != "")){
-               if((document.getElementById("item-name").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Item Name field")
+               if((document.getElementById("item-name").value).includes("'") || (document.getElementById("item-name").value).includes('"')){
+                    alert("Apostrophes not allowed in Item Name field")
+                    window.setTimeout(function () { document.getElementById("item-name").focus(); }, 0);
+                }
+                else if(document.getElementById("item-name").value == "Hidden Item"){
+                    alert("Item Name Hidden Item is reserved.  Please pick a different Item Name")
+                    window.setTimeout(function () { document.getElementById("item-name").focus(); }, 0);
                     return
                 }
             }
         }
+        //validate Item Description data
         function item_description_input(){
             if((document.getElementById("item-description").value != "")){
-               if((document.getElementById("item-description").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Item Description field")
+               if((document.getElementById("item-description").value).includes("'") || (document.getElementById("item-description").value).includes('"')){
+                    alert("Apostrophes not allowed in Item Description field")
+                    window.setTimeout(function () { document.getElementById("item-description").focus(); }, 0);
                     return
                 }
             }
         }
+        //Validate data entered when Create item button is clicked
         function validate_form(){
-            if((document.getElementById("item-number").value != "")){
-               if((document.getElementById("item-number").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Item Number field")
-                    event.preventDefault()
-                    return
-                }
+            if(document.getElementById("item-number").value == ""){
+                alert("Please enter an Item Number")
+                document.getElementById("item-number").focus()
+                return
             }
-            if((document.getElementById("item-name").value != "")){
-               if((document.getElementById("item-name").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Item Name field")
-                    event.preventDefault()
-                    return
-                }
+            else{
+                document.getElementById("item-number").value = document.getElementById("item-number").value.trim()
             }
-            if((document.getElementById("item-description").value != "")){
-               if((document.getElementById("item-description").value).includes("'")){
-                    alert("Apostrophes (') not allowed in Item Description field")
-                    event.preventDefault()
-                    return
-                }
+            if(document.getElementById("item-name").value == ""){
+                alert("Please enter an Item Name")
+                document.getElementById("item-name").focus()
+                return
+            }
+            else{
+                document.getElementById("item-name").value = document.getElementById("item-name").value.trim()
             }
             let form = document.getElementById("new-item-form");
             form.submit();
         }
-
     </script>
 </body>
 </html>

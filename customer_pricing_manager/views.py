@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from customer_manager import models as customer_manager_models
 from item_manager import models as item_manager_models
@@ -33,17 +34,21 @@ def customer_pricing_new(request):
         message = ''
     customers_all=customer_manager_models.Customer.objects.all().order_by('name')
     items_all=item_manager_models.Item.objects.all().order_by('name')
+    now = datetime.today().timestamp
     data = {
         'customers_all': customers_all,
         'items_all': items_all,
-        'message': message
+        'message': message,
+        'now': now
     }
     return render(request, 'customer_pricing_manager/customer_pricing_new.html', data)
 
 def customer_pricing_list(request):
     customer_pricing_all=models.Customer_Pricing.objects.all().order_by('customer_id')
+    now = datetime.today().timestamp
     data = {
         'customer_pricing_all': customer_pricing_all,
+        'now': now
     }
     return render(request, 'customer_pricing_manager/customer_pricing_list.html', data)
 def customer_pricing_options_list(request):

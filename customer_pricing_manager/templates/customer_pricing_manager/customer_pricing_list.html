@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
 <body>
@@ -14,12 +14,13 @@
         <a href="{% url 'customer_pricing_new' %}">Customer pricing new</a>
     </div>
     <h2>Customer Pricing List</h2>
-    <table>
+    <table id="customer-pricing-table">
         <thead>
             <th>Pricing id</th>
             <th>Customer Name</th>
             <th>Item</th>
             <th>Price</th>
+            <th class="hide-me">Item</th>
         </thead>
         {% for pricing in customer_pricing_all %}
         <tr>
@@ -27,8 +28,16 @@
             <td><a href="{% url 'customer_pricing_view' pricing.id %}">{{ pricing.customer_id.name }}</a></td>
             <td><a href="{% url 'customer_pricing_view' pricing.id %}">{{ pricing.item_id.name }}</a></td>
             <td><a href="{% url 'customer_pricing_view' pricing.id %}">{{ pricing.customer_pricing }}</a></td>
+            <td class="hide-me">{{ pricing.item_id.name }}</td>
         </tr>
         {% endfor %}
     </table>
 </body>
+<script type="text/javascript">
+    for(i=0; i<=document.getElementById("customer-pricing-table").rows.length; i++){
+        if(document.getElementById("customer-pricing-table").rows[i].cells.item(4).innerHTML == "Hidden Item"){
+            document.getElementById("customer-pricing-table").deleteRow(i)
+        }
+    }
+</script>
 </html>

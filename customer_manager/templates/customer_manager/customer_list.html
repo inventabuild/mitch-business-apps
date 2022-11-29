@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
 <body>
@@ -17,18 +17,27 @@
         Customer List
     </h2>
     <div>
-        <table>
+        <table id="customer-table">
             <thead>
                 <th>Customer name</th>
                 <th>Customer id</th>
+                <th class="hide-me">Customer name</th>
             </thead>
             {% for customer in customers_all %}
             <tr>
                 <td><a href="{% url 'customer_view' customer.id %}">{{ customer.name }}</a></td>
                 <td><a href="{% url 'customer_view' customer.id %}">{{ customer.id }}</a></td>
+                <td class="hide-me">{{ customer.name }}</td>
             </tr>
             {% endfor %}
         </table>
     </div>
 </body>
+<script type="text/javascript">
+    for(i=0; i<=document.getElementById("customer-table").rows.length; i++){
+        if(document.getElementById("customer-table").rows[i].cells.item(2).innerHTML == "Hidden Customer"){
+            document.getElementById("customer-table").deleteRow(i)
+        }
+    }
+</script>
 </html>

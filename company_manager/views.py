@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render
 from . import models
 
@@ -22,8 +23,10 @@ def company_new(request):
             message = 'New company failed'
     else:
         message = ''
+    now = datetime.today().timestamp
     data = {
-        'message': message
+        'message': message,
+        'now': now
     }
     return render(request, 'company_manager/company_new.html', data)
 def company_view(request, id):
@@ -34,7 +37,9 @@ def company_view(request, id):
     return render(request, 'company_manager/company_view.html', data)
 def company_list(request):
     company_all=models.Company.objects.all().order_by('name')
+    now = datetime.today().timestamp
     data = {
-        'company_all': company_all
+        'company_all': company_all,
+        'now': now
     }
     return render(request, 'company_manager/company_list.html', data)
