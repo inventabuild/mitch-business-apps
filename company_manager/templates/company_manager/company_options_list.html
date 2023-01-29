@@ -5,17 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'company_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
 <body>
     <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a id="home-clicked" href="#" onclick = "return false" class="hyperlink-menu-item">Home</a>
     </div>
     <h2>Company Options</h2>
-    <ul>
-        <li><a url href="{% url 'company_new' %}">Company new</a> - Create a new company</li>
-        <li><a url href="{% url 'company_list' %}">Company list</a> - List all the companies</li>
-    </ul>
+    <nav class="wizard-column-1-description">
+        <ul id="li-clicked">
+            <li><a id="company-new-clicked" href="#" onclick="return false">Company New</a> - Create a new company</li>
+            <li><a id="company-list-clicked" href="#" onclick="return false">Company List</a> - List all the companies</li>
+        </ul>
+    </nav>
+    <div class="company-options-step-1-instruction-div" id="company-options-step-1-instruction-div">
+        <p class="company-options-step-1-instruction-title"><span class="company-options-step-1-left-arrow">&#8592;</span>Click the Create New button</p>
+    </div>
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
+    <script type="text/javascript">
+        var jsWizStatus = document.getElementById("wiz-status").innerHTML
+        if(jsWizStatus == 1){
+            document.getElementById("company-options-step-1-instruction-div").style.display = "none"
+        }
+        else{
+            document.getElementById("company-options-step-1-instruction-div").style.visibility = 'inherit'
+            document.getElementById("company-options-step-1-instruction-div").style.visibility = true
+        }
+        document.getElementById("li-clicked").addEventListener("click", function(e){
+            if(e.target.id == "company-new-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/company_manager/company_new/1", "_top")
+            }
+            else if(e.target.id == "company-new-clicked" && jsWizStatus == 2){
+                window.open("http://127.0.0.1:8000/company_manager/company_new/2", "_top")
+            }
+            else if(e.target.id == "company-list-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/company_manager/company_list/1", "_top")
+            }
+        })
+        document.getElementById("home-clicked").addEventListener("click", function(e){
+            if(jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/home/index/1", "_top")
+            }
+        })
+    </script>
 </body>
 </html>

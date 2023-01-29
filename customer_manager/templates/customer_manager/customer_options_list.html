@@ -5,17 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+<body onload="initialize_data()">
+    <div>
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false" class="hyperlink-menu-item">Home</a>
     </div>
     <h2>Customer Options</h2>
-    <ul>
-        <li><a url href="{% url 'customer_new' %}">Customer new</a> - Create a new customer</li>
-        <li><a url href="{% url 'customer_list' %}">Customer list</a> - View individual customers by selecting from the list</li>
-    </ul>
+    <nav class="wizard-column-1-description">
+        <ul id="li-clicked">
+            <li><a id="customer-new-clicked" href="#" onclick="return false">Customer new</a> - Create a new customer</li>
+            <li><a id="customer-list-clicked" href="#" onclick="return false">Customer list</a> - View individual customers by selecting from the list</li>
+        </ul>
+    </nav>
+    <div class="customer-options-step-1-instruction-div" id="customer-options-step-1-instruction-div">
+        <p class="customer-options-step-1-instruction-title"><span class="customer-options-step-1-left-arrow">&#8592;</span>Step 2: Click the Customer new button</p>
+    </div>
 </body>
+<p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </html>
+<script type="text/javascript">
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    function initialize_data(){
+        if(jsWizStatus == 1){
+            document.getElementById("customer-options-step-1-instruction-div").style.display = "none"
+        }
+        else{
+            document.getElementById("customer-options-step-1-instruction-div").style.visibility = 'inherit'
+            document.getElementById("customer-options-step-1-instruction-div").style.visibility = true
+        }
+    }
+    document.getElementById("home-clicked").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/home/index/1", "_top")
+        }
+    })
+    document.getElementById("li-clicked").addEventListener("click", function(e){
+        if(e.target.id == "customer-new-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/customer_manager/customer_new/1", "_top")
+        }
+        else if(e.target.id == "customer-new-clicked" && jsWizStatus == 2){
+            window.open("http://127.0.0.1:8000/customer_manager/customer_new/2", "_top")
+        }
+        else if(e.target.id == "customer-list-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/customer_manager/customer_list/1", "_top")
+        }
+    })
+</script>    

@@ -1,19 +1,55 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'item_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
+<body onload="initialize_data()">
     <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false" class="hyperlink-menu-item">Home</a>
     </div>
     <h2>Item Options</h2>
-    <ul>
-        <li><a url href="{% url 'item_new' %}">Item new</a> - Create a new item</li>
-        <li><a url href="{% url 'item_list' %}">Item list</a> - View individual items by selecting from the list</li>
-    </ul>
+    <nav class="wizard-column-1-description">
+        <ul id="li-clicked">
+            <li><a id="item-new-clicked" href="#" onclick="return false">Item new</a> - Create a new item</li>
+            <li><a id="item-list-clicked" href="#" onclick="return false">Item list</a> - View individual items by selecting from the list</li>
+        </ul>
+    </nav>
+    <div class="item-options-step-1-instruction-div" id="item-options-step-1-instruction-div">
+        <p class="item-options-step-1-instruction-title"><span class="item-options-step-1-left-arrow">&#8592;</span>Step 2: Click the Item new button</p>
+    </div>
 </body>
+<p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </html>
+<script type="text/javascript">
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    function initialize_data(){
+        if(jsWizStatus == 1){
+            document.getElementById("item-options-step-1-instruction-div").style.display = "none"
+        }
+        else{
+            document.getElementById("item-options-step-1-instruction-div").style.visibility = 'inherit'
+            document.getElementById("item-options-step-1-instruction-div").style.visibility = true
+        }
+    }
+    document.getElementById("home-clicked").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/home/index/1", "_top")
+        }
+    })
+    document.getElementById("li-clicked").addEventListener("click", function(e){
+        if(e.target.id == "item-new-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/item_manager/item_new/1", "_top")
+        }
+        else if(e.target.id == "item-new-clicked" && jsWizStatus == 2){
+            window.open("http://127.0.0.1:8000/item_manager/item_new/2", "_top")
+        }
+        else if(e.target.id == "item-list-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/item_manager/item_list/1", "_top")
+        }
+    })
+</script>

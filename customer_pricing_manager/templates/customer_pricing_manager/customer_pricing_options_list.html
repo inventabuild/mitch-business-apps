@@ -5,17 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
+<body onload="initialize_data()">
     <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false" class="hyperlink-menu-item">Home</a>
     </div>
     <h2>Customer Pricing Options</h2>
-    <ul>
-        <li><a url href="{% url 'customer_pricing_new' %}">Customer pricing new</a> - Create a new item price for a customer</li>
-        <li><a url href="{% url 'customer_pricing_list' %}">Customer pricing list</a> - View individual customer item pricing by selecting from a list</li>
-    </ul>
+    <nav class="wizard-column-1-description">
+        <ul id="li-clicked">
+            <li><a id="customer-pricing-new-clicked" href="#" onclick="return false">Customer pricing new</a> - Create a new item price for a customer</li>
+            <li><a id="customer-pricing-list-clicked" href="#" onclick="return false">Customer pricing list</a> - View individual customer item pricing by selecting from the list</li>
+        </ul>
+    </nav>
+    <div class="customer-pricing-options-step-1-instruction-div" id="customer-pricing-options-step-1-instruction-div">
+        <p class="customer-pricing-options-step-1-instruction-title"><span class="customer-pricing-options-step-1-left-arrow">&#8592;</span>Click Customer pricing new link</p>
+    </div>
 </body>
+<p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </html>
+<script type="text/javascript">
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    function initialize_data(){
+        if(jsWizStatus == 1){
+            document.getElementById("customer-pricing-options-step-1-instruction-div").style.display = "none"
+        }
+        else{
+            document.getElementById("customer-pricing-options-step-1-instruction-div").style.visibility = 'inherit'
+            document.getElementById("customer-pricing-options-step-1-instruction-div").style.visibility = true
+        }
+    }
+    document.getElementById("home-clicked").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/home/index/1", "_top")
+        }
+    })
+    document.getElementById("li-clicked").addEventListener("click", function(e){
+        if(e.target.id == "customer-pricing-new-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_new/1", "_top")
+        }
+        else if(e.target.id == "customer-pricing-new-clicked" && jsWizStatus == 2){
+            window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_new/2", "_top")
+        }
+        else if(e.target.id == "customer-pricing-list-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_list/1", "_top")
+        }
+    })
+</script>

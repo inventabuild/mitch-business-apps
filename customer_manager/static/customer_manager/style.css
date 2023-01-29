@@ -14,6 +14,9 @@ input{
     font-weight: bold;
 }
 .hyperlink-menu-item{
+    color: rgb(85, 26, 139)
+}
+.hyperlink-menu-item-home{
     margin-right: 10px;
 }
 .create-customer-button{
@@ -23,4 +26,185 @@ input{
 }
 .hide-me{
     visibility: hidden;
+}
+.menu-hyperlink-format{
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.customer-options-step-1-instruction-div{
+    font-size: 16px;
+    position: absolute;
+    left: 308px;
+    top: 94px;
+}
+.customer-options-step-1-instruction-title{
+    display: flex;
+    justify-content: center;
+    color: blue;
+    position: relative;
+    z-index: 0;
+}
+.customer-options-step-1-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 2px;
+}
+.wiz-status{
+    visibility: hidden;
+}
+.wizard-column-1-description{
+    display: flex;
+    justify-content:left;
+    z-index: 1;
+    position: relative;
+}
+.rect {
+    display: flex;
+}
+.content {
+    width: 177px;
+    height: 262px;
+}
+.right-border {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    visibility: hidden;
+}
+.bracket-span {
+    width: 10px;
+    height: calc(50% - 10px);
+    display: inline-block;
+}
+.left-brace-tl {
+    border-right: 2px solid blue;
+    border-bottom-right-radius: 10px;
+    margin-right: -6px;
+    margin-top: 10px;
+ }  
+ .left-brace-tr {
+    margin-bottom: 10px;
+    border-left: 2px solid blue;
+    border-top-left-radius: 10px;
+ }
+ .left-brace-bl {
+    margin-top: -4px;
+    border-right: 2px solid blue;
+    border-top-right-radius: 10px;
+    margin-right: -6px;
+ } 
+.left-brace-br {
+    margin-bottom: -8px;
+    border-left: 2px solid blue;
+    border-bottom-left-radius: 10px;
+}
+.customer-new-step-1-instruction-div{
+    font-size: 18.72px;
+    position: absolute;
+    left: 210px;
+    top: 214px;
+    visibility: hidden;
+}
+.customer-new-step-1-instruction-title{
+    color: blue;
+    font-size: 18.72px;
+}
+.customer-new-step-2-instruction-div{
+    font-size: 18.72px;
+    position: absolute;
+    left: 165px;
+    /* top: 257px; */
+    top: 349px;
+    visibility: hidden;
+}
+.customer-new-step-2-instruction-title{
+    color: blue;
+    font-size: 18.72px;
+}
+.customer-new-step-2-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 4px;
+}
+.customer-new-step-3-instruction-div{
+    font-size: 18.72px;
+    position: absolute;
+    left: 160px;
+    top: -11px;
+    visibility: hidden;
+}
+.customer-new-step-3-instruction-title{
+    font-size: 16px;
+    font-weight: bold;
+    color: blue;
+}
+.customer-new-step-3-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 5px;
+}
+.customer-list-step-1-instruction-1-div{
+    font-size: 18.72px;
+    position: absolute;
+    left: 226px;
+    top: 99px;
+    visibility: hidden;
+}
+.customer-list-step-1-instruction-title{
+    font-size: 16px;
+    font-weight: bold;
+    color: blue;
+}
+.customer-list-step-1-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin: 0px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 5px;
+    left: -10px;
+}
+.customer-single-step-1-instruction-div{
+    font-size: 18.72px;
+    position: absolute;
+    left: 32px;
+    top: 13px;
+    visibility: hidden;
+    z-index: -1;
+}
+.customer-single-step-1-instruction-title{
+    font-size: 16px;
+    font-weight: bold;
+    color: blue;
+}
+.customer-single-step-1-left-arrow{
+    font-size: 30px;
+    font-weight: bold;
+    -webkit-text-stroke: 0.5px;
+    color: red;
+    margin: 0px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 2px;
+    left: -10px;
 }

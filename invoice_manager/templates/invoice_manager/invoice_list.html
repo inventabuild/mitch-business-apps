@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="{% static 'invoice_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'invoice_new_view_edit' 1 %}">Invoice new</a>
+<body onload="initialize_data()">
+    <div class="menu-hyperlink-format" id="menu-div">
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false">Home</a>
+        <a id="invoice_new_view_edit" href="#" class="hyperlink-menu-item" onclick = "return false">Invoice new</a>
     </div>
     <h2>Invoice List</h2>
     <div>
@@ -19,26 +19,57 @@
             <thead>
                 <th>Date</th>
                 <th>Number</th>
-                <th>Customer</th>
                 <th>ID</th>
                 <th class="hide-me">Number</th>
             </thead>
             {% for invoice in invoice_all %}
                 <tr>
-                    <td><a href="{% url 'invoice_new_view_edit' invoice.id %}">{{invoice.invoice_date}}</a></td>
-                    <td><a href="{% url 'invoice_new_view_edit' invoice.id %}">{{invoice.invoice_number}}</a></td>
-                    <td><a href="{% url 'invoice_new_view_edit' invoice.id %}">{{invoice.customer_name}}</a></td>
-                    <td><a href="{% url 'invoice_new_view_edit' invoice.id %}">{{invoice.id}}</a></td>
+                    <td><a href="{% url 'invoice_new_view_edit' invoice.id 1 %}" onclick="return false">{{invoice.invoice_date}}</a></td>
+                    <td><a href="{% url 'invoice_new_view_edit' invoice.id 1 %}" onclick="return false">{{invoice.invoice_number}}</a></td>
+                    <td><a href="{% url 'invoice_new_view_edit' invoice.id 1 %}" onclick="return false">{{invoice.id}}</a></td>
                     <td class="hide-me">{{invoice.invoice_number}}</td>
                 </tr>
             {% endfor %}
         </table>
+        <div class="invoice-list-step-1-instruction-1-div" id="invoice-list-step-1-instruction-1-div">
+            <p class="invoice-list-step-1-instruction-title"><span class="invoice-list-step-1-left-arrow">&#8592;</span>Click the Date, Number or ID to see details of invoice you created.</p>
+        </div>
     </div>
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </body>
 <script type="text/javascript">
-    for(i=0; i<=document.getElementById("invoice-table").rows.length; i++){
-        if(document.getElementById("invoice-table").rows[i].cells.item(4).innerHTML == "00000"){
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    document.getElementById("menu-div").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            if(e.target.id == "home-clicked"){
+            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+            else if(e.target.id == "invoice_new_view_edit"){
+                window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/1/1/", "_top")
+            }
+        }
+    })
+    document.getElementById("invoice-table").addEventListener("click", function(e){
+        if(jsWizStatus == 2){
+            if(document.getElementsByTagName("td")[0].textContent == e.target.innerHTML || document.getElementsByTagName("td")[1].textContent == e.target.innerHTML || document.getElementsByTagName("td")[2].textContent == e.target.innerHTML){
+                var wizTarget = String(e.target)
+                wizTarget = wizTarget.slice(0, wizTarget.length-2) + "6/"
+                window.open(wizTarget, "_top")
+            }
+        }
+        else if(jsWizStatus == 1){
+            window.open(e.target, "_top")
+         }
+    })
+    function initialize_data(){
+        if(jsWizStatus == 2){
+            document.getElementById("invoice-list-step-1-instruction-1-div").style.visibility = "inherit" 
+            document.getElementById("invoice-list-step-1-instruction-1-div").style.visibility = "true"
+        }
+        for(i=0; i<=document.getElementById("invoice-table").rows.length; i++){
+        if(document.getElementById("invoice-table").rows[i].cells.item(1).textContent == "00000"){
             document.getElementById("invoice-table").deleteRow(i)
+        }
         }
     }
 </script>

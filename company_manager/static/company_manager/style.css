@@ -2,57 +2,32 @@ input{
     display: block;
     margin-bottom: 5px;
 }
-.hyperlink-format{
+.menu-hyperlink-format{
     margin-bottom: 10px;
     font-weight: bold;
 }
-.customer-pricing-view-output{
+.company-view-output{
     display: block;
     margin-bottom: 5px;
 }
 .output-label{
     font-weight: bold;
 }
-.customer-pricing-div{
-    margin-bottom: 5px;
-}
-td, th{
-    padding-right: 8px;
-}
-.hyperlink-menu-item{
+.hyperlink-menu-item-home{
     margin-right: 10px;
 }
-.create-customer-pricing-button{
+.hyperlink-menu-item{
+    color: rgb(85, 26, 139)
+}
+.create-company-button{
     background-color: #FFA41C;
     border-width: 1px;
     border-radius: 16px;
 }
-.customer-name-select{
-    background-color: rgb(255,216,20);
-    border: 1px solid rgb(133,133,133);
-    text-align: left;
-    width: 30ch;
-}
-.customer-name-select option{
-    background-color: white;
-}
-.item-name-select{
-    background-color: rgb(255,216,20);
-    border: 1px solid rgb(133,133,133);
-    text-align: left;
-    width: 30ch;
-}
-.item-name-select option{
-    background-color: white;
-}
-.customer-pricing{
-    width: 16ch;
-    text-align: right;
-}
-.item-name-select option{
-    background-color: white;
-}
 .hide-me{
+    visibility: hidden;
+}
+.wiz-status{
     visibility: hidden;
 }
 .wizard-column-1-description{
@@ -61,20 +36,20 @@ td, th{
     z-index: 1;
     position: relative;
 }
-.customer-pricing-options-step-1-instruction-div{
+.company-options-step-1-instruction-div{
     font-size: 16px;
     position: absolute;
-    left: 465px;
+    left: 308px;
     top: 94px;
 }
-.customer-pricing-options-step-1-instruction-title{
+.company-options-step-1-instruction-title{
     display: flex;
     justify-content: center;
     color: blue;
     position: relative;
     z-index: 0;
 }
-.customer-pricing-options-step-1-left-arrow{
+.company-options-step-1-left-arrow{
     font-size: 40px;
     font-weight: bold;
     color: red;
@@ -84,21 +59,15 @@ td, th{
     position: relative;
     top: 2px;
 }
-.wiz-status{
+.company-options-step-1-instruction-div{
     visibility: hidden;
-}
-.hyperlink-menu-item-home{
-    margin-right: 10px;
-}
-.hyperlink-menu-item{
-    color: rgb(85, 26, 139)
 }
 .rect {
     display: flex;
 }
 .content {
-    width: 225px;
-    height: 125px;
+    width: 177px;
+    height: 305px;
 }
 .right-border {
     -webkit-transform: rotate(180deg);
@@ -135,29 +104,29 @@ td, th{
     border-left: 2px solid blue;
     border-bottom-left-radius: 10px;
 }
-.customer-pricing-new-step-1-instruction-div{
+.company-new-step-1-instruction-div{
     font-size: 18.72px;
     position: absolute;
-    left: 260px;
-    top: 125px;
+    left: 210px;
+    top: 214px;
     visibility: hidden;
 }
-.customer-pricing-new-step-1-instruction-title{
+.company-new-step-1-instruction-title{
     color: blue;
     font-size: 18.72px;
 }
-.customer-pricing-new-step-2-instruction-div{
+.company-new-step-2-instruction-div{
     font-size: 18.72px;
     position: absolute;
-    left: 213px;
-    top: 213px;
+    left: 170px;
+    top: 391px;
     visibility: hidden;
 }
-.customer-pricing-new-step-2-instruction-title{
+.company-new-step-2-instruction-title{
     color: blue;
     font-size: 18.72px;
 }
-.customer-pricing-new-step-2-left-arrow{
+.company-new-step-2-left-arrow{
     font-size: 40px;
     font-weight: bold;
     color: red;
@@ -167,19 +136,19 @@ td, th{
     position: relative;
     top: 4px;
 }
-.customer-pricing-new-step-3-instruction-div{
+.company-new-step-3-instruction-div{
     font-size: 18.72px;
     position: absolute;
-    left: 205px;
+    left: 170px;
     top: -11px;
     visibility: hidden;
 }
-.customer-pricing-new-step-3-instruction-title{
+.company-new-step-3-instruction-title{
     font-size: 16px;
     font-weight: bold;
     color: blue;
 }
-.customer-pricing-new-step-3-left-arrow{
+.company-new-step-3-left-arrow{
     font-size: 40px;
     font-weight: bold;
     color: red;
@@ -189,19 +158,19 @@ td, th{
     position: relative;
     top: 5px;
 }
-.customer-pricing-list-step-1-instruction-1-div{
+.company-list-step-1-instruction-1-div{
     font-size: 18.72px;
     position: absolute;
-    left: 690px;
+    left: 238px;
     top: 99px;
     visibility: hidden;
 }
-.customer-pricing-list-step-1-instruction-title{
+.company-list-step-1-instruction-title{
     font-size: 16px;
     font-weight: bold;
     color: blue;
 }
-.customer-pricing-list-step-1-left-arrow{
+.company-list-step-1-left-arrow{
     font-size: 40px;
     font-weight: bold;
     color: red;
@@ -212,7 +181,7 @@ td, th{
     top: 5px;
     left: -10px;
 }
-.customer-pricing-single-step-1-instruction-div{
+.company-single-step-1-instruction-div{
     font-size: 18.72px;
     position: absolute;
     left: 32px;
@@ -220,12 +189,12 @@ td, th{
     visibility: hidden;
     z-index: -1;
 }
-.customer-pricing-single-step-1-instruction-title{
+.company-single-step-1-instruction-title{
     font-size: 16px;
     font-weight: bold;
     color: blue;
 }
-.customer-pricing-single-step-1-left-arrow{
+.company-single-step-1-left-arrow{
     font-size: 30px;
     font-weight: bold;
     -webkit-text-stroke: 0.5px;

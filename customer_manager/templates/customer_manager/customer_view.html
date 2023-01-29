@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'customer_list' %}">Customer list</a>
+<body onload="initialize_data()">
+    <div class="menu-hyperlink-format" id="menu-div">
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false">Home</a>
+        <a id="customer-list-clicked" href="#" class="hyperlink-menu-item" onclick="return false">Customer list</a>
     </div>
     <h2>Customer Info</h2>
     <div>
@@ -56,5 +56,29 @@
             <label>{{ customer_single.zip_code }}</label>
         </span>
     </div>
+    <div class="customer-single-step-1-instruction-div" id="customer-single-step-1-instruction-div">
+        <p class="customer-single-step-1-instruction-title"><span class="customer-single-step-1-left-arrow">&#8593;</span>Click the Home link</p>
+    </div>
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </body>
+<script type="text/javascript">
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    function initialize_data(){
+        if(jsWizStatus == 2){
+            document.getElementById("customer-single-step-1-instruction-div").style.visibility = "inherit"
+            document.getElementById("customer-single-step-1-instruction-div").style.visibility = "true"
+        }
+    }
+    document.getElementById("menu-div").addEventListener("click", function(e){
+        if(e.target.id == "home-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+        }
+        else if(e.target.id == "home-clicked" && jsWizStatus == 2){
+            window.open("http://127.0.0.1:8000/home/index/5/", "_top")
+        }
+        else if(e.target.id == "customer-list-clicked" && jsWizStatus==1){
+            window.open("http://127.0.0.1:8000/customer_manager/customer_list/1/", "_top")
+        }
+    })
+</script>
 </html>

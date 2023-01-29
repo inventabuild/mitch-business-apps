@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="{% static 'customer_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'customer_new' %}">Customer new</a>
+<body onload="initialize_data()">
+    <div id="menu-div" class="menu-hyperlink-format">
+        <a id="home-clicked" href="#" onclick = "return false" class="hyperlink-menu-item-home hyperlink-menu-item">Home</a>
+        <a id="customer-new-clicked" href="#" onclick = "return false" class="hyperlink-menu-item">Customer new</a>
     </div>
     <h2>
         Customer List
@@ -25,18 +25,51 @@
             </thead>
             {% for customer in customers_all %}
             <tr>
-                <td><a href="{% url 'customer_view' customer.id %}">{{ customer.name }}</a></td>
-                <td><a href="{% url 'customer_view' customer.id %}">{{ customer.id }}</a></td>
+                <td><a href="{% url 'customer_view' customer.id 1 %}" onclick="return false">{{ customer.name }}</a></td>
+                <td><a href="{% url 'customer_view' customer.id 1 %}" onclick="return false">{{ customer.id }}</a></td>
                 <td class="hide-me">{{ customer.name }}</td>
             </tr>
             {% endfor %}
         </table>
+        <div class="customer-list-step-1-instruction-1-div" id="customer-list-step-1-instruction-1-div">
+            <p class="customer-list-step-1-instruction-title"><span class="customer-list-step-1-left-arrow">&#8592;</span>Click the Customer name or id to see its details</p>
+        </div>
     </div>
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </body>
 <script type="text/javascript">
-    for(i=0; i<=document.getElementById("customer-table").rows.length; i++){
-        if(document.getElementById("customer-table").rows[i].cells.item(2).innerHTML == "Hidden Customer"){
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    document.getElementById("menu-div").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            if(e.target.id == "home-clicked"){
+            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+            else if(e.target.id == "customer-new-clicked"){
+                window.open("http://127.0.0.1:8000/customer_manager/customer_new/1/", "_top")
+            }
+        }
+    })
+    document.getElementById("customer-table").addEventListener("click", function(e){
+        if(jsWizStatus == 2){
+            if(document.getElementsByTagName("td")[0].textContent == e.target.innerHTML || document.getElementsByTagName("td")[1].textContent == e.target.innerHTML){
+                var wizTarget = String(e.target)
+                wizTarget = wizTarget.slice(0, wizTarget.length-2) + "2/"
+                window.open(wizTarget, "_top")
+            }
+        }
+        else if(jsWizStatus == 1){
+            window.open(e.target, "_top")
+         }
+    })
+    function initialize_data(){
+        if(jsWizStatus == 2){
+            document.getElementById("customer-list-step-1-instruction-1-div").style.visibility = "inherit" 
+            document.getElementById("customer-list-step-1-instruction-1-div").style.visibility = "true"
+        }
+        for(i=0; i<=document.getElementById("customer-table").rows.length; i++){
+        if(document.getElementById("customer-table").rows[i].cells.item(1).textContent == "1"){
             document.getElementById("customer-table").deleteRow(i)
+        }
         }
     }
 </script>

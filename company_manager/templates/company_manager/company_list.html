@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}?v={{ now }}">
+    <link rel="stylesheet" href="{% static 'company_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'company_new' %}">Company new</a>
+<body onload="initialize_data()">
+    <div class="menu-hyperlink-format" id="menu-div">
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false">Home</a>
+        <a id="company-new-clicked" href="#" class="hyperlink-menu-item" onclick = "return false">Company new</a>
     </div>
     <h2>
         Company List
@@ -25,19 +25,54 @@
             </thead>
             {% for company in company_all %}
             <tr>
-                <td><a href="{% url 'company_view' company.id %}">{{ company.name }}</a></td>
-                <td><a href="{% url 'company_view' company.id %}">{{ company.id }}</a></td>
+                <td><a href="{% url 'company_view' company.id 1 %}" onclick="return false">{{ company.name }}</a></td>
+                <td><a href="{% url 'company_view' company.id 1 %}" onclick="return false">{{ company.id }}</a></td>
                 <td class="hide-me">{{ company.name }}</td>
             </tr>
             {% endfor %}
         </table>
     </div>
+    <div class="company-list-step-1-instruction-1-div" id="company-list-step-1-instruction-1-div">
+        <p class="company-list-step-1-instruction-title"><span class="company-list-step-1-left-arrow">&#8592;</span>Click the Company Name or ID to see its details</p>
+    </div>
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </body>
 <script type="text/javascript">
-    for(i=0; i<=document.getElementById("company-table").rows.length; i++){
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    document.getElementById("menu-div").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            if(e.target.id == "home-clicked"){
+                window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+        
+            else if(e.target.id == "company-new-clicked"){
+                    window.open("http://127.0.0.1:8000/item_manager/item_new/1/", "_top")
+                }
+        }
+    })
+    document.getElementById("company-table").addEventListener("click", function(e){
+        if(jsWizStatus == 2){
+            if(document.getElementsByTagName("td")[0].textContent == e.target.innerHTML || document.getElementsByTagName("td")[1].textContent == e.target.innerHTML){
+                var wizTarget = String(e.target)
+                wizTarget = wizTarget.slice(0, wizTarget.length-2) + "2/"
+                window.open(wizTarget, "_top")
+            }
+        }
+        else if(jsWizStatus == 1){
+            window.open(e.target, "_top")
+         }
+    })
+    function initialize_data(){
+        // delete initial dummy row
+        for(i=0; i<=document.getElementById("company-table").rows.length; i++){
         if(document.getElementById("company-table").rows[i].cells.item(2).innerHTML == "Hidden Company"){
             document.getElementById("company-table").deleteRow(i)
         }
+        if(jsWizStatus == 2){
+            document.getElementById("company-list-step-1-instruction-1-div").style.visibility = "inherit" 
+            document.getElementById("company-list-step-1-instruction-1-div").style.visibility = "true"
+        }
+    }
     }
 </script>
 </html>

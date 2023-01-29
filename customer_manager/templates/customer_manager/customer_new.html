@@ -9,58 +9,104 @@
     <title>Document</title>
 </head>
 <body onload="initialize_data()">
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'customer_list' %}">Customer list</a>
+    <div id="menu-div" class="menu-hyperlink-format">
+        <a id="home-clicked" href="#" onclick = "return false" class="hyperlink-menu-item-home hyperlink-menu-item">Home</a>
+        <a id="customer-list-clicked" href="#" onclick = "return false" class="hyperlink-menu-item">Customer list</a>
     </div>
     <h2>
         New Customer Form
     </h2>
-    <form action="{% url 'customer_new' %}" id="customer-form" method="POST">
+    <form action="#" id="new-customer-form" method="POST">
         {% csrf_token %}
-        <div>
-            <label>
-                Name
-                <input type="text" name="customer_name" id="customer-name" class="customer-name" onblur="customer_name_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                Address
-                <input type="text" name="customer_address" id="customer-address" class="customer-address" onblur="customer_address_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                City
-                <input type="text" name="customer_city" id="customer-city" class="customer-city" onblur="customer_city_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                State
-                <input type="text" name="customer_state" id="customer-state" class="customer-state" onblur="customer_state_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>Zip Code
-                <input type="text" name="customer_zip_code" id="customer-zip-code" class="customer-zip-code" onblur="customer_zip_code_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                Country
-                <input type="text" name="customer_country" id="customer-country" class="customer-country" onblur="customer_country_input()" placeholder="required" required />
-            </label>
+        <div class="rect">
+            <div class="content">
+                <div>
+                    <label>
+                        Name
+                        <input type="text" name="customer_name" id="customer-name" class="customer-name" onblur="customer_name_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Address
+                        <input type="text" name="customer_address" id="customer-address" class="customer-address" onblur="customer_address_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        City
+                        <input type="text" name="customer_city" id="customer-city" class="customer-city" onblur="customer_city_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        State
+                        <input type="text" name="customer_state" id="customer-state" class="customer-state" onblur="customer_state_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>Zip Code
+                        <input type="text" name="customer_zip_code" id="customer-zip-code" class="customer-zip-code" onblur="customer_zip_code_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Country
+                        <input type="text" name="customer_country" id="customer-country" class="customer-country" onblur="customer_country_input()" placeholder="required" required />
+                    </label>
+                </div>
+            </div>
+            <div class="right-border" id="right-border">
+                <span class="bracket-span left-brace-tl"></span>
+                <span class="bracket-span left-brace-tr"></span><br />
+                <span class="bracket-span left-brace-bl"></span>
+                <span class="bracket-span left-brace-br"></span>
+            </div>
         </div>
         <p>
             <button type="button" id="create-customer-button" class="create-customer-button" onclick="validate_form()">Create Customer</button>
         </p>
+        {{ message }}
     </form>
-    {{ message }}
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
+    <div class="customer-new-step-3-instruction-div" id="customer-new-step-3-instruction-div">
+        <p class="customer-new-step-3-instruction-title"><span class="customer-new-step-3-left-arrow">&#8592;</span>Click the Customer list link to see the last Item created</p>
+    </div>
+    <div class="customer-new-step-1-instruction-div" id="customer-new-step-1-instruction-div">
+        <p class="customer-new-step-1-instruction-title">Step 1: Fill in the required fields</p>
+    </div>
+    <div class="customer-new-step-2-instruction-div" id="customer-new-step-2-instruction-div">
+        <p class="customer-new-step-2-instruction-title"><span class="customer-new-step-2-left-arrow">&#8592;</span>Step 2: Click the Create Customer button</p>
+    </div>
     <script type="text/javascript">
+        var jsWizStatus = document.getElementById("wiz-status").innerHTML
+        document.getElementById("menu-div").addEventListener("click", function(e){
+            if(e.target.id == "home-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+            else if(e.target.id == "customer-list-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/customer_manager/customer_list/1/", "_top", "_top")
+            }
+            else if(e.target.id == "customer-list-clicked" && jsWizStatus==3){
+                window.open("http://127.0.0.1:8000/customer_manager/customer_list/2/", "_top")
+
+            }
+        })
         function initialize_data(){
             document.getElementById("customer-name").focus();
+            if(jsWizStatus == 2){
+                document.getElementById("customer-new-step-1-instruction-div").style.visibility = "inherit"
+                document.getElementById("customer-new-step-1-instruction-div").style.visibility = "true"
+                document.getElementById("customer-new-step-2-instruction-div").style.visibility = "inherit"
+                document.getElementById("customer-new-step-2-instruction-div").style.visibility = "true"
+                document.getElementById("right-border").style.visibility = "inherit"
+                document.getElementById("right-border").style.visibility = "true"
+            }
+            else if(jsWizStatus == 3){
+                document.getElementById("customer-new-step-3-instruction-div").style.visibility = "inherit"
+                document.getElementById("customer-new-step-3-instruction-div").style.visibility = "true"
+                document.getElementById("create-customer-button").disabled = "true"
+            }
         }
         //Go to next field when Enter key is pressed
         document.addEventListener("keypress", function(event){
@@ -97,6 +143,12 @@
                     window.setTimeout(function () { document.getElementById("customer-name").focus(); }, 0);
                     return
                 }
+                else if(document.getElementById("customer-name").value.trim() == "" && document.getElementById("customer-name").value != ""){
+                    alert("Field must contain more than only blank spaces")
+                    document.getElementById("customer-name").value = ""
+                    window.setTimeout(function () { document.getElementById("customer-name").focus(); }, 0)
+                return
+                }
             }
         }
         //validates customer address on blur
@@ -106,6 +158,12 @@
                     alert("Apostrophes not allowed in Address field")
                     window.setTimeout(function () { document.getElementById("customer-address").focus(); }, 0);
                     return
+                }
+                else if(document.getElementById("customer-address").value.trim() == "" && document.getElementById("customer-address").value != ""){
+                    alert("Field must contain more than only blank spaces")
+                    document.getElementById("customer-address").value = ""
+                    window.setTimeout(function () { document.getElementById("customer-address").focus(); }, 0)
+                return
                 }
             }
         }
@@ -117,6 +175,12 @@
                     window.setTimeout(function () { document.getElementById("customer-city").focus(); }, 0);
                     return
                 }
+                else if(document.getElementById("customer-city").value.trim() == "" && document.getElementById("customer-city").value != ""){
+                    alert("Field must contain more than only blank spaces")
+                    document.getElementById("customer-city").value = ""
+                    window.setTimeout(function () { document.getElementById("customer-city").focus(); }, 0)
+                return
+                }
             }
         }
         //validates customer state on blur
@@ -126,6 +190,12 @@
                     alert("Apostrophes not allowed in State field")
                     window.setTimeout(function () { document.getElementById("customer-state").focus(); }, 0);
                     return
+                }
+                else if(document.getElementById("customer-state").value.trim() == "" && document.getElementById("customer-state").value != ""){
+                    alert("Field must contain more than only blank spaces")
+                    document.getElementById("customer-state").value = ""
+                    window.setTimeout(function () { document.getElementById("customer-state").focus(); }, 0)
+                return
                 }
             }
         }
@@ -137,6 +207,12 @@
                     window.setTimeout(function () { document.getElementById("customer-country").focus(); }, 0);
                     return
                 }
+                else if(document.getElementById("customer-country").value.trim() == "" && document.getElementById("customer-country").value != ""){
+                    alert("Field must contain more than only blank spaces")
+                    document.getElementById("customer-country").value = ""
+                    window.setTimeout(function () { document.getElementById("customer-country").focus(); }, 0)
+                return
+                }
             }
         }
         //validates customer zip code on blur
@@ -145,6 +221,12 @@
                if((document.getElementById("customer-zip-code").value).includes("'") || (document.getElementById("customer-zip-code").value).includes('"')){
                     alert("Apostrophes not allowed in Zip Code field")
                     window.setTimeout(function () { document.getElementById("customer-zip-code").focus(); }, 0);
+                }
+                else if(document.getElementById("customer-zip-code").value.trim() == "" && document.getElementById("customer-zip-code").value != ""){
+                    alert("Field must contain more than only blank spaces")
+                    document.getElementById("customer-zip-code").value = ""
+                    window.setTimeout(function () { document.getElementById("customer-zip-code").focus(); }, 0)
+                return
                 }
             }
         }
@@ -156,12 +238,18 @@
                     window.setTimeout(function () { document.getElementById("customer-tel").focus(); }, 0);
                     return
                 }
+                else if(document.getElementById("customer-tel").value.trim() == "" && document.getElementById("customer-tel").value != ""){
+                    alert("Field must contain more than only blank spaces")
+                    document.getElementById("customer-tel").value = ""
+                    window.setTimeout(function () { document.getElementById("customer-tel").focus(); }, 0)
+                return
+                }
             }
         }
         //validate all data entered when Create Customer button is clicked
         function validate_form(){
-            if((document.getElementById("customer-name").value == "")){
-                alert("Enter the Customer Name")
+            if((document.getElementById("customer-name").value.trim() == "")){
+                alert("Enter the Customer Name. Only spaces not allowed")
                 document.getElementById("customer-name").focus()
                 event.preventDefault()
                 return
@@ -169,8 +257,8 @@
             else{
                 document.getElementById("customer-name").value = document.getElementById("customer-name").value.trim()
             }
-            if((document.getElementById("customer-address").value == "")){
-                alert("Enter the Customer Address")
+            if((document.getElementById("customer-address").value.trim() == "")){
+                alert("Enter the Customer Address. Only spaces not allowed")
                 document.getElementById("customer-address").focus()
                 event.preventDefault()
                 return
@@ -178,8 +266,8 @@
             else{
                 document.getElementById("customer-address").value = document.getElementById("customer-address").value.trim()
             }
-            if((document.getElementById("customer-city").value == "")){
-                alert("Enter the Customer City")
+            if((document.getElementById("customer-city").value.trim() == "")){
+                alert("Enter the Customer City. Only spaces not allowed")
                 document.getElementById("customer-city").focus()
                 event.preventDefault()
                 return
@@ -187,8 +275,8 @@
             else{
                 document.getElementById("customer-city").value = document.getElementById("customer-city").value.trim()
             }
-            if((document.getElementById("customer-state").value == "")){
-                alert("Enter the Customer State")
+            if((document.getElementById("customer-state").value.trim() == "")){
+                alert("Enter the Customer State. Only spaces not allowed")
                 document.getElementById("customer-state").focus()
                 event.preventDefault()
                 return
@@ -196,8 +284,8 @@
             else{
                 document.getElementById("customer-state").value = document.getElementById("customer-state").value.trim()
             }
-            if((document.getElementById("customer-country").value == "")){
-                alert("Enter the Customer Country")
+            if((document.getElementById("customer-country").value.trim() == "")){
+                alert("Enter the Customer Country. Only spaces not allowed")
                 document.getElementById("customer-country").focus()
                 event.preventDefault()
                 return
@@ -205,8 +293,8 @@
             else{
                 document.getElementById("customer-country").value = document.getElementById("customer-country").value.trim()
             }
-            if((document.getElementById("customer-zip-code").value == "")){
-                alert("Enter the Customer Zip Code")
+            if((document.getElementById("customer-zip-code").value.trim() == "")){
+                alert("Enter the Customer Zip Code. Only spaces not allowed")
                 document.getElementById("customer-zip-code").focus()
                 event.preventDefault()
                 return
@@ -214,7 +302,13 @@
             else{
                 document.getElementById("customer-zip-code").value = document.getElementById("customer-zip-code").value.trim()
             }
-            let form = document.getElementById("customer-form");
+            let form = document.getElementById("new-customer-form");
+            if(jsWizStatus == 1){
+                form.action = "http://127.0.0.1:8000/customer_manager/customer_new/1/"
+            }
+            else if(jsWizStatus == 2){
+                form.action = "http://127.0.0.1:8000/customer_manager/customer_new/3/"
+            }
             form.submit();
         }
         </script>

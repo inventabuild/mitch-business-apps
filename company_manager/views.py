@@ -3,9 +3,15 @@ from django.shortcuts import render
 from . import models
 
 # Create your views here.
-def company_options_list(request):
-    return render(request, 'company_manager/company_options_list.html')
-def company_new(request):
+
+def company_options_list(request, wizStatus):
+    now = datetime.today().timestamp
+    data = {
+        'now': now,
+        'wizStatus': wizStatus
+    }
+    return render(request, 'company_manager/company_options_list.html', data)
+def company_new(request, wizStatus):
     if request.method == "POST":
         try:
             new_company = models.Company(
@@ -26,20 +32,25 @@ def company_new(request):
     now = datetime.today().timestamp
     data = {
         'message': message,
-        'now': now
+        'now': now,
+        'wizStatus': wizStatus
     }
     return render(request, 'company_manager/company_new.html', data)
-def company_view(request, id):
+def company_view(request, id, wizStatus):
     company_single=models.Company.objects.get(id=id)
+    now = datetime.today().timestamp
     data={
-        'company_single': company_single
+        'company_single': company_single,
+        'now': now,
+        'wizStatus': wizStatus
     } 
     return render(request, 'company_manager/company_view.html', data)
-def company_list(request):
-    company_all=models.Company.objects.all().order_by('name')
+def company_list(request, wizStatus):
+    company_all=models.Company.objects.all().order_by('-id')
     now = datetime.today().timestamp
     data = {
         'company_all': company_all,
-        'now': now
+        'now': now,
+        'wizStatus': wizStatus
     }
     return render(request, 'company_manager/company_list.html', data)

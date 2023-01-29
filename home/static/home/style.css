@@ -1,0 +1,146 @@
+.app-container{
+    display: flex;
+}
+.app-column{
+    flex: 1;
+}
+.app-column-1{
+    order: 1
+}
+.app-column-2{
+    order: 2
+}
+.app-column-title{
+    display: flex;
+    justify-content: center;
+}
+.wizard-column-1-description{
+    display: flex;
+    justify-content: center;
+}
+.wizard-column-title{
+    display: flex;
+    justify-content: center;
+    color: blue;
+}
+.wizard-column-2-description{
+    display: flex;
+    justify-content: center;
+    color: blue
+}
+.wiz-status{
+    visibility: hidden;
+}
+.wizard-index-step-1-instruction-div{
+    position: absolute;
+    left: 550px;
+    top: 131px;
+  }
+.wizard-index-step-1-instruction-title{
+    font-size: 16px;
+    color: blue;
+}
+.wizard-index-step-1-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 5px;
+}
+.wizard-index-step-1-instruction-div{
+    visibility: hidden;
+}
+.wizard-index-item-step-1-instruction-div{
+    position: absolute;
+    left: 512px;
+    top: 149px;
+}
+.wizard-index-item-step-1-instruction-title{
+    font-size: 16px;
+    color: blue;
+}
+.wizard-index-item-step-1-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 5px;
+}
+.wizard-index-item-step-1-instruction-div{
+    visibility: hidden;
+}
+.wizard-index-customer-step-1-instruction-div{
+    position: absolute;
+    left: 550px;
+    top: 167px;
+}
+.wizard-index-customer-step-1-instruction-title{
+    font-size: 16px;
+    color: blue;
+}
+.wizard-index-customer-step-1-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 5px;
+}
+.wizard-index-customer-step-1-instruction-div{
+    visibility: hidden;
+}
+.wizard-index-pricing-step-1-instruction-div{
+    position: absolute;
+    left: 597px;
+    top: 185px;
+}
+.wizard-index-pricing-step-1-instruction-title{
+    font-size: 16px;
+    color: blue;
+}
+.wizard-index-pricing-step-1-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 5px;
+}
+.wizard-index-pricing-step-1-instruction-div{
+    visibility: hidden;
+}
+.wizard-index-invoice-step-1-instruction-div{
+    position: absolute;
+    left: 530px;
+    top: 203px;
+}
+.wizard-index-invoice-step-1-instruction-title{
+    font-size: 16px;
+    color: blue;
+}
+.wizard-index-invoice-step-1-left-arrow{
+    font-size: 40px;
+    font-weight: bold;
+    color: red;
+    margin-right: 6px;
+    line-height: 10px;
+    z-index: 0;
+    position: relative;
+    top: 5px;
+}
+.wizard-index-invoice-step-1-instruction-div{
+    visibility: hidden;
+}
+.wizard-column-portal-page{
+    visibility: hidden;
+}

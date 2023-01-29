@@ -5,17 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="stylesheet" href="{% static 'invoice_manager/style.css' %}">
+    <link rel="stylesheet" href="{% static 'invoice_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
+<body onload="initialize_data()">
     <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false" class="hyperlink-menu-item">Home</a>
     </div>
     <h2>Invoice Options</h2>
-    <ul>
-        <li><a href="{% url 'invoice_new_view_edit' 1 %}">Invoice new, view, edit</a> - Create a new invoice, view / edit an existing invoice</li>
-        <li><a href="{% url 'invoice_list' %}">Invoice list</a> - View individual invoices by selecting from a list</li>
-    </ul>
+    <nav class="wizard-column-1-description">
+        <ul id="li-clicked">
+            <li><a id="invoice-new-view-edit-clicked" href="#" onclick="return false">Invoice new, view, edit</a> - Create a new invoice, view / edit an existing invoice</li>
+            <li><a id="invoice-list-clicked" href="#" onclick="return false">Invoice list</a> - View individual invoices by selecting from a list</li>
+        </ul>
+    </nav>
+    <div class="invoice-options-step-1-instruction-div" id="invoice-options-step-1-instruction-div">
+        <p class="invoice-options-step-1-instruction-title"><span class="invoice-options-step-1-left-arrow">&#8592;</span>Step 2: Click the Invoice new, view, edit button</p>
+    </div>
 </body>
+<p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </html>
+<script type="text/javascript">
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    function initialize_data(){
+        if(jsWizStatus == 1){
+            document.getElementById("invoice-options-step-1-instruction-div").style.display = "none"
+        }
+        else{
+            document.getElementById("invoive-options-step-1-instruction-div").style.visibility = 'inherit'
+            document.getElementById("invoice-options-step-1-instruction-div").style.visibility = true
+        }
+    }
+    document.getElementById("home-clicked").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/home/index/1", "_top")
+        }
+    })
+    document.getElementById("li-clicked").addEventListener("click", function(e){
+        if(e.target.id == "invoice-new-view-edit-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/1/1", "_top")
+        }
+        else if(e.target.id == "invoice-new-view-edit-clicked" && jsWizStatus == 2){
+            window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/1/2", "_top")
+        }
+        else if(e.target.id == "invoice-list-clicked" && jsWizStatus == 1){
+            window.open("http://127.0.0.1:8000/invoice_manager/invoice_list/1", "_top")
+        }
+    })
+</script>

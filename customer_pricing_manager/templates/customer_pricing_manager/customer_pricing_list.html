@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="{% static 'customer_pricing_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'customer_pricing_new' %}">Customer pricing new</a>
+<body onload="initialize_data()">
+    <div class="menu-hyperlink-format" id="menu-div">
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false">Home</a>
+        <a id="customer-pricing-new" href="#" class="hyperlink-menu-item" onclick = "return false">Customer pricing new</a>
     </div>
     <h2>Customer Pricing List</h2>
     <table id="customer-pricing-table">
@@ -24,19 +24,53 @@
         </thead>
         {% for pricing in customer_pricing_all %}
         <tr>
-            <td><a href="{% url 'customer_pricing_view' pricing.id %}">{{ pricing.id }}</a></td>
-            <td><a href="{% url 'customer_pricing_view' pricing.id %}">{{ pricing.customer_id.name }}</a></td>
-            <td><a href="{% url 'customer_pricing_view' pricing.id %}">{{ pricing.item_id.name }}</a></td>
-            <td><a href="{% url 'customer_pricing_view' pricing.id %}">{{ pricing.customer_pricing }}</a></td>
+            <td><a href="{% url 'customer_pricing_view' pricing.id 1 %}" onclick="return false">{{ pricing.id }}</a></td>
+            <td><a href="{% url 'customer_pricing_view' pricing.id 1 %}" onclick="return false">{{ pricing.customer_id.name }}</a></td>
+            <td><a href="{% url 'customer_pricing_view' pricing.id 1 %}" onclick="return false">{{ pricing.item_id.name }}</a></td>
+            <td><a href="{% url 'customer_pricing_view' pricing.id 1 %}" onclick="return false">{{ pricing.customer_pricing }}</a></td>
             <td class="hide-me">{{ pricing.item_id.name }}</td>
         </tr>
         {% endfor %}
     </table>
+    <div class="customer-pricing-list-step-1-instruction-1-div" id="customer-pricing-list-step-1-instruction-1-div">
+        <p class="customer-pricing-list-step-1-instruction-title"><span class="customer-pricing-list-step-1-left-arrow">&#8592;</span>Click any link in this row to see customer pricing details you created.</p>
+    </div>
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </body>
 <script type="text/javascript">
-    for(i=0; i<=document.getElementById("customer-pricing-table").rows.length; i++){
-        if(document.getElementById("customer-pricing-table").rows[i].cells.item(4).innerHTML == "Hidden Item"){
-            document.getElementById("customer-pricing-table").deleteRow(i)
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    document.getElementById("menu-div").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            if(e.target.id == "home-clicked"){
+            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+            else if(e.target.id == "customer-pricing-new"){
+                window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_new/1/", "_top")
+            }
+        }
+    })
+    document.getElementById("customer-pricing-table").addEventListener("click", function(e){
+        if(jsWizStatus == 2){
+            if(document.getElementsByTagName("td")[0].textContent == e.target.innerHTML || document.getElementsByTagName("td")[1].textContent == e.target.innerHTML || document.getElementsByTagName("td")[2].textContent == e.target.innerHTML || document.getElementsByTagName("td")[3].textContent == e.target.innerHTML){
+                var wizTarget = String(e.target)
+                wizTarget = wizTarget.slice(0, wizTarget.length-2) + "2/"
+                window.open(wizTarget, "_top")
+            }
+        }
+        else if(jsWizStatus == 1){
+            window.open(e.target, "_top")
+         }
+    })
+    function initialize_data(){
+        if(jsWizStatus == 2){
+            document.getElementById("customer-pricing-list-step-1-instruction-1-div").style.visibility = "inherit" 
+            document.getElementById("customer-pricing-list-step-1-instruction-1-div").style.visibility = "true"
+            document.getElementById("customer-pricing-list-step-1-instruction-1-div").style.left = (document.getElementsByTagName("td")[4].offsetLeft + 10) + 'px'
+        }
+        for(i=0; i<=document.getElementById("customer-pricing-table").rows.length; i++){
+            if(document.getElementById("customer-pricing-table").rows[i].cells.item(2).textContent == "Hidden Item"){
+                document.getElementById("customer-pricing-table").deleteRow(i)
+            }
         }
     }
 </script>

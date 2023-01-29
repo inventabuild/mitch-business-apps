@@ -9,23 +9,32 @@ from django.core import serializers
 from django.contrib import messages
 
 # Create your views here.
-def invoice_view(request, id):
+def invoice_view(request, id, wizStatus):
     invoice_single = models.Invoice.objects.get(id=id)
+    now = datetime.today().timestamp
     data = {
         'invoice_single': invoice_single,
+        'now': now,
+        'wizStatus': wizStatus
         }
     return render(request, 'invoice_manager/invoice_view.html', data)
-def invoice_list(request):
-    invoice_all = models.Invoice.objects.all().order_by('invoice_date')
+def invoice_list(request, wizStatus):
+    invoice_all = models.Invoice.objects.all().order_by('-id')
     now = datetime.today().timestamp
     data = {
         'invoice_all': invoice_all,
-        'now': now
+        'now': now,
+        'wizStatus': wizStatus
         }
     return render(request, 'invoice_manager/invoice_list.html', data)
-def invoice_options_list(request):
-    return render(request, 'invoice_manager/invoice_options_list.html')
-def invoice_new_view_edit(request, id):
+def invoice_options_list(request, wizStatus):
+    now = datetime.today().timestamp
+    data={
+        'now': now,
+        'wizStatus': wizStatus
+    }
+    return render(request, 'invoice_manager/invoice_options_list.html', data)
+def invoice_new_view_edit(request, id, wizStatus):
     if request.method == 'POST':
         try:
             company_id = request.POST.get('company-select')
@@ -218,5 +227,6 @@ def invoice_new_view_edit(request, id):
         'json_item_all': json_item_all,
         'json_customer_pricing_all': json_customer_pricing_all,
         'now': now,
+        'wizStatus': wizStatus
         }
     return render(request, 'invoice_manager/invoice_new_view_edit.html', data)

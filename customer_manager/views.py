@@ -3,7 +3,7 @@ from django.shortcuts import render
 from . import models
 
 # Create your views here.
-def customer_new(request):
+def customer_new(request, wizStatus):
     if request.method == "POST":
         try:
             new_customer = models.Customer(
@@ -23,22 +23,32 @@ def customer_new(request):
     now = datetime.today().timestamp
     data = {
         'message': message,
-        'now': now
+        'now': now,
+        'wizStatus': wizStatus
     }
     return render(request, 'customer_manager/customer_new.html', data)
-def customer_view(request, id):
+def customer_view(request, id, wizStatus):
     customer_single=models.Customer.objects.get(id=id)
+    now = datetime.today().timestamp
     data={
-        'customer_single': customer_single
+        'customer_single': customer_single,
+        'now': now,
+        'wizStatus': wizStatus
     } 
     return render(request, 'customer_manager/customer_view.html', data)
-def customer_list(request):
-    customers_all=models.Customer.objects.all().order_by('name')
+def customer_list(request, wizStatus):
+    customers_all=models.Customer.objects.all().order_by('-id')
     now = datetime.today().timestamp
     data = {
         'customers_all': customers_all,
-        'now': now
+        'now': now,
+        'wizStatus': wizStatus
     }
     return render(request, 'customer_manager/customer_list.html', data)
-def customer_options_list(request):
-    return render(request, 'customer_manager/customer_options_list.html')
+def customer_options_list(request, wizStatus):
+    now = datetime.today().timestamp
+    data = {
+        'now': now,
+        'wizStatus': wizStatus
+    }
+    return render(request, 'customer_manager/customer_options_list.html', data)

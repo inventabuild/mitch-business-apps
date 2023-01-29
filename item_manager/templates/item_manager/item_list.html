@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="{% static 'item_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
-<body>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'item_new' %}">Item new</a>
+<body onload="initialize_data()">
+    <div class="menu-hyperlink-format" id="menu-div">
+        <a id="home-clicked" href="#" class="hyperlink-menu-item-home hyperlink-menu-item" onclick = "return false">Home</a>
+        <a id="item-new" href="#" class="hyperlink-menu-item" onclick = "return false">Item new</a>
     </div>
     <h2>List all items</h2>
     <table id="item-table">
@@ -23,18 +23,51 @@
         </thead>
         {% for item in list_all %}
         <tr>
-            <td><a href="{% url 'item_view' item.id %}">{{item.number}}</a></td>
-            <td><a href="{% url 'item_view' item.id %}">{{item.name}}</a></td>
-            <td><a href="{% url 'item_view' item.id %}">{{item.id}}</a></td>
+            <td><a href="{% url 'item_view' item.id 1 %}" onclick="return false">{{item.number}}</a></td>
+            <td><a href="{% url 'item_view' item.id 1 %}" onclick="return false">{{item.name}}</a></td>
+            <td><a href="{% url 'item_view' item.id 1 %}" onclick="return false">{{item.id}}</a></td>
             <td class="hide-me">{{item.number}}</td>
         </tr>
         {% endfor %}
     </table>
+    <div class="item-list-step-1-instruction-1-div" id="item-list-step-1-instruction-1-div">
+        <p class="item-list-step-1-instruction-title"><span class="item-list-step-1-left-arrow">&#8592;</span>Click the Item Number, Name or id to see its details</p>
+    </div>
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
 </body>
 <script type="text/javascript">
-    for(i=0; i<=document.getElementById("item-table").rows.length; i++){
+    var jsWizStatus = document.getElementById("wiz-status").innerHTML
+    document.getElementById("menu-div").addEventListener("click", function(e){
+        if(jsWizStatus == 1){
+            if(e.target.id == "home-clicked"){
+            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+            else if(e.target.id == "item-new"){
+                window.open("http://127.0.0.1:8000/item_manager/item_new/1/", "_top")
+            }
+        }
+    })
+    document.getElementById("item-table").addEventListener("click", function(e){
+        if(jsWizStatus == 2){
+            if(document.getElementsByTagName("td")[0].textContent == e.target.innerHTML || document.getElementsByTagName("td")[1].textContent == e.target.innerHTML || document.getElementsByTagName("td")[2].textContent == e.target.innerHTML){
+                var wizTarget = String(e.target)
+                wizTarget = wizTarget.slice(0, wizTarget.length-2) + "2/"
+                window.open(wizTarget, "_top")
+            }
+        }
+        else if(jsWizStatus == 1){
+            window.open(e.target, "_top")
+         }
+    })
+    function initialize_data(){
+        if(jsWizStatus == 2){
+            document.getElementById("item-list-step-1-instruction-1-div").style.visibility = "inherit" 
+            document.getElementById("item-list-step-1-instruction-1-div").style.visibility = "true"
+        }
+        for(i=0; i<=document.getElementById("item-table").rows.length; i++){
         if(document.getElementById("item-table").rows[i].cells.item(3).innerHTML == "00000"){
             document.getElementById("item-table").deleteRow(i)
+        }
         }
     }
 </script>

@@ -5,67 +5,113 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'company_manager/styles.css' %}?v={{ now }}">
+    <link rel="stylesheet" href="{% static 'company_manager/style.css' %}?v={{ now }}">
     <title>Document</title>
 </head>
 <body onload="initialize_data()">
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'company_list' %}">Company list</a>
+    <div id="menu-div" class="menu-hyperlink-format">
+        <a id="home-clicked" href="#" onclick = "return false" class="hyperlink-menu-item-home hyperlink-menu-item">Home</a>
+        <a id="company-list-clicked" href="#" onclick = "return false" class="hyperlink-menu-item">Company list</a>
     </div>
     <h2>
         New Company Form
     </h2>
-    <form action="{% url 'company_new' %}" id="company-form" method="POST">
+    <form action="#" id="company-form" method="POST">
         {% csrf_token %}
-        <div>
-            <label>
-                Name
-                <input type="text" name="company_name" id="company-name" class="company-name" onblur="company_name_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                Address
-                <input type="text" name="company_address" id="company-address" class="company-address" onblur="company_address_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                City
-                <input type="text" name="company_city" id="company-city" class="company-city" onblur="company_city_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                State
-                <input type="text" name="company_state" id="company-state" class="company-state" onblur="company_state_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>Zip Code
-                <input type="text" name="company_zip_code" id="company-zip-code" class="company-zip-code" onblur="company_zip_code_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>
-                Country
-                <input type="text" name="company_country" id="company-country" class="company-country" onblur="company_country_input()" placeholder="required" required />
-            </label>
-        </div>
-        <div>
-            <label>Telephone #
-                <input type="text" name="company_tel" id="company-tel" class="company-tel" onblur="company_tel_input()" placeholder="required" required />
-            </label>
+        <div class="rect">
+            <div class="content">
+                <div>
+                    <label>
+                        Name
+                        <input type="text" name="company_name" id="company-name" class="company-name" onblur="company_name_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Address
+                        <input type="text" name="company_address" id="company-address" class="company-address" onblur="company_address_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        City
+                        <input type="text" name="company_city" id="company-city" class="company-city" onblur="company_city_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        State
+                        <input type="text" name="company_state" id="company-state" class="company-state" onblur="company_state_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>Zip Code
+                        <input type="text" name="company_zip_code" id="company-zip-code" class="company-zip-code" onblur="company_zip_code_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Country
+                        <input type="text" name="company_country" id="company-country" class="company-country" onblur="company_country_input()" placeholder="required" required />
+                    </label>
+                </div>
+                <div>
+                    <label>Telephone #
+                        <input type="text" name="company_tel" id="company-tel" class="company-tel" onblur="company_tel_input()" placeholder="required" required />
+                    </label>
+                </div>
+            </div> 
+            <div class="right-border" id="right-border">
+                <span class="bracket-span left-brace-tl"></span>
+                <span class="bracket-span left-brace-tr"></span><br />
+                <span class="bracket-span left-brace-bl"></span>
+                <span class="bracket-span left-brace-br"></span>
+            </div>
         </div>
         <p>
             <button type="button" id="create-company-button" class="create-company-button" onclick="validate_form()">Create Company</button>
         </p>
+        {{ message }}
     </form>
-    {{ message }}
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
+    <div class="company-new-step-3-instruction-div" id="company-new-step-3-instruction-div">
+        <p class="company-new-step-3-instruction-title"><span class="company-new-step-3-left-arrow">&#8592;</span>Click the Company list link to see the last Company created</p>
+    </div>
+    <div class="company-new-step-1-instruction-div" id="company-new-step-1-instruction-div">
+        <p class="company-new-step-1-instruction-title">Step 1: Fill in the required fields</p>
+    </div>
+    <div class="company-new-step-2-instruction-div" id="company-new-step-2-instruction-div">
+        <p class="company-new-step-2-instruction-title"><span class="company-new-step-2-left-arrow">&#8592;</span>Step 2: Click the Create Company button</p>
+    </div>
     <script type="text/javascript">
+        var jsWizStatus = document.getElementById("wiz-status").innerHTML
+        document.getElementById("menu-div").addEventListener("click", function(e){
+            if(e.target.id == "home-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+            else if(e.target.id == "company-list-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/company_manager/company_list/1/", "_top", "_top")
+            }
+            else if(e.target.id == "company-list-clicked" && jsWizStatus==3){
+                window.open("http://127.0.0.1:8000/company_manager/company_list/2/", "_top")
+
+            }
+        })
         function initialize_data(){
             document.getElementById("company-name").focus();
+            if(jsWizStatus == 2){
+                document.getElementById("company-new-step-1-instruction-div").style.visibility = "inherit"
+                document.getElementById("company-new-step-1-instruction-div").style.visibility = "true"
+                document.getElementById("company-new-step-2-instruction-div").style.visibility = "inherit"
+                document.getElementById("company-new-step-2-instruction-div").style.visibility = "true"
+                document.getElementById("right-border").style.visibility = "inherit"
+                document.getElementById("right-border").style.visibility = "true"
+            }
+            else if(jsWizStatus == 3){
+                document.getElementById("company-new-step-3-instruction-div").style.visibility = "inherit"
+                document.getElementById("company-new-step-3-instruction-div").style.visibility = "true"
+                document.getElementById("create-company-button").disabled = "true"
+            }
         }
         //Go to next field when Enter key is pressed
         document.addEventListener("keypress", function(event){
@@ -104,6 +150,12 @@
                     window.setTimeout(function () { document.getElementById("company-name").focus(); }, 0)
                     return
                 }
+            else if(document.getElementById("company-name").value.trim() == "" && document.getElementById("company-name").value != ""){
+                alert("Field must contain more than only blank spaces")
+                document.getElementById("company-name").value = ""
+                window.setTimeout(function () { document.getElementById("company-name").focus(); }, 0)
+                return
+            }
             }
         }
         function company_address_input(){
@@ -113,6 +165,12 @@
                     window.setTimeout(function () { document.getElementById("company-address").focus(); }, 0)
                     return
                 }
+            else if(document.getElementById("company-address").value.trim() == "" && document.getElementById("company-address").value != ""){
+                alert("Field must contain more than only blank spaces")
+                document.getElementById("company-address").value = ""
+                window.setTimeout(function () { document.getElementById("company-address").focus(); }, 0)
+                return
+            }
             }
         }
         function company_city_input(){
@@ -122,6 +180,12 @@
                     window.setTimeout(function () { document.getElementById("company-city").focus(); }, 0)
                     return
                 }
+             else if(document.getElementById("company-city").value.trim() == "" && document.getElementById("company-city").value != ""){
+                alert("Field must contain more than only blank spaces")
+                document.getElementById("company-city").value = ""
+                window.setTimeout(function () { document.getElementById("company-city").focus(); }, 0)
+                return
+            }
             }
         }
         function company_state_input(){
@@ -131,6 +195,12 @@
                     window.setTimeout(function () { document.getElementById("company-state").focus(); }, 0)
                     return
                 }
+             else if(document.getElementById("company-state").value.trim() == "" && document.getElementById("company-state").value != ""){
+                alert("Field must contain more than only blank spaces")
+                document.getElementById("company-state").value = ""
+                window.setTimeout(function () { document.getElementById("company-state").focus(); }, 0)
+                return
+            }
             }
         }
         function company_country_input(){
@@ -140,6 +210,12 @@
                     window.setTimeout(function () { document.getElementById("company-country").focus(); }, 0)
                     return
                 }
+             else if(document.getElementById("company-country").value.trim() == "" && document.getElementById("company-country").value != ""){
+                alert("Field must contain more than only blank spaces")
+                document.getElementById("company-country").value = ""
+                window.setTimeout(function () { document.getElementById("company-country").focus(); }, 0)
+                return
+            }
             }
         }
         function company_zip_code_input(){
@@ -149,6 +225,12 @@
                     window.setTimeout(function () { document.getElementById("company-zip-code").focus(); }, 0)
                     return
                 }
+            else if(document.getElementById("company-zip-code").value.trim() == "" && document.getElementById("company-zip-code").value != ""){
+                alert("Field must contain more than only blank spaces")
+                document.getElementById("company-zip-code").value = ""
+                window.setTimeout(function () { document.getElementById("company-zip-code").focus(); }, 0)
+                return
+            }
             }
         }
         function company_tel_input(){
@@ -157,12 +239,18 @@
                     alert("Apostrophes not allowed in Telephone # field")
                     window.setTimeout(function () { document.getElementById("company-tel").focus(); }, 0)
                     return
-                }
+            }
+            else if(document.getElementById("company-tel").value.trim() == "" && document.getElementById("company-tel").value != ""){
+                alert("Field must contain more than only blank spaces")
+                document.getElementById("company-tel").value = ""
+                window.setTimeout(function () { document.getElementById("company-tel").focus(); }, 0)
+                return
+            }
             }
         }
         function validate_form(){
-            if((document.getElementById("company-name").value == "")){
-                alert("Enter the Company Name")
+            if((document.getElementById("company-name").value.trim() == "")){
+                alert("Enter the Company Name.  Only spaces not allowed")
                 document.getElementById("company-name").focus()
                 event.preventDefault()
                 return
@@ -170,8 +258,8 @@
             else{
                 document.getElementById("company-name").value = document.getElementById("company-name").value.trim()
             }
-            if((document.getElementById("company-address").value == "")){
-                alert("Enter the Company Address")
+            if((document.getElementById("company-address").value.trim() == "")){
+                alert("Enter the Company Address.  Only spaces not allowed")
                 document.getElementById("company-address").focus()
                 event.preventDefault()
                 return
@@ -179,8 +267,8 @@
             else{
                 document.getElementById("company-address").value = document.getElementById("company-address").value.trim()
             }
-            if((document.getElementById("company-city").value == "")){
-                alert("Enter the Company City")
+            if((document.getElementById("company-city").value.trim() == "")){
+                alert("Enter the Company City.  Only spaces not allowed")
                 document.getElementById("company-city").focus()
                 event.preventDefault()
                 return
@@ -188,8 +276,8 @@
             else{
                 document.getElementById("company-city").value = document.getElementById("company-city").value.trim()
             }
-            if((document.getElementById("company-state").value == "")){
-                alert("Enter the Company State")
+            if((document.getElementById("company-state").value.trim() == "")){
+                alert("Enter the Company State.  Only spaces not allowed")
                 document.getElementById("company-state").focus()
                 event.preventDefault()
                 return
@@ -197,8 +285,8 @@
             else{
                 document.getElementById("company-state").value = document.getElementById("company-state").value.trim()
             }
-            if((document.getElementById("company-zip-code").value == "")){
-                alert("Enter the Company Zip Code")
+            if((document.getElementById("company-zip-code").value.trim() == "")){
+                alert("Enter the Company Zip Code.  Only spaces not allowed")
                 document.getElementById("company-zip-code").focus()
                 event.preventDefault()
                 return
@@ -206,8 +294,8 @@
             else{
                 document.getElementById("company-zip-code").value = document.getElementById("company-zip-code").value.trim()
             }
-            if((document.getElementById("company-country").value == "")){
-                alert("Enter the Company Country")
+            if((document.getElementById("company-country").value.trim() == "")){
+                alert("Enter the Company Country.  Only spaces not allowed")
                 document.getElementById("company-country").focus()
                 event.preventDefault()
                 return
@@ -215,8 +303,8 @@
             else{
                 document.getElementById("company-country").value = document.getElementById("company-country").value.trim()
             }
-            if((document.getElementById("company-tel").value == "")){
-                alert("Enter the Company Zip Telephone #")
+            if((document.getElementById("company-tel").value.trim() == "")){
+                alert("Enter the Company Telephone #.  Only spaces not allowed")
                 document.getElementById("company-tel").focus()
                 event.preventDefault()
                 return
@@ -225,6 +313,12 @@
                 document.getElementById("company-tel").value = document.getElementById("company-tel").value.trim()
             }
             let form = document.getElementById("company-form");
+            if(jsWizStatus == 1){
+                document.getElementById("company-form").action = "http://127.0.0.1:8000/company_manager/company_new/1/"
+            }
+            else if(jsWizStatus == 2){
+                document.getElementById("company-form").action = "http://127.0.0.1:8000/company_manager/company_new/3/"
+            }
             form.submit();
         }
     </script>

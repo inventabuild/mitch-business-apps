@@ -9,59 +9,108 @@
     <title>Document</title>
 </head>
 <body onload="initialize_data()")>
-    <div class="menu-hyperlink-format">
-        <a href="{% url 'index' %}" class="hyperlink-menu-item">Home</a>
-        <a href="{% url 'customer_pricing_list' %}">Customer pricing list</a>
+    <div id="menu-div" class="menu-hyperlink-format">
+        <a id="home-clicked" href="#" onclick = "return false" class="hyperlink-menu-item-home hyperlink-menu-item">Home</a>
+        <a id="customer-pricing-list-clicked" href="#" onclick = "return false" class="hyperlink-menu-item">Customer pricing list</a>
     </div>
     <h2>Customer Pricing</h2>
-    <form action="{% url 'customer_pricing_new' %}" id="customer-pricing-form" method="POST">
+    <form action="#" id="customer-pricing-new-form" method="POST">
         {% csrf_token %}
-        <div class="customer-pricing-div">
-            <label>
-             Customer
-                <div>
-                <select name="customer_id" id="customer-name-select" class="customer-name-select">
-                    <option value="-1">
-                        select one
-                    </option>
-                {% for customer in customers_all %}
-                    <option option value="{{ customer.id }}">
-                        {{ customer.name }}
-                    </option>
-                {% endfor %}
-                </select>
-            </div>
-            </label>
-        </div>
-        <div class="customer-pricing-div">
-            <label>
-                Item
-                <div>
-                <select name="item_id" id="item-name-select" class="item-name-select">
-                    <option value="-1">
-                        select one
-                    </option>
-                {% for item in items_all %}
-                    <option option value="{{ item.id }}">
-                        {{ item.name }}
-                    </option>
-                {% endfor %}
-                </select>
+        <div class="rect">
+            <div class="content">
+                <div class="customer-pricing-div">
+                    <label>
+                    Customer
+                        <div>
+                        <select name="customer_id" id="customer-name-select" class="customer-name-select">
+                            <option value="-1">
+                                select one
+                            </option>
+                        {% for customer in customers_all %}
+                            <option option value="{{ customer.id }}">
+                                {{ customer.name }}
+                            </option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                    </label>
                 </div>
-            </label>
+                <div class="customer-pricing-div">
+                    <label>
+                        Item
+                        <div>
+                        <select name="item_id" id="item-name-select" class="item-name-select">
+                            <option value="-1">
+                                select one
+                            </option>
+                        {% for item in items_all %}
+                            <option option value="{{ item.id }}">
+                                {{ item.name }}
+                            </option>
+                        {% endfor %}
+                        </select>
+                        </div>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Customer Price (USD)
+                        <input type="text" name="customer_pricing" maxlength="17" id="customer-pricing" class="customer-pricing" onblur="customer_pricing_input()" placeholder="required" required />
+                    </label>
+                </div>
+            </div>
+            <div class="right-border" id="right-border">
+                <span class="bracket-span left-brace-tl"></span>
+                <span class="bracket-span left-brace-tr"></span><br />
+                <span class="bracket-span left-brace-bl"></span>
+                <span class="bracket-span left-brace-br"></span>
+            </div>
         </div>
-        <div>
-            <label>
-                Customer Price (USD)
-                <input type="number" name="customer_pricing" id="customer-pricing" class="customer-pricing" step=.01 onblur="customer_pricing_input()" placeholder="required" required />
-            </label>
-        </div>
-        <button type="button" class="create-customer-pricing-button" id="create-customer-pricing-button" onclick="validate_form()">Create pricing</button>
+        <p>
+            <button type="button" class="create-customer-pricing-button" id="create-customer-pricing-button" onclick="validate_form()">Create pricing</button>
+        </p>
+        {{ message }}
     </form>
-    {{ message }}
+    <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
+    <div class="customer-pricing-new-step-3-instruction-div" id="customer-pricing-new-step-3-instruction-div">
+        <p class="customer-pricing-new-step-3-instruction-title"><span class="customer-pricing-new-step-3-left-arrow">&#8592;</span>Click Customer pricing list link to see the customer pricing you created</p>
+    </div>
+    <div class="customer-pricing-new-step-1-instruction-div" id="customer-pricing-new-step-1-instruction-div">
+        <p class="customer-pricing-new-step-1-instruction-title">Step 1: Fill in the required fields</p>
+    </div>
+    <div class="customer-pricing-new-step-2-instruction-div" id="customer-pricing-new-step-2-instruction-div">
+        <p class="customer-pricing-new-step-2-instruction-title"><span class="customer-pricing-new-step-2-left-arrow">&#8592;</span>Step 2: Click the Create pricing button</p>
+    </div>
     <script type="text/javascript">
+        var jsWizStatus = document.getElementById("wiz-status").innerHTML
+        document.getElementById("menu-div").addEventListener("click", function(e){
+            if(e.target.id == "home-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            }
+            else if(e.target.id == "customer-pricing-list-clicked" && jsWizStatus == 1){
+                window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_list/1/", "_top", "_top")
+            }
+            else if(e.target.id == "customer-pricing-list-clicked" && jsWizStatus==3){
+                window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_list/2/", "_top")
+
+            }
+        })
         function initialize_data(){
             document.getElementById("customer-name-select").focus();
+            if(jsWizStatus == 2){
+                
+                document.getElementById("customer-pricing-new-step-1-instruction-div").style.visibility = "inherit"
+                document.getElementById("customer-pricing-new-step-1-instruction-div").style.visibility = "true"
+                document.getElementById("customer-pricing-new-step-2-instruction-div").style.visibility = "inherit"
+                document.getElementById("customer-pricing-new-step-2-instruction-div").style.visibility = "true"
+                document.getElementById("right-border").style.visibility = "inherit"
+                document.getElementById("right-border").style.visibility = "true"
+            }
+            else if(jsWizStatus == 3){
+                document.getElementById("customer-pricing-new-step-3-instruction-div").style.visibility = "inherit"
+                document.getElementById("customer-pricing-new-step-3-instruction-div").style.visibility = "true"
+                document.getElementById("create-customer-pricing-button").disabled = "true"
+            }
         }
         //Enter key moves cursor to next input field
         document.addEventListener("keypress",function(event){
@@ -101,9 +150,17 @@
         }
         //Customer Price data is converted to a two decimal number
         function customer_pricing_input(){
-            if(document.getElementById("customer-pricing").value != ""){
-                customerPricing = Number(document.getElementById("customer-pricing").value) + Number(document.getElementById("customer-pricing").value) * Number.EPSILON;
+            if(isNaN(document.getElementById("customer-pricing").value)){
+                alert("Only numbers allowed in Customer Price field")
+                document.getElementById("customer-pricing").value = ""
+            }
+            else if(document.getElementById("customer-pricing").value.trim() != ""){
+                customerPricingNoCommas = document.getElementById("customer-pricing").value.replace(/,/g, '');
+                customerPricing = Number(customerPricingNoCommas) + Number(customerPricingNoCommas) * Number.EPSILON;
                 customerPricing = customerPricing.toFixed(2);
+                customerPricingWholeNumber = ((customerPricing).split('.')[0]);
+                customerPricingDecimal = ((customerPricing).split('.')[1]);
+                customerPricing = Number(customerPricingWholeNumber).toLocaleString("en-US") + "." + customerPricingDecimal;
                 document.getElementById("customer-pricing").value = customerPricing;
                 event.preventDefault()
                 return;
@@ -129,8 +186,8 @@
             else{
                 document.getElementById("item-name-select").value = document.getElementById("item-name-select").value.trim()
             }
-            if(document.getElementById("customer-pricing").value == "") {
-                alert("Enter customer pricing");
+            if(document.getElementById("customer-pricing").value.trim() == "") {
+                alert("Enter customer pricing. Only blanks not allowed");
                 document.getElementById("customer-pricing").focus();
                 event.preventDefault();
                 return;
@@ -138,7 +195,13 @@
             else{
                 document.getElementById("customer-pricing").value = document.getElementById("customer-pricing").value.trim()
             }
-            let form = document.getElementById("customer-pricing-form");
+            let form = document.getElementById("customer-pricing-new-form");
+            if(jsWizStatus == 1){
+                form.action = "http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_new/1/"
+            }
+            else if(jsWizStatus == 2){
+                form.action = "http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_new/3/"
+            }
             form.submit();
         }
     </script>
