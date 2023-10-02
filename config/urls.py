@@ -18,12 +18,14 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls')),
+    path('', include('home_init.urls')),
     path('home/', include('home.urls')),
     path('company_manager/', include('company_manager.urls')),
     path('item_manager/', include('item_manager.urls')),
     path('customer_manager/', include('customer_manager.urls')),
     path('customer_pricing_manager/', include('customer_pricing_manager.urls')),
     path('invoice_manager/', include('invoice_manager.urls')),
+    path('blog/', include('blog.urls')),
 ]
+
 

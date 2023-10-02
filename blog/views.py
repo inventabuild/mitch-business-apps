@@ -3,7 +3,7 @@ from .models import BlogPost
 
 # Create your views here.
 
-def home(request):
+def posts(request):
     posts = BlogPost.objects.all()
     context = {'posts': posts}
-    return render(request, 'home.html', context)
+    return render(request, 'posts.html', context)
