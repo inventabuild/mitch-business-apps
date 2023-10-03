@@ -77,13 +77,13 @@
     }
     document.getElementById("menu-div").addEventListener("click", function(e){
         if(e.target.id == "home-clicked" && jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            window.open("/home/index/1/", "_top")
         }
         else if(e.target.id == "home-clicked" && jsWizStatus == 2){
-            window.open("http://127.0.0.1:8000/home/index/3/", "_top")
+            window.open("/home/index/3/", "_top")
         }
         else if(e.target.id == "company-list-clicked" && jsWizStatus==1){
-            window.open("http://127.0.0.1:8000/company_manager/company_list/1/", "_top")
+            window.open("/company_manager/company_list/1/", "_top")
         }
     })
 </script>

@@ -34,18 +34,18 @@
         }
         document.getElementById("li-clicked").addEventListener("click", function(e){
             if(e.target.id == "company-new-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/company_manager/company_new/1", "_top")
+                window.open("/company_manager/company_new/1", "_top")
             }
             else if(e.target.id == "company-new-clicked" && jsWizStatus == 2){
-                window.open("http://127.0.0.1:8000/company_manager/company_new/2", "_top")
+                window.open("/company_manager/company_new/2", "_top")
             }
             else if(e.target.id == "company-list-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/company_manager/company_list/1", "_top")
+                window.open("/company_manager/company_list/1", "_top")
             }
         })
         document.getElementById("home-clicked").addEventListener("click", function(e){
             if(jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/home/index/1", "_top")
+                window.open("/home/index/1", "_top")
             }
         })
     </script>
