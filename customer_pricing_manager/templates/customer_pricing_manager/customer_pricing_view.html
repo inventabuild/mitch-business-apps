@@ -53,13 +53,13 @@
     }
     document.getElementById("menu-div").addEventListener("click", function(e){
         if(e.target.id == "home-clicked" && jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            window.open("/home/index/1/", "_top")
         }
         else if(e.target.id == "home-clicked" && jsWizStatus == 2){
-            window.open("http://127.0.0.1:8000/home/index/6/", "_top")
+            window.open("/home/index/6/", "_top")
         }
         else if(e.target.id == "customer-pricing-list-clicked" && jsWizStatus==1){
-            window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_list/1/", "_top")
+            window.open("/customer_pricing_manager/customer_pricing_list/1/", "_top")
         }
     })
 </script>

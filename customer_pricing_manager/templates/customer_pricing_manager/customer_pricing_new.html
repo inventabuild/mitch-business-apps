@@ -85,13 +85,13 @@
         var jsWizStatus = document.getElementById("wiz-status").innerHTML
         document.getElementById("menu-div").addEventListener("click", function(e){
             if(e.target.id == "home-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+                window.open("/home/index/1/", "_top")
             }
             else if(e.target.id == "customer-pricing-list-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_list/1/", "_top", "_top")
+                window.open("/customer_pricing_manager/customer_pricing_list/1/", "_top", "_top")
             }
             else if(e.target.id == "customer-pricing-list-clicked" && jsWizStatus==3){
-                window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_list/2/", "_top")
+                window.open("/customer_pricing_manager/customer_pricing_list/2/", "_top")
 
             }
         })
@@ -197,10 +197,10 @@
             }
             let form = document.getElementById("customer-pricing-new-form");
             if(jsWizStatus == 1){
-                form.action = "http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_new/1/"
+                form.action = "/customer_pricing_manager/customer_pricing_new/1/"
             }
             else if(jsWizStatus == 2){
-                form.action = "http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_new/3/"
+                form.action = "/customer_pricing_manager/customer_pricing_new/3/"
             }
             form.submit();
         }

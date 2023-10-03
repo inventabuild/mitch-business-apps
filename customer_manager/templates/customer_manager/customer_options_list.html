@@ -38,18 +38,18 @@
     }
     document.getElementById("home-clicked").addEventListener("click", function(e){
         if(jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/home/index/1", "_top")
+            window.open("/home/index/1", "_top")
         }
     })
     document.getElementById("li-clicked").addEventListener("click", function(e){
         if(e.target.id == "customer-new-clicked" && jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/customer_manager/customer_new/1", "_top")
+            window.open("/customer_manager/customer_new/1", "_top")
         }
         else if(e.target.id == "customer-new-clicked" && jsWizStatus == 2){
-            window.open("http://127.0.0.1:8000/customer_manager/customer_new/2", "_top")
+            window.open("/customer_manager/customer_new/2", "_top")
         }
         else if(e.target.id == "customer-list-clicked" && jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/customer_manager/customer_list/1", "_top")
+            window.open("/customer_manager/customer_list/1", "_top")
         }
     })
 </script>    

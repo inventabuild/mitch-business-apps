@@ -42,10 +42,10 @@
     document.getElementById("menu-div").addEventListener("click", function(e){
         if(jsWizStatus == 1){
             if(e.target.id == "home-clicked"){
-            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            window.open("/home/index/1/", "_top")
             }
             else if(e.target.id == "invoice_new_view_edit"){
-                window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/1/1/", "_top")
+                window.open("/invoice_manager/invoice_new_view_edit/1/1/", "_top")
             }
         }
     })

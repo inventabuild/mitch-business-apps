@@ -61,13 +61,13 @@
     }
     document.getElementById("menu-div").addEventListener("click", function(e){
         if(e.target.id == "home-clicked" && jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/home/index/1/", "_top")
+            window.open("/home/index/1/", "_top")
         }
         else if(e.target.id == "home-clicked" && jsWizStatus == 2){
-            window.open("http://127.0.0.1:8000/home/index/4/", "_top")
+            window.open("/home/index/4/", "_top")
         }
         else if(e.target.id == "item-list-clicked" && jsWizStatus==1){
-            window.open("http://127.0.0.1:8000/item_manager/item_list/1/", "_top")
+            window.open("/item_manager/item_list/1/", "_top")
         }
     })
 </script>

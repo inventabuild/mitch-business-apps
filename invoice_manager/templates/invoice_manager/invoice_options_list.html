@@ -38,18 +38,18 @@
     }
     document.getElementById("home-clicked").addEventListener("click", function(e){
         if(jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/home/index/1", "_top")
+            window.open("/home/index/1", "_top")
         }
     })
     document.getElementById("li-clicked").addEventListener("click", function(e){
         if(e.target.id == "invoice-new-view-edit-clicked" && jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/1/1", "_top")
+            window.open("/invoice_manager/invoice_new_view_edit/1/1", "_top")
         }
         else if(e.target.id == "invoice-new-view-edit-clicked" && jsWizStatus == 2){
-            window.open("http://127.0.0.1:8000/invoice_manager/invoice_new_view_edit/1/2", "_top")
+            window.open("/invoice_manager/invoice_new_view_edit/1/2", "_top")
         }
         else if(e.target.id == "invoice-list-clicked" && jsWizStatus == 1){
-            window.open("http://127.0.0.1:8000/invoice_manager/invoice_list/1", "_top")
+            window.open("/invoice_manager/invoice_list/1", "_top")
         }
     })
 </script>
