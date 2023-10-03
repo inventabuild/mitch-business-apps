@@ -62,34 +62,34 @@
         var jsWizStatus = document.getElementById("wiz-status").innerHTML
         document.getElementById("li-clicked").addEventListener("click", function(e) {
             if(e.target.id == "company-manager-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/company_manager/company_options_list/1", "_top");
+                window.open("/company_manager/company_options_list/1", "_top");
             }
             else if(e.target.id == "item-manager-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/item_manager/item_options_list/1", "_top");
+                window.open("/item_manager/item_options_list/1", "_top");
             }
             else if(e.target.id == "customer-manager-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/customer_manager/customer_options_list/1", "_top");
+                window.open("/customer_manager/customer_options_list/1", "_top");
             }
             else if(e.target.id == "customer-pricing-manager-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_options_list/1", "_top");
+                window.open("/customer_pricing_manager/customer_pricing_options_list/1", "_top");
             }
             else if(e.target.id == "invoice-manager-clicked" && jsWizStatus == 1){
-                window.open("http://127.0.0.1:8000/invoice_manager/invoice_options_list/1", "_top");
+                window.open("/invoice_manager/invoice_options_list/1", "_top");
             }
             else if(e.target.id == "company-manager-clicked" && jsWizStatus == 2){
-                window.open("http://127.0.0.1:8000/company_manager/company_options_list/2", "_top");
+                window.open("/company_manager/company_options_list/2", "_top");
             }
             else if(e.target.id == "item-manager-clicked" && jsWizStatus == 3){
-                window.open("http://127.0.0.1:8000/item_manager/item_options_list/2", "_top");
+                window.open("/item_manager/item_options_list/2", "_top");
             }
             else if(e.target.id == "customer-manager-clicked" && jsWizStatus == 4){
-                window.open("http://127.0.0.1:8000/customer_manager/customer_options_list/2", "_top");
+                window.open("/customer_manager/customer_options_list/2", "_top");
             }
             else if(e.target.id == "customer-pricing-manager-clicked" && jsWizStatus == 5){
-                window.open("http://127.0.0.1:8000/customer_pricing_manager/customer_pricing_options_list/2", "_top");
+                window.open("/customer_pricing_manager/customer_pricing_options_list/2", "_top");
             }
             else if(e.target.id == "invoice-manager-clicked" && jsWizStatus == 6){
-                window.open("http://127.0.0.1:8000/invoice_manager/invoice_options_list/2", "_top");
+                window.open("/invoice_manager/invoice_options_list/2", "_top");
             }
         })
         if(jsWizStatus == "2"){
