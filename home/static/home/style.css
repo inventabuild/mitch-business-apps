@@ -1,3 +1,60 @@
+/* body{
+    background-image: url("images/AdobeStock_39802378_Preview.jpeg");
+    background-size: 700px;
+    background-position: center bottom;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+} */
+.app-table-properties{
+    display: table;
+    width: 100%;
+    border-spacing: 0px;
+    border: 1px solid black;
+}
+.wizard-table-properties{
+    display: table;
+    width: 100%;
+    border-spacing: 0px;
+    border: 1px solid black;
+    background-image: url("images/wizard-image.jpg"), url("images/white-background.png");
+    background-size: 150px 150px, cover;
+    background-repeat: no-repeat;
+    background-position: left top 100%;
+}
+.app-table-header{
+    color: white;
+    background-color: rgb(51,102,153);
+    text-align: center;
+    font-size: 1.5em;
+}
+.wizard-table-header{
+    color: white;
+    background-color: rgb(51,102,153);
+    text-align: center;
+    font-size: 1.5em;
+}
+td{
+    text-align: center;
+    padding: 5px;
+}
+td:empty::after{
+    content: "\00a0";
+}
+#app-table tr:nth-child(even){
+    background: #FFF;
+}
+#app-table tr:nth-child(odd){
+    background: #CCC;
+}
+a{
+    color:rgb(0,51,102);
+}
+li{
+    background-color: white;
+}
+li:nth-child(odd){
+    background-color: lightgray;
+}
 .app-container{
     display: flex;
 }
@@ -10,81 +67,71 @@
 .app-column-2{
     order: 2
 }
-.app-column-title{
-    display: flex;
-    justify-content: center;
-}
-.wizard-column-1-description{
-    display: flex;
-    justify-content: center;
-}
 .wizard-column-title{
     display: flex;
     justify-content: center;
-    color: blue;
+    color: black;
+    background-color: yellow;
+    /* margin: 0px; */
+}
+.app-column-1-description{
+    display: flex;
+    flex-direction: column;
+    /* display: block; */
+    justify-content: center;
+    /* margin-right: -50%; */
+    /* transform: translateX(50%) */
+    /* text-align: center; */
+}
+.wizard-column-1-description{
+    display: flex;
+    flex-direction: column;
+    /* display: block; */
+    justify-content: center;
+    /* margin-right: -50%; */
+    /* transform: translateX(50%) */
+    /* text-align: center; */
 }
 .wizard-column-2-description{
     display: flex;
     justify-content: center;
-    color: blue
+    color:black;
+}
+.wizard-column-2-hyperlinks{
+    display: flex;
+    justify-content: center;
 }
 .wiz-status{
     visibility: hidden;
 }
-.wizard-index-step-1-instruction-div{
-    position: absolute;
-    left: 550px;
-    top: 131px;
-  }
 .wizard-index-step-1-instruction-title{
     font-size: 16px;
     color: blue;
 }
-.wizard-index-step-1-left-arrow{
-    font-size: 40px;
+.wizard-index-step-1-instruction{
     font-weight: bold;
     color: red;
-    margin-right: 6px;
-    line-height: 10px;
-    z-index: 0;
-    position: relative;
-    top: 5px;
+    display: none;
 }
-.wizard-index-step-1-instruction-div{
-    visibility: hidden;
-}
-.wizard-index-item-step-1-instruction-div{
-    position: absolute;
-    left: 512px;
-    top: 149px;
+.wizard-index-item-step-1-instruction{
+    font-weight: bold;
+    color: red;
+    display: none;
 }
 .wizard-index-item-step-1-instruction-title{
     font-size: 16px;
     color: blue;
 }
-.wizard-index-item-step-1-left-arrow{
-    font-size: 40px;
+.wizard-index-customer-step-1-instruction{
     font-weight: bold;
     color: red;
-    margin-right: 6px;
-    line-height: 10px;
-    z-index: 0;
-    position: relative;
-    top: 5px;
-}
-.wizard-index-item-step-1-instruction-div{
-    visibility: hidden;
-}
-.wizard-index-customer-step-1-instruction-div{
-    position: absolute;
-    left: 550px;
-    top: 167px;
+    display: none;
 }
 .wizard-index-customer-step-1-instruction-title{
     font-size: 16px;
     color: blue;
 }
-.wizard-index-customer-step-1-left-arrow{
+/* .wizard-index-customer-step-1-left-arrow{
     font-size: 40px;
     font-weight: bold;
     color: red;
@@ -93,54 +140,31 @@
     z-index: 0;
     position: relative;
     top: 5px;
-}
+} */
 .wizard-index-customer-step-1-instruction-div{
     visibility: hidden;
 }
-.wizard-index-pricing-step-1-instruction-div{
-    position: absolute;
-    left: 597px;
-    top: 185px;
+.wizard-index-pricing-step-1-instruction{
+    font-weight: bold;
+    color: red;
+    display: none;
 }
 .wizard-index-pricing-step-1-instruction-title{
     font-size: 16px;
     color: blue;
 }
-.wizard-index-pricing-step-1-left-arrow{
-    font-size: 40px;
-    font-weight: bold;
-    color: red;
-    margin-right: 6px;
-    line-height: 10px;
-    z-index: 0;
-    position: relative;
-    top: 5px;
-}
-.wizard-index-pricing-step-1-instruction-div{
+.wizard-index-pricing-step-1-instruction{
     visibility: hidden;
 }
-.wizard-index-invoice-step-1-instruction-div{
-    position: absolute;
-    left: 530px;
-    top: 203px;
+.wizard-index-invoice-step-1-instruction{
+    font-weight: bold;
+    color: red;
+    display: none;
 }
 .wizard-index-invoice-step-1-instruction-title{
     font-size: 16px;
     color: blue;
 }
-.wizard-index-invoice-step-1-left-arrow{
-    font-size: 40px;
-    font-weight: bold;
-    color: red;
-    margin-right: 6px;
-    line-height: 10px;
-    z-index: 0;
-    position: relative;
-    top: 5px;
-}
-.wizard-index-invoice-step-1-instruction-div{
-    visibility: hidden;
-}
 .wizard-column-portal-page{
-    visibility: hidden;
+    display: none;
 }

@@ -13,54 +13,82 @@
     <header>
         <div class="app-container">
             <div class="app-column app-column-1">
-                <h2 class="app-column-title">Apps for Creating Your Invoices</h2>
-                <p >
-                    <nav class="wizard-column-1-description">
-                        <ul id="li-clicked">
-                            <li><a id="company-manager-clicked" href=# onclick="return false">Company manager</a></li>
-                            <li><a id="item-manager-clicked" href=# onclick="return false">Item manager</a></li>
-                            <li><a id="customer-manager-clicked" href=# onclick="return false">Customer manager</a></li>
-                            <li><a id="customer-pricing-manager-clicked" href=# onclick="return false">Customer pricing manager</a></li>
-                            <li><a id="invoice-manager-clicked" href=# onclick="return false">Invoice manager</a></li>
-                        </ul>
-                    </nav>
-                </p>
-                <div class="wizard-index-step-1-instruction-div" id="wizard-index-step-1-instruction-div">
-                    <p class="wizard-index-step-1-instruction-title"><span class="wizard-index-step-1-left-arrow">&#8592;</span>Click the Company manager link</p>
-                </div>
-                <div class="wizard-index-item-step-1-instruction-div" id="wizard-index-item-step-1-instruction-div">
-                    <p class="wizard-index-item-step-1-instruction-title"><span class="wizard-index-item-step-1-left-arrow">&#8592;</span>Click the Item manager link</p>
-                </div>
-                <div class="wizard-index-customer-step-1-instruction-div" id="wizard-index-customer-step-1-instruction-div">
-                    <p class="wizard-index-customer-step-1-instruction-title"><span class="wizard-index-customer-step-1-left-arrow">&#8592;</span>Click the Customer manager link</p>
-                </div>
-                <div class="wizard-index-pricing-step-1-instruction-div" id="wizard-index-pricing-step-1-instruction-div">
-                    <p class="wizard-index-pricing-step-1-instruction-title"><span class="wizard-index-customer-step-1-left-arrow">&#8592;</span>Click the Customer pricing manager link</p>
-                </div>
-                <div class="wizard-index-invoice-step-1-instruction-div" id="wizard-index-invoice-step-1-instruction-div">
-                    <p class="wizard-index-invoice-step-1-instruction-title"><span class="wizard-index-customer-step-1-left-arrow">&#8592;</span>Click the Invoice manager link</p>
-                </div>
+                <table class="app-table-properties" id="app-table">
+                    <tr>
+                        <th class="app-table-header">Apps for Creating Your Invoices</th>
+                    </tr>
+                    <tr>
+                        <td><a id="company-manager-clicked" href=# onclick="return false">Company manager</a><span class="wizard-index-step-1-instruction" id="wizard-index-step-1-instruction">  &#8592; Click the Company manager link</span></td>
+                    </tr>
+                    <tr>
+                        <td><a id="item-manager-clicked" href=# onclick="return false">Item manager</a><span class="wizard-index-item-step-1-instruction" id="wizard-index-item-step-1-instruction">  &#8592; Click the Item manager link</span></td>
+                    </tr>
+                    <tr>
+                        <td><a id="customer-manager-clicked" href=# onclick="return false">Customer manager</a><span class="wizard-index-customer-step-1-instruction" id="wizard-index-customer-step-1-instruction">  &#8592; Click the Customer manager link</span></td>
+                    </tr>
+                    <tr>
+                        <td><a id="customer-pricing-manager-clicked" href=# onclick="return false">Customer pricing manager</a><span class="wizard-index-pricing-step-1-instruction" id="wizard-index-pricing-step-1-instruction"> &#8592; Click the Customer pricing manager link</span></td>
+                    </tr>
+                    <tr>
+                        <td><a id="invoice-manager-clicked" href=# onclick="return false">Invoice manager</a><span class="wizard-index-invoice-step-1-instruction" id="wizard-index-invoice-step-1-instruction"> &#8592; Click the Invoice manager link</span></td>
+                    </tr>
+                </table>
             </div>
-            <div class="app-column app-column-2" id="app-column app-column-2">
+            <div class="app-column app-column-2">
                 <div id="wizard-column-home-page">
-                    <h2 class="wizard-column-title">New Wizard</h2>
-                    <p class="wizard-column-2-description">Click the Wizard link for a step-by-step to create your first invoice</p>
-                    <p class="wizard-column-2-description"><a href="{% url 'index' 2 %}">Wizard</a></p>
+                    <table class="wizard-table-properties">
+                        <tr>
+                            <th class="wizard-table-header">Wizard</th>
+                        </tr>
+                        <tr>
+                            <td>A step by step on how to create your first invoice</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="wizard-column-2-hyperlinks"><a href="{% url 'index' 2 %}">Wizard</a></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="wizard-column wizard-column-2" id="wizard-column wizard-column-2">
+                <div>
                     <div class="wizard-column-portal-page" id="wizard-column-portal-page">
-                        <h2 class="wizard-column-title">Wizard Portal</h2>
-                        <p class="wizard-column-2-description">Click the Exit Wizard link to return to the Invoice Creator home page</p>
-                        <p class="wizard-column-2-description"><a href="{% url 'index' 1 %}">Exit Wizard</a></p>
+                        <table class="wizard-table-properties">
+                            <tr>
+                                <th class="wizard-table-header">Wizard Is Activated</th>
+                            </tr>
+                            <tr>
+                                <td>Click the Exit Wizard link to return to the Invoice Creator home page</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="wizard-column-2-hyperlinks"><a href="{% url 'index' 1 %}">Exit Wizard</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
+
         </div>
         <p class="wiz-status" id="wiz-status">{{ wizStatus }}</p>
     </header>
     <script type="text/javascript">
         var jsWizStatus = document.getElementById("wiz-status").innerHTML
-        document.getElementById("li-clicked").addEventListener("click", function(e) {
+        document.getElementById("app-table").addEventListener("click", function(e) {
             if(e.target.id == "company-manager-clicked" && jsWizStatus == 1){
                 window.open("/company_manager/company_options_list/1", "_top");
             }
@@ -93,39 +121,39 @@
             }
         })
         if(jsWizStatus == "2"){
-            document.getElementById("wizard-index-step-1-instruction-div").style.visibility = 'inherit'
-            document.getElementById("wizard-index-step-1-instruction-div").style.visibility = true
+            document.getElementById("wizard-index-step-1-instruction").style.visibility = 'inherit'
+            document.getElementById("wizard-index-step-1-instruction").style.display = "contents";
             document.getElementById("wizard-column-home-page").style.display = "none";
             document.getElementById("wizard-column-portal-page").style.visibility = 'inherit';
-            document.getElementById("wizard-column-portal-page").style.visibility = true;
+            document.getElementById("wizard-column-portal-page").style.display = "contents";
         }
         else if(jsWizStatus == "3"){
-            document.getElementById("wizard-index-item-step-1-instruction-div").style.visibility = 'inherit'
-            document.getElementById("wizard-index-item-step-1-instruction-div").style.visibility = true
+            document.getElementById("wizard-index-item-step-1-instruction").style.visibility = 'inherit'
+            document.getElementById("wizard-index-item-step-1-instruction").style.display = "contents";
             document.getElementById("wizard-column-home-page").style.display = "none";
             document.getElementById("wizard-column-portal-page").style.visibility = 'inherit';
-            document.getElementById("wizard-column-portal-page").style.visibility = true;
+            document.getElementById("wizard-column-portal-page").style.display = "contents";
         }
         else if(jsWizStatus == "4"){
-            document.getElementById("wizard-index-customer-step-1-instruction-div").style.visibility = 'inherit'
-            document.getElementById("wizard-index-customer-step-1-instruction-div").style.visibility = true
+            document.getElementById("wizard-index-customer-step-1-instruction").style.visibility = 'inherit'
+            document.getElementById("wizard-index-customer-step-1-instruction").style.display = "contents";
             document.getElementById("wizard-column-home-page").style.display = "none";
             document.getElementById("wizard-column-portal-page").style.visibility = 'inherit';
-            document.getElementById("wizard-column-portal-page").style.visibility = true;
+            document.getElementById("wizard-column-portal-page").style.display = "contents";
         }
         else if(jsWizStatus == "5"){
-            document.getElementById("wizard-index-pricing-step-1-instruction-div").style.visibility = 'inherit'
-            document.getElementById("wizard-index-pricing-step-1-instruction-div").style.visibility = true
+            document.getElementById("wizard-index-pricing-step-1-instruction").style.visibility = 'inherit'
+            document.getElementById("wizard-index-pricing-step-1-instruction").style.display = "contents";
             document.getElementById("wizard-column-home-page").style.display = "none";
             document.getElementById("wizard-column-portal-page").style.visibility = 'inherit';
-            document.getElementById("wizard-column-portal-page").style.visibility = true;
+            document.getElementById("wizard-column-portal-page").style.display = "contents";
         }
         else if(jsWizStatus == "6"){
-            document.getElementById("wizard-index-invoice-step-1-instruction-div").style.visibility = 'inherit'
-            document.getElementById("wizard-index-invoice-step-1-instruction-div").style.visibility = true
+            document.getElementById("wizard-index-invoice-step-1-instruction").style.visibility = 'inherit'
+            document.getElementById("wizard-index-invoice-step-1-instruction").style.display = "contents";
             document.getElementById("wizard-column-home-page").style.display = "none";
             document.getElementById("wizard-column-portal-page").style.visibility = 'inherit';
-            document.getElementById("wizard-column-portal-page").style.visibility = true;
+            document.getElementById("wizard-column-portal-page").style.display = "contents";
         }
     </script>
 </body>
