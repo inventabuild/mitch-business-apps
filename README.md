@@ -7,7 +7,7 @@ Github
 https://inventabuild.github.io/Customer-invoice/
 
 Heroku
-https://mitch-business-apps.herokuapp.com/company_manager/company_options_list
+https://mitch-business-apps.herokuapp.com/home/index/1/
 
 ## Short Project Description
 
