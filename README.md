@@ -11,7 +11,7 @@ https://mitch-business-apps.herokuapp.com/home/index/1/
 
 ## Short Project Description
 
-An Django based website with multiple databases and foreign keys for creating invoices from customer, item and pricing databases all created in the various apps in the program.
+An Django based website for creating business invoices.
 
 The website uses Django,Python, html, css and Javascript.
 
