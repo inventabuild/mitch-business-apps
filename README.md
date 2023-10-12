@@ -4,7 +4,7 @@ Mitchell Rabushka
 
 ## Link
 Github
-https://inventabuild.github.io/Customer-invoice/
+https://github.com/inventabuild/mitch-business-apps
 
 Heroku
 https://mitch-business-apps.herokuapp.com/home/index/1/
